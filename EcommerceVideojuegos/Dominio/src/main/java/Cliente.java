@@ -7,6 +7,29 @@
  *
  * @author Sebastian Moreno
  */
-public class Cliente {
+public class Cliente  extends Usuario{
+    CarritoCompra carritoCompra;
+    
+    public Cliente() {
+    }
+
+    @Override
+    public Long getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = super.getId();
+    }
+
+    public CarritoCompra getCarritoCompra() {
+        return carritoCompra;
+    }
+
+    public void setCarritoCompra(CarritoCompra carritoCompra) {
+        this.carritoCompra = carritoCompra;
+    }
+    
     
 }

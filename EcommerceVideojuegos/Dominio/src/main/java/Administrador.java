@@ -7,8 +7,6 @@
  *
  * @author Sebastian Moreno
  */
-public enum  MetodoPago {
-    TARJETA,
-    TRANSFERENCIA,
-    CONTRA_ENTREGA
+public class Administrador extends Usuario{
+
 }

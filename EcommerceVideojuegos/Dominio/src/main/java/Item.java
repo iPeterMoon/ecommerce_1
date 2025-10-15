@@ -1,17 +1,22 @@
 
 import java.math.BigDecimal;
 
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
 /**
  *
  * @author Sebastian Moreno
  */
-public class ItemPedido {
+public class Item {
     Long id;
     Producto producto;
-    BigDecimal precioUnitario;
+    BigDecimal subtotal;
     int cantidad;
 
-    public ItemPedido() {
+    public Item() {
     }
 
     public Long getId() {
@@ -30,12 +35,12 @@ public class ItemPedido {
         this.producto = producto;
     }
 
-    public BigDecimal getPrecioUnitario() {
-        return precioUnitario;
+    public BigDecimal getSubtotal() {
+        return subtotal;
     }
 
-    public void setPrecioUnitario(BigDecimal precioUnitario) {
-        this.precioUnitario = precioUnitario;
+    public void setSubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
     }
 
     public int getCantidad() {
@@ -48,7 +53,8 @@ public class ItemPedido {
 
     @Override
     public String toString() {
-        return "ItemPedido{" + "id=" + id + ", producto=" + producto + ", precioUnitario=" + precioUnitario + ", cantidad=" + cantidad + '}';
+        return "ItemCarrito{" + "id=" + id + ", producto=" + producto + ", subtotal=" + subtotal + ", cantidad=" + cantidad + '}';
     }
+    
     
 }

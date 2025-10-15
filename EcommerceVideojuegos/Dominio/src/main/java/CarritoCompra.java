@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class CarritoCompra {
     Long id;
-    List<ItemCarrito> items;
+    List<Item> items;
     BigDecimal total;
 
     public CarritoCompra() {
@@ -24,11 +24,11 @@ public class CarritoCompra {
         this.id = id;
     }
 
-    public List<ItemCarrito> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<ItemCarrito> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 
