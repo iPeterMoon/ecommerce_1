@@ -5,18 +5,18 @@ import java.time.LocalDate;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author Sebastian Moreno
  */
 public class Resenia {
+
     Long id;
     Producto producto;
     String comentario;
     LocalDate fechaRealizada;
     int calificacion;
-    Cliente cliente;
+    Usuario cliente;
 
     public Resenia() {
     }
@@ -61,14 +61,17 @@ public class Resenia {
         this.calificacion = calificacion;
     }
 
-    public Cliente getCliente() {
+    public Usuario getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(Usuario cliente) {
         this.cliente = cliente;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Resenia{" + "id=" + id + ", producto=" + producto + ", comentario=" + comentario + ", fechaRealizada=" + fechaRealizada + ", calificacion=" + calificacion + ", cliente=" + cliente + '}';
+    }
+
 }

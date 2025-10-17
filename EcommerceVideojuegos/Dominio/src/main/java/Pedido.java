@@ -6,18 +6,18 @@ import java.util.List;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
- * 
+ *
  * @author Sebastian Moreno
  */
 public class Pedido {
+
     Long id;
     Pago pago;
     List<Item> items;
     EstadoPedido estadoPedido;
     LocalDate fecha;
-    Cliente cliente;
+    Usuario cliente;
 
     public Pedido() {
     }
@@ -46,8 +46,6 @@ public class Pedido {
         this.items = items;
     }
 
-    
-
     public EstadoPedido getEstadoPedido() {
         return estadoPedido;
     }
@@ -64,11 +62,11 @@ public class Pedido {
         this.fecha = fecha;
     }
 
-    public Cliente getCliente() {
+    public Usuario getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(Usuario cliente) {
         this.cliente = cliente;
     }
 
@@ -76,6 +74,5 @@ public class Pedido {
     public String toString() {
         return "Pedido{" + "id=" + id + ", pago=" + pago + ", items=" + items + ", estadoPedido=" + estadoPedido + ", fecha=" + fecha + ", cliente=" + cliente + '}';
     }
-    
-    
+
 }

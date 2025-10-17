@@ -5,15 +5,15 @@ import java.math.BigDecimal;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author Sebastian Moreno
  */
 public class Item {
+
     Long id;
     Producto producto;
-    BigDecimal subtotal;
+    BigDecimal precioUnitario;
     int cantidad;
 
     public Item() {
@@ -36,11 +36,11 @@ public class Item {
     }
 
     public BigDecimal getSubtotal() {
-        return subtotal;
+        return precioUnitario;
     }
 
     public void setSubtotal(BigDecimal subtotal) {
-        this.subtotal = subtotal;
+        this.precioUnitario = subtotal;
     }
 
     public int getCantidad() {
@@ -53,8 +53,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "ItemCarrito{" + "id=" + id + ", producto=" + producto + ", subtotal=" + subtotal + ", cantidad=" + cantidad + '}';
+        return "ItemCarrito{" + "id=" + id + ", producto=" + producto + ", precioUnitario=" + precioUnitario + ", cantidad=" + cantidad + '}';
     }
-    
-    
+
 }

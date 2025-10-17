@@ -7,20 +7,19 @@ import java.util.List;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author Sebastian Moreno
  */
 public class Producto {
+
     Long id;
-    String nombre;
-    Blob imagen;
+    String imagen;
     BigDecimal precio;
     int existencias;
+    String plataforma;
     String descripcion;
-    Categoria categoria;
-    String especificaciones;
+    int calificacionPromedio;
     List<Resenia> resenias;
 
     public Producto() {
@@ -34,19 +33,11 @@ public class Producto {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Blob getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(Blob imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 
@@ -66,6 +57,14 @@ public class Producto {
         this.existencias = existencias;
     }
 
+    public String getPlataforma() {
+        return plataforma;
+    }
+
+    public void setPlataforma(String plataforma) {
+        this.plataforma = plataforma;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -74,20 +73,12 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public int getCalificacionPromedio() {
+        return calificacionPromedio;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public String getEspecificaciones() {
-        return especificaciones;
-    }
-
-    public void setEspecificaciones(String especificaciones) {
-        this.especificaciones = especificaciones;
+    public void setCalificacionPromedio(int calificacionPromedio) {
+        this.calificacionPromedio = calificacionPromedio;
     }
 
     public List<Resenia> getResenias() {
@@ -98,13 +89,9 @@ public class Producto {
         this.resenias = resenias;
     }
 
-
-
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", precio=" + precio + ", existencias=" + existencias + ", descripcion=" + descripcion + ", categoria=" + categoria + ", especificaciones=" + especificaciones + ", resenias=" + resenias + '}';
+        return "Producto{" + "id=" + id + ", imagen=" + imagen + ", precio=" + precio + ", existencias=" + existencias + ", plataforma=" + plataforma + ", descripcion=" + descripcion + ", calificacionPromedio=" + calificacionPromedio + ", resenias=" + resenias + '}';
     }
-    
-    
     
 }

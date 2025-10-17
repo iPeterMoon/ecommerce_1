@@ -1,19 +1,22 @@
+
+import java.util.List;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author Sebastian Moreno
  */
 public class Videojuego extends Producto {
+
     Long id;
     String desarrolladora;
-    String plataforma;
     String clasificacion;
     int añoLanzamiento;
     String nombre;
+    List<Categoria> categorias;
 
     public Videojuego() {
     }
@@ -22,24 +25,12 @@ public class Videojuego extends Producto {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getDesarrolladora() {
         return desarrolladora;
     }
 
     public void setDesarrolladora(String desarrolladora) {
         this.desarrolladora = desarrolladora;
-    }
-
-    public String getPlataforma() {
-        return plataforma;
-    }
-
-    public void setPlataforma(String plataforma) {
-        this.plataforma = plataforma;
     }
 
     public String getClasificacion() {
@@ -65,6 +56,18 @@ public class Videojuego extends Producto {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+
+    @Override
+    public String toString() {
+        return "Videojuego{" + "id=" + id + ", desarrolladora=" + desarrolladora + ", clasificacion=" + clasificacion + ", a\u00f1oLanzamiento=" + añoLanzamiento + ", nombre=" + nombre + ", categorias=" + categorias + '}';
+    }
+
 }

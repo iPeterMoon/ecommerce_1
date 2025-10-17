@@ -8,6 +8,7 @@
  * @author Sebastian Moreno
  */
 public class Direccion {
+
     Long id;
     String calle;
     String numero;
@@ -15,6 +16,7 @@ public class Direccion {
     String ciudad;
     String estado;
     String codigoPostal;
+    String numeroExterior;
 
     public Direccion() {
     }
@@ -75,11 +77,17 @@ public class Direccion {
         this.codigoPostal = codigoPostal;
     }
 
+    public String getNumeroExterior() {
+        return numeroExterior;
+    }
+
+    public void setNumeroExterior(String numeroExterior) {
+        this.numeroExterior = numeroExterior;
+    }
+
     @Override
     public String toString() {
-        return "Direccion{" + "id=" + id + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", ciudad=" + ciudad + ", estado=" + estado + ", codigoPostal=" + codigoPostal + '}';
+        return "Direccion{" + "id=" + id + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", ciudad=" + ciudad + ", estado=" + estado + ", codigoPostal=" + codigoPostal + ", numeroExterior=" + numeroExterior + '}';
     }
-    
-    
-    
+
 }

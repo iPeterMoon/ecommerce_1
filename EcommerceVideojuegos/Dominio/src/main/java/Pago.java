@@ -6,18 +6,18 @@ import java.time.LocalDateTime;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author Sebastian Moreno
  */
 public class Pago {
-    
+
     Long id;
     BigDecimal monto;
     MetodoPago metodoPago;
     LocalDateTime fechaHoraPago;
     EstadoPago estadoPago;
+    String Referencia;
 
     public Pago() {
     }
@@ -62,10 +62,17 @@ public class Pago {
         this.estadoPago = estadoPago;
     }
 
+    public String getReferencia() {
+        return Referencia;
+    }
+
+    public void setReferencia(String Referencia) {
+        this.Referencia = Referencia;
+    }
+
     @Override
     public String toString() {
-        return "Pago{" + "id=" + id + ", monto=" + monto + ", metodoPago=" + metodoPago + ", fechaHoraPago=" + fechaHoraPago + ", estadoPago=" + estadoPago + '}';
+        return "Pago{" + "id=" + id + ", monto=" + monto + ", metodoPago=" + metodoPago + ", fechaHoraPago=" + fechaHoraPago + ", estadoPago=" + estadoPago + ", Referencia=" + Referencia + '}';
     }
-    
-    
+
 }

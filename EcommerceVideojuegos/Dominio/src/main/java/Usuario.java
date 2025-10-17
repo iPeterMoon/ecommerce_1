@@ -5,12 +5,12 @@ import java.util.List;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author Sebastian Moreno
  */
-public abstract class Usuario  {
+public abstract class Usuario {
+
     Long id;
     String nombre;
     String correo;
@@ -19,7 +19,7 @@ public abstract class Usuario  {
     boolean cuentaActiva;
     String contrasenia;
     String rol;
-    List<Tarjeta> tarjetas;
+    CarritoCompra carritoCompra;
 
     public Usuario() {
     }
@@ -88,19 +88,17 @@ public abstract class Usuario  {
         this.rol = rol;
     }
 
-    public List<Tarjeta> getTarjetas() {
-        return tarjetas;
+    public CarritoCompra getCarritoCompra() {
+        return carritoCompra;
     }
 
-    public void setTarjetas(List<Tarjeta> tarjetas) {
-        this.tarjetas = tarjetas;
+    public void setCarritoCompra(CarritoCompra carritoCompra) {
+        this.carritoCompra = carritoCompra;
     }
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", telefono=" + telefono + ", direcciones=" + direcciones + ", cuentaActiva=" + cuentaActiva + ", contrasenia=" + contrasenia + ", rol=" + rol + ", tarjetas=" + tarjetas + '}';
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", telefono=" + telefono + ", direcciones=" + direcciones + ", cuentaActiva=" + cuentaActiva + ", contrasenia=" + contrasenia + ", rol=" + rol + ", carritoCompra=" + carritoCompra + '}';
     }
-    
-    
-    
+
 }
