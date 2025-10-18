@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Pixelify+Sans:wght@400..700&display=swap');
+
+:root{
+    --bg-color: #1B2838;
+    --dark-blue: #171D25;
+    --tron-cyan: #00FFFF; 
+}
+
+body{
+    background-color: var(--bg-color);
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header{
+    width: 100%;
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--dark-blue);
+    border-bottom: 2px solid var(--tron-cyan);
+}
+
+.tron-grid{
+    background-color: var(--bg-color);
+            background-image: linear-gradient(0deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            min-height: 100vh;
+}
+
+.brand{
+    color: white;
+    font-family: 'Pixelify Sans', sans-serif;
+    flex: 2;
+    text-align: center;
+    font-weight: 300;
+}
+
+.brand a:hover{
+    font-weight: 600;
+    transition-duration: 0.3s;
+}
+nav{
+    display: flex;
+    gap: 48px;
+    flex: 1;
+    justify-content: end;
+}
+
+.logo {
+    flex: 1;
+}
+
+.logo img{
+    width: 90px;
+    height: auto;
+    margin-left: 10%
+}
+
+.logo img:hover{
+    width: 100px;
+    height: auto;
+    margin-left: 9%;
+    transition-duration: 0.3s;
+}
+
+nav span{
+    width: 64px;
+    height: auto;
+    cursor: pointer;
+}
+
+nav span:last-child{
+    margin-right: 10%;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
