@@ -20,6 +20,7 @@ header{
     align-items: center;
     background-color: var(--dark-blue);
     border-bottom: 2px solid var(--tron-cyan);
+    box-shadow: 0 0 5px var(--tron-cyan), 0 0 10px var(--tron-cyan);
 }
 
 .tron-grid{
@@ -38,15 +39,13 @@ header{
     font-weight: 300;
 }
 
+.brand a{
+    transition-duration: 0.3s;
+}
+
 .brand a:hover{
     font-weight: 600;
     transition-duration: 0.3s;
-}
-nav{
-    display: flex;
-    gap: 48px;
-    flex: 1;
-    justify-content: end;
 }
 
 .logo {
@@ -56,7 +55,8 @@ nav{
 .logo img{
     width: 90px;
     height: auto;
-    margin-left: 10%
+    margin-left: 10%;
+    transition-duration: 0.3s;
 }
 
 .logo img:hover{
@@ -66,10 +66,37 @@ nav{
     transition-duration: 0.3s;
 }
 
-nav span{
+nav{
+    display: flex;
+    gap: 40px;
+    flex: 1;
+    justify-content: end;
+    height: 100%;
+    align-items: center;
+}
+
+nav span img{
     width: 64px;
     height: auto;
     cursor: pointer;
+    position: relative;
+    transition-duration: 0.3s;
+}
+
+nav span img:hover{
+    width: 70px;
+    height: auto;
+    transition-duration: 0.3s;
+}
+
+nav span img:{
+    width: 74px;
+    height: auto;
+    transition-duration: 0.3s;
+}
+
+nav span {
+    width: 80px;
 }
 
 nav span:last-child{
