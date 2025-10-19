@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Pixelify+Sans:wght@400..700&display=swap');
+
+:root {
+    --bg-color: #1B2838;
+    --dark-blue: #171D25;
+    --tron-cyan: #00FFFF;
+}
+
+body {
+    background-color: var(--bg-color);
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--dark-blue);
+    border-bottom: 2px solid var(--tron-cyan);
+    position: relative;
+    overflow: hidden;
+    min-width: 320px;
+    position: relative;
+    top: 0;
+    z-index: 100;
+}
+
+.tron-grid {
+    background-color: var(--bg-color);
+    background-image: linear-gradient(0deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.brand {
+    color: white;
+    font-family: 'Pixelify Sans', sans-serif;
+    flex: 2;
+    font-weight: 300;
+}
+
+.brand a {
+    transition-duration: 0.3s;
+    font-size: 1rem;
+}
+
+.brand a:hover {
+    font-weight: 600;
+    transition-duration: 0.3s;
+}
+
+.logo {
+    flex: 1;
+}
+
+.logo img {
+    margin: 8px;
+    width: 3rem;
+    height: auto;
+    transition-duration: 0.3s;
+}
+
+.logo img:hover {
+    width: 100px;
+    height: auto;
+    margin-left: 9%;
+    transition-duration: 0.3s;
+}
+
+nav {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+    justify-content: end;
+    height: 100%;
+    align-items: center;
+}
+
+nav span img {
+    width: 28px;
+    height: auto;
+    cursor: pointer;
+    position: relative;
+    transition-duration: 0.3s;
+}
+
+nav span img:hover {
+    width: 70px;
+    height: auto;
+    transition-duration: 0.3s;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    justify-items: center;
+}
+
+.game-card {
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 7.250rem;
+}
+
+.game-card img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top;
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--tron-cyan), 0 0 15px var(--tron-cyan);
+}
+
+.featured-filters {
+    display: flex;
+    justify-content: space-between;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.featured-filters img {
+    width: 43px;
+    height: auto;
+}
+
+.featured-games {
+    padding: 2rem 5%;
+}
+
+.featured-filters h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.sidebar {
+    display: none;
+    width: 70rem;
+    background-color: #171D25;
+    padding: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    gap: 15px;
+}
+
+.sidebar-content{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+@media (min-width: 414px) {
+    .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .game-card {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .games-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+
+    .game-card {
+        width: 100%;
+    }
+
+    .featured-filters img {
+        display: none;
+    }
+
+    main {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        display: flex;
+        width: 70rem;
+    }
+}
