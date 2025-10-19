@@ -8,6 +8,9 @@
     --text-white: #ffff;
     --bg-color-black: #121212;
     --bg-button-green: #009951;
+    --text-color-blue: #1A9FFF;
+    --text-color-gray: rgba(175,175,175,0.68);
+    --gray: #32353C;
 }
 
 body {
