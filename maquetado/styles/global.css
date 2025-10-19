@@ -49,13 +49,13 @@ header {
 
 .brand-mobile h1 {
     font-family: 'Pixelify Sans', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 300;
     margin: 0;
 }
 
 .logo {
-    width: 2.5rem;
+    width: 2rem;
     height: auto;
     margin-right: 8px;
 }
@@ -70,7 +70,7 @@ nav ul {
 }
 
 .nav-element a img {
-    width: 36px;
+    width: 32px;
     height: auto;
     display: block;
 }
@@ -82,6 +82,21 @@ a {
 
 main {
     padding: 2rem 5%;
+}
+
+@media only screen and (min-width: 401px){
+    .logo {
+        width: 3.5rem;
+        padding-left: 10px
+    }
+
+    .brand-mobile h1 {
+        font-size: 1.5rem;
+    }
+
+    .nav-element a img {
+        width: 36px;
+    }
 }
 
 @media only screen and (min-width: 481px) {
@@ -110,7 +125,6 @@ main {
     }
 
     .logo {
-        width: 3.5rem;
         padding-left: 20px
     }
 
