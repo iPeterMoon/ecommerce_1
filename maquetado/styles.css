@@ -20,7 +20,12 @@ header {
     align-items: center;
     background-color: var(--dark-blue);
     border-bottom: 2px solid var(--tron-cyan);
-    box-shadow: 0 0 5px var(--tron-cyan), 0 0 10px var(--tron-cyan);
+    position: relative;
+    overflow: hidden;
+    min-width: 320px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .tron-grid {
@@ -29,6 +34,7 @@ header {
         linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 .brand {
@@ -53,9 +59,10 @@ header {
 }
 
 .logo img {
-    width: 90px;
+    padding-left: 12px;
+    margin: 8px;
+    width: 5rem;
     height: auto;
-    margin-left: 10%;
     transition-duration: 0.3s;
 }
 
@@ -365,4 +372,69 @@ main {
 .game-card:hover {
     transform: scale(1.05);
     box-shadow: 0 0 10px var(--tron-cyan), 0 0 15px var(--tron-cyan);
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: 60px;
+    }
+
+
+    nav span {
+        width: auto;
+    }
+
+    nav span img {
+        width: 48px;
+    }
+
+    nav {
+        gap: 10px;
+        flex: 1;
+        justify-content: space-evenly;
+    }
+
+    nav span:last-child {
+        margin-right: 0%;
+    }
+
+    .logo img {
+        width: 4rem;
+    }
+
+    .games-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+
+    @media (max-width: 480px) {
+        .logo {
+            flex: 0;
+        }
+
+        .logo img {
+            width: 2.5rem;
+        }
+
+        .brand {
+            text-align: left;
+        }
+
+        .brand a {
+            font-size: 1rem;
+        }
+
+        nav span img {
+            width: 28px;
+        }
+
+        header {
+            height: 60px;
+        }
+
+        .featured-header h2 {
+            font-size: 1rem;
+        }
+
+    }
 }
