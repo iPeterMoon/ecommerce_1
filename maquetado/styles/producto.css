@@ -1,99 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Pixelify+Sans:wght@400..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Ponnala&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Ponnala&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-}
+
+
 :root {
-  --bg-color: #1b2838;
-  --dark-blue: #171d25;
-  --tron-cyan: #00ffff;
   --text-white: #ffff;
   --bg-color2: #121212;
   --bg-button: #009951;
 }
+
 body {
   overflow-x: hidden;
-}
-header {
-  width: 100%;
-  height: 90px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--dark-blue);
-  border-bottom: 2px solid var(--tron-cyan);
-  overflow: hidden;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.tron-grid {
-  background-color: var(--bg-color);
-  background-image: linear-gradient(0deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  min-height: 100vh;
-}
-
-.brand {
-  color: white;
-  font-family: "Pixelify Sans", sans-serif;
-  flex: 2;
-  text-align: left;
-  font-weight: 300;
-}
-
-.brand a {
-  transition-duration: 0.3s;
-}
-
-.brand a:hover {
-  font-weight: 600;
-  transition-duration: 0.3s;
-}
-
-.logo img {
-  padding-left: 12px;
-  margin: 8px;
-  width: 3rem;
-  height: auto;
-  transition-duration: 0.3s;
-}
-
-.logo img:hover {
-  width: 4rem;
-  height: auto;
-  transition-duration: 0.3s;
-}
-
-nav {
-  display: flex;
-  gap: 0.1rem;
-  flex: 1;
-  justify-content: end;
-  height: 100%;
-  align-items: center;
-}
-
-nav span {
-  width: auto;
-  margin: 5px;
-}
-nav span img {
-  width: 3rem;
-  height: auto;
-  cursor: pointer;
-  position: relative;
-  transition-duration: 0.3s;
-}
-
-nav span img:hover {
-  width: 4rem;
-  height: auto;
-  transition-duration: 0.3s;
 }
 
 a {
@@ -101,9 +18,7 @@ a {
   color: white;
   font-size: 1.8rem;
 }
-nav span:first-child {
-  display: none;
-}
+
 /*Informacion de el articulo*/
 .grid-item-info {
   font-family: "Ponnala", system-ui;
@@ -112,6 +27,7 @@ nav span:first-child {
   grid-row: 1fr;
   padding-top: 2rem;
 }
+
 .image-and-price {
   grid-column: 1/2;
   grid-row: 1/2;
@@ -120,24 +36,29 @@ nav span:first-child {
   justify-content: center;
   align-items: center;
 }
+
 .image-and-price img {
   width: 80%;
   object-fit: cover;
 }
+
 .calification {
   margin: 1rem;
   display: flex;
   justify-content: space-between;
   gap: 0.46rem;
 }
+
 .stars {
   flex: 1;
   width: 30%;
 }
+
 .calification span {
   color: var(--text-white);
   font-size: 0.6rem;
 }
+
 .button-with-price {
   width: 11rem;
   height: 4rem;
@@ -147,6 +68,7 @@ nav span:first-child {
   justify-content: center;
   align-items: center;
 }
+
 .price {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: center;
@@ -155,16 +77,18 @@ nav span:first-child {
   width: 95%;
   height: 100%;
 }
+
 .add-to-car {
   text-align: center;
   font-size: 1rem;
-  width:98%;
+  width: 98%;
   height: 100%;
   border: none;
   border-radius: 10px;
   background-color: var(--bg-button);
   cursor: pointer;
 }
+
 .item-added:target {
   display: flex;
 
@@ -172,7 +96,8 @@ nav span:first-child {
 
 /* Estilos para la caja blanca interna */
 .modal-content {
-  background-color: var(--dark-blue); /* Usando tus variables */
+  background-color: var(--dark-blue);
+  /* Usando tus variables */
   color: var(--text-white);
   border: 1px solid var(--tron-cyan);
   box-shadow: 0 0 10px var(--tron-cyan);
@@ -197,9 +122,10 @@ nav span:first-child {
   justify-content: center;
   align-items: center;
 }
+
 /* Estilos para el botón de cerrar */
 .modal-close {
-    
+
   display: inline-block;
   margin-top: 1rem;
   padding: 0.5rem 1rem;
@@ -208,6 +134,7 @@ nav span:first-child {
   text-decoration: none;
   border-radius: 5px;
 }
+
 .item-description {
   width: 80%;
   display: flex;
@@ -216,6 +143,7 @@ nav span:first-child {
   align-items: center;
   color: var(--text-white);
 }
+
 .description {
   font-size: clamp(0.4rem, 3vw, 1rem);
 }
@@ -232,6 +160,7 @@ nav span:first-child {
 #user-calification {
   margin: 0px;
 }
+
 .review-container {
   padding: 20px;
   background-color: var(--bg-color2);
@@ -243,6 +172,7 @@ nav span:first-child {
   justify-content: flex-start;
   text-align: end;
 }
+
 .review-date {
   font-size: 0.5rem;
 }
@@ -251,33 +181,39 @@ nav span:first-child {
   font-size: clamp(0.3rem, 3vw, 1rem);
   text-align: start;
 }
-.item-cart-info{
-    background-color: var(--bg-color2);
-    display: flex;
-    padding: 1rem;
+
+.item-cart-info {
+  background-color: var(--bg-color2);
+  display: flex;
+  padding: 1rem;
 }
-.item-img{
-    width: 30%;
+
+.item-img {
+  width: 30%;
 }
-.product-cart-information{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding-left: 10px;
-    gap:10px;
+
+.product-cart-information {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-left: 10px;
+  gap: 10px;
 }
-.modal-buttons{
-    height: 3rem;
-    display: flex;
-    gap:10px;
-    justify-content: center;
-    align-items: center;
+
+.modal-buttons {
+  height: 3rem;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
-.modal-buttons a{
-    align-items: center;
-    justify-content: center;
-    font-size: clamp(.2rem, 1rem, 1rem);
+
+.modal-buttons a {
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(.2rem, 1rem, 1rem);
 }
-.modal-content h2{
-    margin: 10px;
+
+.modal-content h2 {
+  margin: 10px;
 }
