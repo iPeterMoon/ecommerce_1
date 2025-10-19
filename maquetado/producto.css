@@ -4,7 +4,6 @@
 * {
   margin: 0;
   padding: 0;
-
 }
 :root {
   --bg-color: #1b2838;
@@ -14,20 +13,18 @@
   --bg-color2: #121212;
   --bg-button: #009951;
 }
-body{
-    overflow-x: hidden;
+body {
+  overflow-x: hidden;
 }
 header {
   width: 100%;
-  height: 120px;
+  height: 90px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--dark-blue);
   border-bottom: 2px solid var(--tron-cyan);
-  position: relative;
   overflow: hidden;
-  min-width: 480px;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -159,11 +156,57 @@ nav span:first-child {
   height: 100%;
 }
 .add-to-car {
-  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  width:98%;
   height: 100%;
   border: none;
   border-radius: 10px;
   background-color: var(--bg-button);
+  cursor: pointer;
+}
+.item-added:target {
+  display: flex;
+
+}
+
+/* Estilos para la caja blanca interna */
+.modal-content {
+  background-color: var(--dark-blue); /* Usando tus variables */
+  color: var(--text-white);
+  border: 1px solid var(--tron-cyan);
+  box-shadow: 0 0 10px var(--tron-cyan);
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.item-added {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.item-added:target {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Estilos para el botón de cerrar */
+.modal-close {
+    
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #575353;
+  color: var(--text-white);
+  text-decoration: none;
+  border-radius: 5px;
 }
 .item-description {
   width: 80%;
@@ -173,8 +216,8 @@ nav span:first-child {
   align-items: center;
   color: var(--text-white);
 }
-.description{
-    font-size: clamp(.4rem, 3vw, 1rem);
+.description {
+  font-size: clamp(0.4rem, 3vw, 1rem);
 }
 
 .user-reviews {
@@ -186,26 +229,55 @@ nav span:first-child {
   flex-direction: column;
 }
 
-#user-calification{
-    margin: 0px;
-
+#user-calification {
+  margin: 0px;
 }
-.review-container{
-    padding: 20px;
+.review-container {
+  padding: 20px;
+  background-color: var(--bg-color2);
+  border-radius: 20px;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: end;
+}
+.review-date {
+  font-size: 0.5rem;
+}
+
+.review-container .review-message {
+  font-size: clamp(0.3rem, 3vw, 1rem);
+  text-align: start;
+}
+.item-cart-info{
     background-color: var(--bg-color2);
-    border-radius: 20px;
-    width: 60%;
+    display: flex;
+    padding: 1rem;
+}
+.item-img{
+    width: 30%;
+}
+.product-cart-information{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: end;
+    align-items: start;
+    padding-left: 10px;
+    gap:10px;
 }
-.review-date{
-    font-size: .5rem;
+.modal-buttons{
+    height: 3rem;
+    display: flex;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
 }
-
-.review-container .review-message{
-    font-size: clamp(.3rem, 3vw, 1rem);
-    text-align: start;
+.modal-buttons a{
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(.2rem, 1rem, 1rem);
+}
+.modal-content h2{
+    margin: 10px;
 }
