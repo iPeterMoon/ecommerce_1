@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Pixelify+Sans:wght@400..700&display=swap');
+
+:root {
+    --bg-color: #1B2838;
+    --dark-blue: #171D25;
+    --tron-cyan: #00FFFF;
+}
+
+body {
+    background-color: var(--bg-color);
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.tron-grid {
+    background-color: var(--bg-color);
+    background-image: linear-gradient(0deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    min-height: 100vh;
+}
+
+header {
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--dark-blue);
+    border-bottom: 2px solid var(--tron-cyan);
+    padding: 0 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand-title-desktop {
+    display: none;
+}
+
+.brand-mobile {
+    display: flex;
+    align-items: center;
+}
+
+.brand-mobile h1 {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin: 0;
+}
+
+.logo {
+    width: 2.5rem;
+    height: auto;
+    margin-right: 8px;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    list-style: none;
+    padding: 0 6px 0 0;
+    margin: 0;
+}
+
+.nav-element a img {
+    width: 36px;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+main {
+    padding: 2rem 5%;
+}
+
+@media only screen and (min-width: 481px){
+    header {
+        height: 84px;
+    }
+
+    .brand-mobile h1 {
+        display: none;
+    }
+
+    .brand-mobile {
+        flex: 1 1 0;
+    }
+
+    .brand-title-desktop {
+        display: flex;
+        flex: 1 1 0;
+        justify-content: center;
+    }
+
+    .brand-title-desktop h1 {
+        font-family: 'Pixelify Sans', sans-serif;
+        font-size: 2rem;
+        font-weight: 300;
+    }
+
+    .logo {
+        width: 3.5rem;
+        padding-left: 20px
+    }
+
+    nav ul {
+        gap: 10px;
+        padding: 0 12px 0 0;
+    }
+
+    nav {
+        flex: 1 1 0;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .nav-element a img {
+        width: 48px;
+    }
+}
+
+@media only screen and (min-width: 769px){
+    
+    header {
+        height: 120px;
+    }
+
+    .brand-title-desktop h1{
+        transition-duration: 0.3s;
+    }
+    
+    .brand-title-desktop h1:hover{
+        font-weight: 600;
+        transition-duration: 0.3s;
+    }
+
+    .nav-element a img {
+        width: 64px;
+    }
+    
+    .nav-element a img:hover{
+        width: 70px;
+        transition-duration: 0.3s;
+        
+    }
+
+    nav ul {
+        gap: 40px;
+    }
+
+    .logo {
+        width: 4.5rem;
+        transition-duration: 0.3s;
+    }
+
+    .logo:hover{
+        width: 5rem;
+        transition-duration: 0.3s;
+    }
+
+}
