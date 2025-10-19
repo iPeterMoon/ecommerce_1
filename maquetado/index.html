@@ -5,26 +5,46 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/landing_styles.css">
 
 </head>
 
 <body class="tron-grid grid-container">
     <header>
-        <span class="logo">
-            <a href="index.html"><img src="imgs/logo-mundito.svg" alt="logo"></a>
-        </span>
-        <h1 class="brand"><a href="index.html">MunditoGames</a></h1>
+
+        <div class="brand-mobile">
+            <a href="index.html">
+                <img class="logo" src="imgs/logo-mundito.svg" alt="logo">
+            </a>
+            <a href="index.html">
+                <h1>MunditoGames</h1>
+            </a>
+        </div>
+        <div class="brand-title-desktop">
+            <a href="index.html"><h1>MunditoGames</h1></a>
+        </div>
+
+
         <nav>
-            <span>
-                <img src="icons/search.svg" alt="search">
-            </span>
-            <span>
-                <img src="icons/cart.svg" alt="cart">
-            </span>
-            <span>
-                <img src="icons/user.svg" alt="search">
-            </span>
+            <ul>
+                <li class="nav-element">
+                    <a href="">
+                        <img src="icons/search.svg" alt="search">
+                    </a>
+                </li>
+
+                <li class="nav-element">
+                    <a href="">
+                        <img src="icons/cart.svg" alt="cart">
+                    </a>
+                </li>
+                <li class="nav-element">
+                    <a href="login.html">
+                        <img src="icons/user.svg" alt="search">
+                    </a>
+                </li>
+            </ul>
         </nav>
     </header>
     <main>
@@ -71,7 +91,9 @@
                 </div>
                 <div class="slide">
                     <a href="#">
-                        <img id="nba2k" src="https://img.asmedia.epimg.net/resizer/v2/H5T6S6D3CBBJDOIWI5SE4ZXWZY.jpg?auth=7152cd5af15d88b9c3983fbd011abe11d671b2bd5bc1cedadd0770a395acd638&width=1472&height=828&smart=true" alt="nba2k">
+                        <img id="nba2k"
+                            src="https://img.asmedia.epimg.net/resizer/v2/H5T6S6D3CBBJDOIWI5SE4ZXWZY.jpg?auth=7152cd5af15d88b9c3983fbd011abe11d671b2bd5bc1cedadd0770a395acd638&width=1472&height=828&smart=true"
+                            alt="nba2k">
                     </a>
                 </div>
             </div>
@@ -119,16 +141,14 @@
                         alt="gta VI">
                 </a>
                 <a href="#" class="game-card">
-                    <img src="https://m.media-amazon.com/images/I/81bwynfO98L.jpg"
-                        alt="call of duty black ops 3">
+                    <img src="https://m.media-amazon.com/images/I/81bwynfO98L.jpg" alt="call of duty black ops 3">
                 </a>
                 <a href="#" class="game-card">
                     <img src="https://juegosdigitalesmexico.mx/files/images/productos/1744069588-hogwarts-legacy-digital-deluxe-edition-ps5-0.webp"
                         alt="harry potter">
                 </a>
                 <a href="#" class="game-card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/b/b9/Elden_Ring_Box_art.jpg"
-                        alt="elden ring">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/b/b9/Elden_Ring_Box_art.jpg" alt="elden ring">
                 </a>
                 <a href="#" class="game-card">
                     <img src="https://upload.wikimedia.org/wikipedia/en/b/bb/Dark_souls_3_cover_art.jpg"
