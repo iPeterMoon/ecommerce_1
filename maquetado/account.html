@@ -114,12 +114,12 @@
                                         </span>
                                     </div>
                                 </div>
-                                <span>
+                                <a href="#edit-address-modal" class="edit-icon">
                                     <img src="icons/edit.svg" alt="edit">
-                                </span>
-                                <span>
+                                </a>
+                                <a href="#" class="delete-icon">
                                     <img src="icons/trash.svg" alt="delete">
-                                </span>
+                                </a>
                             </div>
                             <div class="address">
                                 <div class="address-info">
@@ -143,12 +143,12 @@
                                         </span>
                                     </div>
                                 </div>
-                                <span>
+                                <a href="#edit-address-modal" class="edit-icon">
                                     <img src="icons/edit.svg" alt="edit">
-                                </span>
-                                <span>
+                                </a>
+                                <a href="#" class="delete-icon">
                                     <img src="icons/trash.svg" alt="delete">
-                                </span>
+                                </a>
                             </div>
                         </div>
                         <div class="change-pswd">
@@ -170,6 +170,51 @@
             </section>
         </div>
     </main>
+
+    <!-- Modal para editar direccion -->
+    <div id="edit-address-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Editar Dirección</h3>
+            <form action="">
+                <div class="modal-form-group full-width">
+                    <label for="address-name">Nombre de la Dirección</label>
+                    <input type="text" id="address-name" name="address-name" value="Casa">
+                </div>
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="street">Calle</label>
+                        <input type="text" id="street" name="street" value="Calle Falsa 123">
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="ext-number">Numero Exterior</label>
+                        <input type="text" id="ext-number" name="ext-number" value="123">
+                    </div>
+                </div>
+                <div class="modal-form-group full-width">
+                    <label for="colonia">Colonia</label>
+                    <input type="text" id="colonia" name="colonia" value="Colonia Centro">
+                </div>
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="postal-code">Código Postal</label>
+                        <input type="text" id="postal-code" name="postal-code" value="12345">
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="city">Ciudad</label>
+                        <input type="text" id="city" name="city" value="Ciudad Ejemplo">
+                    </div>
+                </div>
+                <div class="modal-form-group full-width">
+                    <label for="state">Estado</label>
+                    <input type="text" id="state" name="state" value="SON">
+                </div>
+                <div class="modal-buttons">
+                    <a href="#" class="modal-button cancel">Cancelar</a>
+                    <button type="submit" class="modal-button save">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
