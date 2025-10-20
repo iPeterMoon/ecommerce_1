@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+}
+
+.container {
+  font-family: "Poppins";
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.5rem;
+  min-height: 80vh;
+}
+
+h1 {
+  font-size: 4.5vw;
+}
+.products {
+  display: flex;
+  flex-direction: column;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+.product-row {
+  border-radius: 10px;
+  width: 100%;
+  background-color: var(--account-bg);
+  margin-top: 0.8rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+.delete-button {
+  width: 1rem;
+  cursor: pointer;
+}
+.product-img {
+  width: 10vw;
+}
+.tittle {
+  align-self: flex-start;
+  font-weight: bold;
+  font-size: 2.8vw;
+  text-align: center;
+}
+.tittle p:last-child {
+  font-weight: 100;
+}
+.quantity {
+  align-self: flex-start;
+  font-weight: bold;
+  font-size: 2.8vw;
+  text-align: center;
+}
+.quantity p:last-child {
+  font-weight: 100;
+}
+.price {
+  align-self: flex-start;
+  font-weight: bold;
+  font-size: 2.8vw;
+  text-align: center;
+}
+.price p:last-child {
+  font-weight: 100;
+}
+.subtotal {
+  align-self: flex-start;
+  font-weight: bold;
+  font-size: 3vw;
+  text-align: center;
+}
+.subtotal p:last-child {
+  font-weight: 100;
+}
+.resume-products {
+  background-color: var(--account-bg);
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin-top: 2rem;
+  width: 90%;
+  min-height: 5vw;
+  display: flex;
+  font-size: 3vw;
+  gap: 0.2rem;
+}
+.subtittles .results {
+  display: flex;
+  flex-direction: column;
+  flex:3;
+}
+
+.purchase-information{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:1rem;
+}
+.purchase-information p {
+  display: flex;
+  font-size: 1vw;
+  width: 50%;
+  height: 100%;
+}
+.purchase-information img{
+    width: 10%;
+}
+.button-with-price {
+justify-self: flex-end;
+padding-right: 2rem;
+  width: 30vw;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.price-purchase {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-align: center;
+  color: var(--text-white);
+  background-color: var(--bg-color-black);
+  width: 95%;
+  height: 100%;
+}
+.add-to-car {
+  text-align: center;
+  font-size: 2vw;
+  width: 100%;
+  height: 50%;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--bg-button-green);
+  cursor: pointer;
+}
+.information{
+    width: 44%;
+}
