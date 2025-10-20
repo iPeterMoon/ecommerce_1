@@ -11,6 +11,9 @@
     --text-color-blue: #1A9FFF;
     --text-color-gray: rgba(175,175,175,0.68);
     --gray: #32353C;
+    --account-bg: #15202C;
+    --blue: #223D5A;
+    --dark-input: #101923;
 }
 
 body {
