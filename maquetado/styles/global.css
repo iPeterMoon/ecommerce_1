@@ -14,6 +14,9 @@
     --account-bg: #15202C;
     --blue: #223D5A;
     --dark-input: #101923;
+    --bg-light-green : #DCFCE7;
+    --brown : #854D0E;
+    --bg-light-yellow: #FEF9C3;
 }
 
 body {
@@ -38,6 +41,7 @@ header {
     align-items: center;
     background-color: var(--dark-blue);
     border-bottom: 2px solid var(--tron-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
     padding: 0 12px;
     position: sticky;
     top: 0;

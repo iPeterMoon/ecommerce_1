@@ -261,6 +261,102 @@ button {
     flex: 1 1 0;
 }
 
+.purchase{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-input);
+    border-radius: 1.5rem;
+    box-sizing: border-box;
+    font-size: 0.625rem;
+    margin-bottom: 1rem;
+}
+
+.purchase-header{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--blue);
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.purchase-header strong {
+    color: var(--tron-cyan);
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.purchase-info{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.purchase-item{
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.purchase-details{
+    flex: 2;
+}
+
+.purchase-info img {
+    width: 25%;
+    height:auto;
+}
+
+.cost {
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.purchase-footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--blue);
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    align-items: center;
+}
+
+.purchase-footer a {
+    text-decoration: underline;
+}
+.delivery-state {
+    display: flex;
+    justify-content: center;
+     width: 40%;
+     padding: 0.25rem 0.5rem;
+     gap: 0.5rem;
+     border-radius: 0.75rem;
+}
+
+.delivery-state img {
+    width: 1rem;
+     height: auto;
+}
+
+.delivery-state p {
+    font-weight: bold;
+    margin: 0;
+}
+
+.delivered{
+    color: var(--bg-button-green);
+    background-color: var(--bg-light-green);
+}
+
+.sent {
+    color: var(--brown);
+    background-color: var(--bg-light-yellow);
+}
+
+
 
 @media only screen and (min-width: 481px) {
 
@@ -291,6 +387,15 @@ button {
     .info-account {
         width: 80%;
     }
+
+    .purchase {
+        font-size: 1rem;
+    }
+    .purchase-header strong {
+    color: var(--tron-cyan);
+    font-size: 1.125rem;
+    font-weight: bold;
+}
 }
 
 @media only screen and (min-width: 900px) {
@@ -303,4 +408,5 @@ button {
     .info-account {
         width: 60%;
     }
+    
 }
