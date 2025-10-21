@@ -30,6 +30,8 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: var(--text-white);
+    font-family: 'Poppins', sans-serif;
 }
 
 .tron-grid {
@@ -110,14 +112,14 @@ main {
 
 .footer-container {
     display: flex;
-    flex-wrap: wrap; /* Permite que las columnas se apilen en móvil */
+    flex-wrap: wrap; 
     justify-content: space-between;
-    gap: 2rem; /* Espacio entre las columnas */
+    gap: 2rem;
 }
 
 .footer-column {
-    flex: 1; /* Permite que las columnas crezcan */
-    min-width: 220px; /* Ancho mínimo para cada columna antes de apilarse */
+    flex: 1; 
+    min-width: 220px; 
 }
 
 .footer-column h4 {
@@ -138,7 +140,7 @@ main {
 }
 
 .footer-column .logo-container img {
-    width: 3rem; /* Tamaño del logo en el footer */
+    width: 3rem; 
 }
 
 .footer-column p {

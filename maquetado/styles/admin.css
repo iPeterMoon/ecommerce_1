@@ -8,6 +8,19 @@
     margin: 3rem auto 10rem;
 }
 
+header {
+    border-bottom: 3px solid var(--text-white);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.site-footer {
+    border-top: 2px solid var(--text-white);
+}
+
+.footer-column h4 {
+    color: var(--text-white);
+}
+
 .options button {
     width: 100%;
     padding: 1rem;
@@ -20,25 +33,258 @@
     cursor: pointer;
 }
 
-.options button:hover{
+.options button:hover {
     transform: scale(1.005);
     box-shadow: 0 0 10px var(--text-white), 0 0 15px var(--text-white);
 }
 
-@media only screen and (min-width: 481px){
-    .options{
+h1 {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.search {
+    width: 90%;
+    margin: 1rem auto 2rem;
+    background-color: var(--account-bg);
+    border: 1 px solid white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: block;
+    color: var(--text-white)
+}
+
+.main-div {
+    width: 95%;
+    background-color: var(--account-bg);
+    padding: 2rem;
+    margin: auto;
+
+}
+
+.add-videogame {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+.add-videogame img {
+    width: 1.5rem;
+    cursor: pointer;
+}
+
+.videogames {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.videogame {
+    background-color: var(--dark-input);
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 1rem;
+    font-size: 0.625rem;
+}
+
+.videogame img {
+    width: 1.5rem;
+}
+
+.game-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.game-title {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.modal-overlay:target {
+    display: flex;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.modal-container {
+    background-color: var(--account-bg);
+    border: 1px solid var(--gray);
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.modal-container h2 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0 0 1.5rem 0;
+}
+
+.modal-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    margin-bottom: 0.4rem;
+    color: #ccc;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background-color: var(--dark-input);
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+    color: var(--text-white);
+    height: 40px;
+    padding: 10px;
+    font-size: 0.875rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 3rem;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: var(--dark-input);
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+    padding: 0;
+}
+
+.input-wrapper input {
+    border: none;
+    flex-grow: 1;
+}
+
+.input-wrapper .icon,
+.input-wrapper .stepper {
+    padding: 0 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon img {
+    width: 1.5rem;
+}
+
+
+.form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.form-button {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cancel {
+    background-color: var(--gray);
+    color: var(--text-white);
+}
+
+.save {
+    background-color: var(--dark-input);
+    color: #a7a7a7;
+}
+
+@media only screen and (min-width: 481px) {
+    .options {
         width: 70%;
     }
-}
 
-@media only screen and (min-width: 769px){
-    .options{
-        width: 60%;
+    .videogames {
+        width: 90%;
+    }
+
+    .videogame {
+        font-size: 1rem;
+    }
+
+    .videogame img {
+        width: 2rem;
+    }
+
+    .modal-container {
+        padding: 2rem;
+    }
+
+    .modal-container h2 {
+        font-size: 1.2rem;
+    }
+
+    .modal-form {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .form-group.full-width {
+        grid-column: 1 / -1;
     }
 }
 
-@media only screen and (min-width: 1201px){
-    .options{
+@media only screen and (min-width: 769px) {
+    .options {
+        width: 60%;
+    }
+
+    .modal-container {
+        max-width: 700px;
+    }
+}
+
+@media only screen and (min-width: 1201px) {
+    .options {
         width: 30%;
+    }
+
+    .videogames {
+        width: 80%;
     }
 }
