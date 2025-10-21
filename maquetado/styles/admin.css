@@ -253,6 +253,38 @@ h1 {
     color: #a7a7a7;
 }
 
+.chip-container {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    min-height: 30px;
+}
+
+.chip {
+    display: flex;
+    align-items: center;
+    background-color: var(--blue);
+    color: var(--text-white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.chip .remove-chip {
+    margin-left: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffc0c0;
+}
+
+.chip .remove-chip:hover {
+    color: #ff6b6b;
+}
+
+
 @media only screen and (min-width: 481px) {
     .options {
         width: 70%;
@@ -303,6 +335,10 @@ h1 {
 @media only screen and (min-width: 1201px) {
     .options {
         width: 30%;
+    }
+
+    h1 {
+        font-size: 2rem;
     }
 
     .videogames {
