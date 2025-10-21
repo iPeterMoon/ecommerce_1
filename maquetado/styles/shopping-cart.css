@@ -40,12 +40,12 @@ h1 {
   cursor: pointer;
 }
 .product-img {
-  width: 10vw;
+  width: 8vw;
 }
 .tittle {
   align-self: flex-start;
   font-weight: bold;
-  font-size: 2.8vw;
+  font-size: 2.3vw;
   text-align: center;
 }
 .tittle p:last-child {
@@ -54,7 +54,7 @@ h1 {
 .quantity {
   align-self: flex-start;
   font-weight: bold;
-  font-size: 2.8vw;
+  font-size: 2.3vw;
   text-align: center;
 }
 .quantity p:last-child {
@@ -63,7 +63,7 @@ h1 {
 .price {
   align-self: flex-start;
   font-weight: bold;
-  font-size: 2.8vw;
+  font-size: 2.3vw;
   text-align: center;
 }
 .price p:last-child {
@@ -72,7 +72,7 @@ h1 {
 .subtotal {
   align-self: flex-start;
   font-weight: bold;
-  font-size: 3vw;
+  font-size: 2.3vw;
   text-align: center;
 }
 .subtotal p:last-child {
@@ -83,7 +83,7 @@ h1 {
   border-radius: 10px;
   padding: 0.5rem;
   margin-top: 2rem;
-  width: 90%;
+  width: 78vw;
   min-height: 5vw;
   display: flex;
   font-size: 3vw;
@@ -140,4 +140,43 @@ padding-right: 2rem;
 }
 .information{
     width: 44%;
+}
+
+@media (min-width: 768px) {
+  .add-to-car{
+    font-size: 2.5vw;
+  }
+  .resume-products{
+    font-size: 1.5vw;
+  }
+  .products{
+  width: 90%;
+  }
+  .product-row{
+    justify-content: space-between;
+    padding-right: 10rem;
+    width: 100%;
+  }
+  .resume-products{
+    justify-content: space-between;
+  }
+  .quantity{
+    font-size: 1.5vw;
+  }
+   .price{
+    font-size: 1.5vw;
+  }
+   .subtotal{
+    font-size: 1.5vw;
+  }
+   .tittle{
+    font-size: 1.5vw;
+  }
+  .results{
+    flex:2;
+  }
+  .product-img{
+    width: 6vw;
+  }
+
 }
