@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    color: var(--text-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1rem 2rem 1rem;
+    flex-grow: 1;
+}
+
+body {
+    font-size: 0.9rem;
+}
+
+.main-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--text-white);
+    text-align: left;
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+}
+
+.card-form-container {
+    background-color: var(--dark-input);
+    border-radius: 13px;
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-row {
+  border-radius: 10px;
+  width: 100%;
+  margin-top: 0.8rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding-left: 3rem;
+} 
+
+.game-name{
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0; 
+    margin-bottom: 0.2rem;
+    text-decoration: underline; 
+}
+
+.review-status {
+    align-items: flex-end;
+    text-decoration: none; 
+    font-size: 1.5rem;
+    gap: 30px;
+}
+
+
+.product-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 190px;
+    gap: 20px;
+}
+
+.review-container{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 15px;
+}
+
+.edit-icon{
+    width: 20px;
+    line-height: 0; 
+}
+
+.product-img{
+    height: 190px;
+    width: 190px;
+}
+
+@media (min-width: 769px) {
+
+    .main-title {
+        font-size: 2.2rem;
+        text-align: left;
+        max-width: 750px;
+    }
+
+    .card-form-container {
+        max-width: 1500px;
+    }
+
+    .header-data p {
+        font-size: 1rem;
+    }
+
+    .form-content {
+        gap: 2rem;
+    }
+
+    .form-row {
+        flex-direction: row;
+        gap: 2rem;
+    }
+}
