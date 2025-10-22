@@ -54,21 +54,49 @@ body {
     gap: 1.5rem;
 }
 
-.review-container{
+.review-container {
+    display: flex;
+    flex-direction: column;
     background-color: #121212;
     border-radius: 1rem;
     padding: 3%;
+    gap: 15px;
 }
 
-.review-delete{
+.review-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review-info p {
+    font-size: 0.725rem;
+}
+
+p.user {
+    font-size: 1rem;
+}
+
+.review-delete {
     display: flex;
     flex-direction: row;
     justify-content: end;
 }
 
-.delete-icon{
+.delete-icon {
     cursor: pointer;
     width: 2.2rem;
+}
+
+.search {
+    width: 90%;
+    margin: 1rem auto 2rem;
+    background-color: var(--account-bg);
+    border: 1 px solid white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: block;
+    color: var(--text-white)
 }
 
 @media (min-width: 769px) {
@@ -81,5 +109,13 @@ body {
 
     .card-form-container {
         max-width: 1500px;
+    }
+
+    .review-info p {
+        font-size: 0.725rem;
+    }
+
+    p.user {
+        font-size: 1rem;
     }
 }

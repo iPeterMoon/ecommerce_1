@@ -39,29 +39,30 @@ body {
 }
 
 .product-row {
-  border-radius: 10px;
-  width: 100%;
-  margin-top: 0.8rem;
-  padding: 0.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-  padding-left: 3rem;
-} 
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 0.8rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
 
-.game-name{
+.game-name {
     font-weight: 700;
     font-size: 1.5rem;
-    margin: 0; 
+    margin: 0;
     margin-bottom: 0.2rem;
-    text-decoration: underline; 
+    text-decoration: underline;
 }
 
 .review-status {
     align-items: flex-end;
-    text-decoration: none; 
-    font-size: 1.5rem;
+    text-decoration: none;
+    font-size: 1rem;
     gap: 30px;
 }
 
@@ -70,23 +71,23 @@ body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    height: 190px;
+    height: 100px;
     gap: 20px;
 }
 
-.review-container{
+.review-container {
     display: flex;
     flex-direction: row;
     align-items: end;
     gap: 15px;
 }
 
-.edit-icon{
+.edit-icon {
     width: 20px;
-    line-height: 0; 
+    line-height: 0;
 }
 
-.product-img{
+.product-img {
     height: 190px;
     width: 190px;
 }
@@ -114,5 +115,18 @@ body {
     .form-row {
         flex-direction: row;
         gap: 2rem;
+    }
+
+    .review-status {
+        font-size: 1.5rem;
+    }
+
+    .product-info-wrapper {
+        height: 190px;
+    }
+
+    .product-row{
+        display: flex;
+        flex-direction: row;
     }
 }
