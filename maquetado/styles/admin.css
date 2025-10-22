@@ -191,6 +191,8 @@ h1 {
     height: 40px;
     padding: 10px;
     font-size: 0.875rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form-group textarea {
@@ -262,6 +264,14 @@ h1 {
     min-height: 30px;
 }
 
+
+.form-row {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+}
+
 .chip {
     display: flex;
     align-items: center;
@@ -297,8 +307,6 @@ h1 {
     .videogame {
         font-size: 1rem;
     }
-
-
 
     .icon-btn {
         width: 2rem;
