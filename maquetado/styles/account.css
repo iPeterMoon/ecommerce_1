@@ -16,7 +16,9 @@ h2 {
     margin-bottom: 6px;
     margin-top: 0;
 }
-
+hr{
+    margin: 0.5rem auto;
+}
 .edit-bg {
     background-color: var(--account-bg);
     padding: 0.75rem;
@@ -36,11 +38,6 @@ h2 {
     margin-left: 1rem;
 }
 
-.section-title h3 {
-    font-size: 0.875rem;
-    font-weight: 400;
-}
-
 .history-button {
     width: 100%;
 }
@@ -52,14 +49,12 @@ h3 {
 }
 
 label {
-    font-size: 0.8rem;
     font-weight: 200;
     margin-bottom: 5px;
 }
 
 input {
     width: 100%;
-    font-size: 0.875rem;
     background-color: var(--dark-input);
     border: none;
     border-radius: 5px;
@@ -119,11 +114,9 @@ input {
 
 .address-name {
     font-weight: bold;
-    font-size: 0.75rem;
 }
 
 .address span p {
-    font-size: 0.75rem;
     padding: 5px 0;
     margin: 0;
 }
@@ -146,7 +139,6 @@ input {
 
 .pswd input {
     flex: 1 1 0;
-    font-size: 0.75rem;
 }
 
 form button {
@@ -160,7 +152,6 @@ button {
     border: none;
     padding: 10px 0;
     color: white;
-    font-size: 0.875rem;
     border-radius: 5px;
 }
 
@@ -221,10 +212,6 @@ button {
     width: 100%;
 }
 
-.modal-content label {
-    font-size: 0.75rem;
-}
-
 .modal-content input {
     height: 2rem;
     color: var(--text-white);
@@ -242,7 +229,6 @@ button {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
-    font-size: 0.875rem;
     text-decoration: none;
     cursor: pointer;
     text-align: center;
@@ -257,22 +243,20 @@ button {
 .modal-button.save {
     background-color: var(--blue);
     color: var(--text-white);
-    font-size: 0.875rem;
     flex: 1 1 0;
 }
 
-.purchase{
+.purchase {
     width: 100%;
     display: flex;
     flex-direction: column;
     background-color: var(--dark-input);
     border-radius: 1.5rem;
     box-sizing: border-box;
-    font-size: 0.625rem;
     margin-bottom: 1rem;
 }
 
-.purchase-header{
+.purchase-header {
     display: flex;
     justify-content: space-between;
     background-color: var(--blue);
@@ -283,30 +267,28 @@ button {
 
 .purchase-header strong {
     color: var(--tron-cyan);
-    font-size: 0.75rem;
-    font-weight: bold;
 }
 
-.purchase-info{
+.purchase-info {
     padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-.purchase-item{
+.purchase-item {
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
 }
 
-.purchase-details{
+.purchase-details {
     flex: 2;
 }
 
 .purchase-info img {
     width: 25%;
-    height:auto;
+    height: auto;
 }
 
 .cost {
@@ -327,18 +309,19 @@ button {
 .purchase-footer a {
     text-decoration: underline;
 }
+
 .delivery-state {
     display: flex;
     justify-content: center;
-     width: 40%;
-     padding: 0.25rem 0.5rem;
-     gap: 0.5rem;
-     border-radius: 0.75rem;
+    width: 40%;
+    padding: 0.25rem 0.5rem;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
 }
 
 .delivery-state img {
     width: 1rem;
-     height: auto;
+    height: auto;
 }
 
 .delivery-state p {
@@ -346,7 +329,7 @@ button {
     margin: 0;
 }
 
-.delivered{
+.delivered {
     color: var(--bg-button-green);
     background-color: var(--bg-light-green);
 }
@@ -388,14 +371,18 @@ button {
         width: 80%;
     }
 
+    hr{
+        margin: 1rem auto;
+    }
+
     .purchase {
         font-size: 1rem;
     }
+
     .purchase-header strong {
-    color: var(--tron-cyan);
-    font-size: 1.125rem;
-    font-weight: bold;
-}
+        color: var(--tron-cyan);
+        font-size: 1.125rem;
+    }
 }
 
 @media only screen and (min-width: 900px) {
@@ -408,5 +395,5 @@ button {
     .info-account {
         width: 60%;
     }
-    
+
 }

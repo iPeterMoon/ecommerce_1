@@ -1,12 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  color: white;
-}
-
 .container {
-  font-family: "Poppins";
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -16,14 +8,16 @@
 }
 
 h1 {
-  font-size: 4.5vw;
+  font-size: 1.5rem;
 }
+
 .products {
   display: flex;
   flex-direction: column;
   max-height: 50vh;
   overflow-y: auto;
 }
+
 .product-row {
   border-radius: 10px;
   width: 100%;
@@ -35,49 +29,56 @@ h1 {
   align-items: center;
   gap: 1rem;
 }
+
 .delete-button {
   width: 1rem;
   cursor: pointer;
 }
+
 .product-img {
   width: 8vw;
 }
+
 .tittle {
   align-self: flex-start;
   font-weight: bold;
-  font-size: 2.3vw;
   text-align: center;
 }
+
 .tittle p:last-child {
   font-weight: 100;
 }
+
 .quantity {
   align-self: flex-start;
   font-weight: bold;
-  font-size: 2.3vw;
   text-align: center;
 }
+
 .quantity p:last-child {
   font-weight: 100;
 }
+
 .price {
   align-self: flex-start;
   font-weight: bold;
-  font-size: 2.3vw;
   text-align: center;
 }
+
 .price p:last-child {
   font-weight: 100;
 }
+
 .subtotal {
   align-self: flex-start;
   font-weight: bold;
-  font-size: 2.3vw;
   text-align: center;
 }
+
 .subtotal p:last-child {
   font-weight: 100;
 }
+
 .resume-products {
   background-color: var(--account-bg);
   border-radius: 10px;
@@ -86,33 +87,35 @@ h1 {
   width: 78vw;
   min-height: 5vw;
   display: flex;
-  font-size: 3vw;
   gap: 0.2rem;
 }
+
 .subtittles .results {
   display: flex;
   flex-direction: column;
-  flex:3;
+  flex: 3;
 }
 
-.purchase-information{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap:1rem;
+.purchase-information {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
+
 .purchase-information p {
   display: flex;
-  font-size: 1vw;
   width: 50%;
   height: 100%;
 }
-.purchase-information img{
-    width: 10%;
+
+.purchase-information img {
+  width: 10%;
 }
+
 .button-with-price {
-justify-self: flex-end;
-padding-right: 2rem;
+  justify-self: flex-end;
+  padding-right: 2rem;
   width: 30vw;
   margin: 1rem;
   display: flex;
@@ -120,17 +123,17 @@ padding-right: 2rem;
   justify-content: center;
   align-items: center;
 }
+
 .price-purchase {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: center;
   color: var(--text-white);
   background-color: var(--bg-color-black);
   width: 95%;
   height: 100%;
 }
+
 .add-to-car {
   text-align: center;
-  font-size: 2vw;
   width: 100%;
   height: 50%;
   border: none;
@@ -138,44 +141,32 @@ padding-right: 2rem;
   background-color: var(--bg-button-green);
   cursor: pointer;
 }
-.information{
-    width: 44%;
+
+.information {
+  width: 50%;
 }
 
 @media (min-width: 768px) {
-  .add-to-car{
-    font-size: 2.5vw;
+
+  .products {
+    width: 90%;
   }
-  .resume-products{
-    font-size: 1.5vw;
-  }
-  .products{
-  width: 90%;
-  }
-  .product-row{
+
+  .product-row {
     justify-content: space-between;
     padding-right: 10rem;
     width: 100%;
   }
-  .resume-products{
+
+  .resume-products {
     justify-content: space-between;
   }
-  .quantity{
-    font-size: 1.5vw;
+
+  .results {
+    flex: 2;
   }
-   .price{
-    font-size: 1.5vw;
-  }
-   .subtotal{
-    font-size: 1.5vw;
-  }
-   .tittle{
-    font-size: 1.5vw;
-  }
-  .results{
-    flex:2;
-  }
-  .product-img{
+
+  .product-img {
     width: 6vw;
   }
 
