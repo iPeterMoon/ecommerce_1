@@ -21,7 +21,9 @@
   width: 100%;
   object-fit: cover;
 }
-
+#calificacion-general{
+  gap: 1rem;
+}
 .calification {
   display: flex;
   justify-content: space-between;
@@ -69,6 +71,10 @@
   display: flex;
 }
 
+.add-to-car:hover{
+   transition: background-color 0.3s ease, transform 0.3s ease;
+  transform: scale(1.1) ;
+}
 /* Estilos para la caja blanca interna */
 .modal-content {
   background-color: var(--dark-blue);

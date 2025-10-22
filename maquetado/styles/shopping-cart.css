@@ -90,6 +90,18 @@ h1 {
   gap: 0.2rem;
 }
 
+.subtittles {
+  font-size: 0.5rem;
+  padding-left: 1rem;
+}
+.results {
+  font-size: 0.5rem;
+}
+
+.add-to-car:hover {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  transform: scale(1.1);
+}
 .subtittles .results {
   display: flex;
   flex-direction: column;
@@ -107,6 +119,7 @@ h1 {
   display: flex;
   width: 50%;
   height: 100%;
+  font-size: 0.5rem;
 }
 
 .purchase-information img {
@@ -145,9 +158,27 @@ h1 {
 .information {
   width: 50%;
 }
-
+@media (min-width: 1320px) {
+  .subtittles {
+    font-size: 2rem;
+  }
+  .results {
+    font-size: 2rem;
+  }
+  .purchase-information p {
+    font-size: 2rem;
+  }
+}
 @media (min-width: 768px) {
-
+  .subtittles {
+    font-size: 1.1rem;
+  }
+  .results {
+    font-size: 1.1rem;
+  }
+  .purchase-information p {
+    font-size: 1.1rem;
+  }
   .products {
     width: 90%;
   }
@@ -169,5 +200,4 @@ h1 {
   .product-img {
     width: 6vw;
   }
-
 }
