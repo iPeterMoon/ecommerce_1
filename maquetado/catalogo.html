@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/catalogo.css">
 
 </head>
 
@@ -63,7 +64,9 @@
         <section class="featured-games">
             <div class="featured-filters">
                 <h2 class="section-title">Catalogo</h2>
-                <img src="icons/filter.svg " alt="cart">
+                <a href="#filter-modal">
+                    <img src="icons/filter.svg " alt="cart">
+                </a>
             </div>
 
             <div class="games-grid catalogo-grid">
@@ -99,9 +102,19 @@
                 </a>
             </div>
         </section>
-
         </div>
     </main>
+    <div class="modal-overlay" id="filter-modal">
+        <div class="modal-container sidebar-modal">
+            <a href="#" class="close-modal-button">X</a>
+            <div class="sidebar-content">
+                <p>Filtrar por:</p>
+                <a href="#" class="filter-option">Plataforma</a>
+                <a href="#" class="filter-option">Genero</a>
+                <a href="#" class="filter-option">Año</a>
+            </div>
+        </div>
+    </div>
     <footer class="site-footer">
         <div class="footer-container">
 
