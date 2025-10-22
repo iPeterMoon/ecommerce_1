@@ -437,8 +437,7 @@ main {
     }
 
     .logo:hover {
-        width: 5rem;
-        transition-duration: 0.3s;
+        transform: scale(1.15);
     }
 
     .catalogo-grid {
