@@ -1,0 +1,342 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    color: var(--text-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1rem 2rem 1rem;
+    flex-grow: 1;
+}
+
+body {
+    font-size: 0.9rem;
+}
+
+.main-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--text-white);
+    text-align: left;
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+}
+
+.card-form-container {
+    background-color: var(--dark-input);
+    border-radius: 13px;
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header-data {
+    background-color: var(--blue);
+    padding: 0.8rem 1.5rem;
+    font-weight: bold;
+    color: var(--text-white);
+    font-size: 1rem;
+}
+
+.form-content {
+    padding: 2rem 1.5rem;
+    padding-bottom: 0.5675rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.details-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #121212;
+    border-radius: 1rem;
+    padding: 3%;
+    gap: 15px;
+}
+
+.review-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review-info p {
+    font-size: 0.725rem;
+}
+
+.review-delete {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.delete-icon {
+    cursor: pointer;
+    width: 2.2rem;
+}
+
+.search {
+    width: 90%;
+    margin: 1rem auto 2rem;
+    background-color: var(--account-bg);
+    border: 1 px solid white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: block;
+    color: var(--text-white)
+}
+
+.payment-acc {
+    font-weight: 800;
+}
+
+.details-info {
+    display: flex;
+    flex-direction: row;
+    font-size: 0.5rem;
+    border-bottom: 1px solid white;
+}
+
+.details-game {
+    display: flex;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+    gap: 10px;
+}
+
+.game-name {
+    font-weight: 800;
+}
+
+.details-gamelogo {
+    width: 90px;
+}
+
+.price-subtotal {
+    display: flex;
+}
+
+.price-shipment {
+    display: flex;
+}
+
+.price-total {
+    display: flex;
+}
+
+.rightdetail {
+    display: flex;
+    flex-direction: row;
+}
+
+.righty {
+    margin-left: auto;
+}
+
+.user {
+    font-size: 0.5rem;
+    font-weight: 800;
+}
+
+.content-title {
+    font-size: 0.5rem;
+}
+
+.payment-pending {
+    margin-left: auto;
+    width: 40%;
+}
+
+.price-game {
+    margin-left: auto;
+}
+
+.details-gamelogo {
+    width: 50px;
+}
+
+.details-game-amount {
+    font-size: 0.4rem;
+}
+
+.price-game {
+    font-size: 0.4rem;
+}
+
+.details-price {
+    font-size: 0.5rem;
+}
+
+.pending.righty {
+    display: flex;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    background-color: #FEBC2F;
+    border-radius: 7px;
+    width: 50px;
+}
+
+.rightdetail a {
+    display: flex;
+    background-color: #009951;
+    border-radius: 5px;
+    margin-left: auto;
+    height: 20px;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.header-title {
+    display: none;
+}
+
+.form-content {
+    padding-top: 10px;
+}
+
+@media (min-width: 769px) {
+
+    .main-title {
+        font-size: 2.2rem;
+        text-align: left;
+        max-width: 1000px;
+    }
+
+    .card-form-container {
+        max-width: 1000px;
+    }
+
+    .review-info p {
+        font-size: 0.725rem;
+    }
+
+    p.user {
+        font-size: 1.5rem;
+    }
+
+    .details-info {
+        font-size: 1rem;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .details-direction {
+        width: 40%;
+    }
+
+    .payment-pending {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 40%;
+        margin-left: auto;
+    }
+
+    .details-gamelogo {
+        width: 90px;
+    }
+
+    .details-game-amount {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+
+    }
+
+    .details-game {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        color: white;
+    }
+
+    .price-game {
+        display: flex;
+        margin-left: auto;
+        font-weight: 800;
+    }
+
+    .details-gamelogo {
+        width: 90px;
+    }
+
+
+    .details-game-amount {
+        font-size: 1rem;
+    }
+
+    .price-game {
+        font-size: 1rem;
+    }
+
+    .price-subtotal {
+        display: flex;
+    }
+
+    .price-shipment {
+        display: flex;
+    }
+
+    .price-total {
+        display: flex;
+    }
+
+    .rightdetail {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .rightdetail a {
+        display: flex;
+        background-color: #009951;
+        border-radius: 5px;
+        margin-left: auto;
+        height: 40px;
+        width: 200px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .pending.righty {
+        display: flex;
+        color: black;
+        justify-content: center;
+        align-items: center;
+        background-color: #FEBC2F;
+        border-radius: 7px;
+        width: 100px;
+    }
+
+    .righty {
+        margin-left: auto;
+    }
+
+    .price-game {
+        font-size: 1rem;
+    }
+
+    .details-price {
+        font-size: 1rem;
+    }
+
+    .header-title {
+        display: block;
+    }
+
+    .form-content {
+        padding-top: 2rem;
+    }
+}
