@@ -27,8 +27,8 @@
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ecommerceVideojuegos"/>
-            <property name="jakarta.persistence.jdbc.user" value="tu_usuario_db"/>
-            <property name="jakarta.persistence.jdbc.password" value="tu_contrasena_db"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value="itson"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.show_sql" value="true"/> <property name="hibernate.format_sql" value="true"/> <property name="hibernate.hbm2ddl.auto" value="update"/>

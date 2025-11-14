@@ -16,40 +16,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="styles/producto.css" />
   </head>
   <body class="tron-grid grid-container">
-    <header>
-      <div class="brand-mobile">
-        <a href="index.html">
-          <img class="logo" src="imgs/logo-mundito.svg" alt="logo" />
-        </a>
-        <a href="index.html">
-          <h1>MunditoGames</h1>
-        </a>
-      </div>
-      <div class="brand-title-desktop">
-        <a href="index.html"><h1>MunditoGames</h1></a>
-      </div>
-
-      <nav>
-        <ul>
-          <li class="nav-element">
-            <a href="">
-              <img src="icons/search.svg" alt="search" />
-            </a>
-          </li>
-
-          <li class="nav-element">
-            <a href="shopping-cart.html">
-              <img src="icons/cart.svg" alt="cart" />
-            </a>
-          </li>
-          <li class="nav-element">
-            <a href="login.html">
-              <img src="icons/user.svg" alt="search" />
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+     <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
     <main>
       <article class="grid-item-info">
         <div class="image-and-price">
@@ -113,49 +80,12 @@
             </div>
           </div>
           <div class="modal-buttons">
-            <a href="index.html" class="modal-close">Seguir comprando</a>
-            <a href="shopping-cart.html" class="modal-close" id="color-blue">Ver mi carro</a>
+            <a href="index.jsp" class="modal-close">Seguir comprando</a>
+            <a href="shopping-cart.jsp" class="modal-close" id="color-blue">Ver mi carro</a>
           </div>
         </div>
       </div>
     </main>
-    <footer class="site-footer">
-      <div class="footer-container">
-        <div class="footer-column">
-          <a href="index.html" class="logo-container">
-            <img src="imgs/logo-mundito.svg" alt="logo" />
-            <h4>MunditoGames</h4>
-          </a>
-          <p>
-            Tu universo de videojuegos. Encuentra los mejores títulos, ofertas y la comunidad más apasionada del gaming.
-          </p>
-        </div>
-
-        <div class="footer-column">
-          <h4>Navegación</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="catalogo.html">Catálogo de Productos</a></li>
-            <li><a href="account.html">Mi Cuenta</a></li>
-            <li><a href="shopping-cart.html">Carrito de Compras</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column">
-          <h4 style="margin-top: 1.5rem">Síguenos</h4>
-          <ul class="social-icons">
-            <li>
-              <a href="#" aria-label="Facebook"><img src="icons/facebook.svg" alt="Facebook" /></a>
-            </li>
-            <li>
-              <a href="#" aria-label="Instagram"><img src="icons/instagram.svg" alt="Instagram" /></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 MunditoGames. Todos los derechos reservados.</p>
-      </div>
-    </footer>
+      <%@include file="WEB-INF/fragmentos/footer.jspf" %>
   </body>
 </html>

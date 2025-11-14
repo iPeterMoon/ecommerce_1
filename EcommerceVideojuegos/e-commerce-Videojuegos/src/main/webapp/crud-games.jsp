@@ -17,42 +17,7 @@
   </head>
 
   <body class="tron-grid grid-container">
-    <header>
-      <div class="brand-mobile">
-        <a href="index.html">
-          <img class="logo" src="imgs/logo-mundito.svg" alt="logo" />
-        </a>
-        <a href="index.html">
-          <h1>MunditoGames</h1>
-        </a>
-      </div>
-      <div class="brand-title-desktop">
-        <a href="index.html">
-          <h1>MunditoGames</h1>
-        </a>
-      </div>
-
-      <nav>
-        <ul>
-          <li class="nav-element">
-            <a href="">
-              <img src="icons/search.svg" alt="search" />
-            </a>
-          </li>
-
-          <li class="nav-element">
-            <a href="shopping-cart.html">
-              <img src="icons/cart.svg" alt="cart" />
-            </a>
-          </li>
-          <li class="nav-element">
-            <a href="login.html">
-              <img src="icons/user.svg" alt="search" />
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
     <main>
       <h1>Gestionar Videojuegos</h1>
       <div class="search-div">
@@ -188,7 +153,7 @@
     <footer class="site-footer">
       <div class="footer-container">
         <div class="footer-column">
-          <a href="index.html" class="logo-container">
+          <a href="index.jsp" class="logo-container">
             <img src="imgs/logo-mundito.svg" alt="logo" />
             <h4>MunditoGames</h4>
           </a>
@@ -325,10 +290,10 @@
         <div class="footer-column">
           <h4>Navegación</h4>
           <ul class="footer-links">
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="catalogo.html">Catálogo de Productos</a></li>
-            <li><a href="account.html">Mi Cuenta</a></li>
-            <li><a href="shopping-cart.html">Carrito de Compras</a></li>
+            <li><a href="index.jsp">Inicio</a></li>
+            <li><a href="catalogo.jsp">Catálogo de Productos</a></li>
+            <li><a href="account.jsp">Mi Cuenta</a></li>
+            <li><a href="shopping-cart.jsp">Carrito de Compras</a></li>
           </ul>
         </div>
 
