@@ -1,0 +1,231 @@
+.review-container {
+    max-width: 600px;
+    margin: 40px auto 80px auto;
+    padding: 30px;
+    background-color: var(--dark-blue);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+.question-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--text-white);
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    position: relative;
+    padding-top: 5px;
+    width: 225px;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    cursor: pointer;
+    color: var(--text-color-gray);
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #FFC107;
+    text-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+}
+
+
+.star-rating input[type="radio"]:checked ~ label {
+    color: #FFC107;
+    text-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+}
+
+.rating-focus-box {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    width: 250px;
+    height: 40px;
+    border: 1px solid var(--tron-cyan);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+
+.review-label {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text-white);
+}
+
+.review-textbox {
+    width: 100%;
+    background-color: var(--bg-color-black);
+    border: 1px solid var(--gray);
+    color: var(--text-white);
+    padding: 15px;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 150px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.review-textbox:focus {
+    border-color: var(--tron-cyan);
+}
+
+.public-notice {
+    font-size: 0.8rem;
+    color: var(--text-color-gray);
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-cancel,
+.btn-publish {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.btn-cancel {
+    background-color: #D32F2F;
+    color: var(--text-white);
+}
+
+.btn-publish {
+    background-color: var(--bg-button-green);
+    color: var(--text-white);
+}
+
+/* Modal Publicada */
+.modal-published {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+}
+
+.modal-published:target {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content-published {
+    background-color: var(--dark-blue);
+    color: var(--text-white);
+    border: 1px solid var(--tron-cyan);
+    box-shadow: 0 0 15px var(--tron-cyan);
+    padding: 40px 60px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.modal-content-published h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.btn-back-to-home {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 1rem;
+    background-color: var(--bg-color-black);
+    color: var(--text-white);
+    border: 1px solid var(--text-color-gray);
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-back-to-home:hover {
+    background-color: var(--gray);
+    border-color: var(--tron-cyan);
+}
+
+
+/* MEDIA QUERIES PARA RESPONSIVE */
+
+@media (max-width: 600px) {
+    .review-container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .star-rating {
+        font-size: 2rem;
+        width: 100%;
+        max-width: 180px;
+        justify-content: flex-start;
+        margin-bottom: 15px;
+    }
+
+    .rating-focus-box {
+        height: 35px;
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .review-textbox {
+        font-size: 0.9rem;
+        padding: 10px;
+        min-height: 120px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .btn-cancel,
+    .btn-publish {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .modal-content-published h2 {
+        font-size: 1.8rem;
+    }
+
+    .modal-content-published {
+        padding: 30px 20px;
+    }
+}
