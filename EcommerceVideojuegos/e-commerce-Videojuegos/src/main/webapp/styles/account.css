@@ -1,0 +1,399 @@
+@import url('global.css');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-white);
+}
+
+.info-account {
+    width: 95%;
+    margin: auto;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin-bottom: 6px;
+    margin-top: 0;
+}
+hr{
+    margin: 0.5rem auto;
+}
+.edit-bg {
+    background-color: var(--account-bg);
+    padding: 0.75rem;
+}
+
+.section-title {
+    background-color: var(--blue);
+    display: flex;
+    gap: 1rem;
+    height: 2.5rem;
+    align-items: center;
+}
+
+.section-title img {
+    width: 1.5rem;
+    height: auto;
+    margin-left: 1rem;
+}
+
+.history-button {
+    width: 100%;
+}
+
+h3 {
+    font-size: 0.875rem;
+    font-weight: 300;
+    margin-bottom: 0.25rem;
+}
+
+label {
+    font-weight: 200;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    background-color: var(--dark-input);
+    border: none;
+    border-radius: 5px;
+    height: 1.5rem;
+}
+
+.name-info,
+.mail-info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.phone-info {
+    display: flex;
+    margin-bottom: 1rem;
+    gap: 10px;
+    align-items: center;
+}
+
+.phone-info input {
+    flex: 1;
+}
+
+
+.contact-info {
+    margin-bottom: 1rem;
+}
+
+.addresses-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.addresses-title span {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.address {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+    background-color: var(--dark-input);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.address-info {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+}
+
+.address-name {
+    font-weight: bold;
+}
+
+.address span p {
+    padding: 5px 0;
+    margin: 0;
+}
+
+.address img {
+    width: 2.5rem;
+    height: auto;
+    flex: 1 1 0;
+}
+
+.pswd {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.pswd label {
+    flex: 1 1 0;
+}
+
+.pswd input {
+    flex: 1 1 0;
+}
+
+form button {
+    display: block;
+    width: 80%;
+    margin: auto;
+}
+
+button {
+    background-color: var(--gray);
+    border: none;
+    padding: 10px 0;
+    color: white;
+    border-radius: 5px;
+}
+
+
+/* El fondo oscuro que cubre toda la pantalla */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* El :target es el que muestra el modal */
+.modal-overlay:target {
+    display: flex;
+}
+
+/* El contenedor del formulario */
+.modal-content {
+    background-color: var(--account-bg);
+    color: var(--text-white);
+    border: 1px solid var(--tron-cyan);
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    /* Ancho máximo para el modal */
+}
+
+.modal-content h3 {
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.modal-form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.modal-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    flex: 1;
+    /* Ocupa el espacio disponible */
+}
+
+.modal-form-group.full-width {
+    width: 100%;
+}
+
+.modal-content input {
+    height: 2rem;
+    color: var(--text-white);
+    box-sizing: border-box;
+    padding: 0 0.5rem;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.modal-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.modal-button.cancel {
+    background-color: var(--gray);
+    color: var(--text-white);
+    flex: 1 1 0;
+}
+
+.modal-button.save {
+    background-color: var(--blue);
+    color: var(--text-white);
+    flex: 1 1 0;
+}
+
+.purchase {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-input);
+    border-radius: 1.5rem;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+}
+
+.purchase-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--blue);
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.purchase-header strong {
+    color: var(--tron-cyan);
+}
+
+.purchase-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.purchase-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.purchase-details {
+    flex: 2;
+}
+
+.purchase-info img {
+    width: 25%;
+    height: auto;
+}
+
+.cost {
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.purchase-footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--blue);
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    align-items: center;
+}
+
+.purchase-footer a {
+    text-decoration: underline;
+}
+
+.delivery-state {
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    padding: 0.25rem 0.5rem;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+}
+
+.delivery-state img {
+    width: 1rem;
+    height: auto;
+}
+
+.delivery-state p {
+    font-weight: bold;
+    margin: 0;
+}
+
+.delivered {
+    color: var(--bg-button-green);
+    background-color: var(--bg-light-green);
+}
+
+.sent {
+    color: var(--brown);
+    background-color: var(--bg-light-yellow);
+}
+
+
+
+@media only screen and (min-width: 481px) {
+
+    .two-column-wrapper {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .name-info,
+    .phone-info {
+        flex: 1;
+        margin-bottom: 0;
+    }
+
+    .phone-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+    }
+
+    .mail-info {
+        margin-top: 1rem;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .info-account {
+        width: 80%;
+    }
+
+    hr{
+        margin: 1rem auto;
+    }
+
+    .purchase {
+        font-size: 1rem;
+    }
+
+    .purchase-header strong {
+        color: var(--tron-cyan);
+        font-size: 1.125rem;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .info-account {
+        width: 70%;
+    }
+}
+
+@media only screen and (min-width: 1240px) {
+    .info-account {
+        width: 60%;
+    }
+
+}

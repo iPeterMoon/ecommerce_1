@@ -1,0 +1,270 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    color: var(--text-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1rem 2rem 1rem;
+    flex-grow: 1;
+}
+
+body {
+    font-size: 0.9rem;
+}
+
+.main-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--text-white);
+    text-align: left;
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+}
+
+.card-form-container {
+    background-color: var(--dark-input);
+    border-radius: 13px;
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header-data {
+    background-color: var(--blue);
+    padding: 0.8rem 1.5rem;
+    font-weight: bold;
+    color: var(--text-white);
+    font-size: 1rem;
+}
+
+.form-content {
+    padding: 2rem 1.5rem;
+    padding-bottom: 0.5675rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.payment-container {
+    display: flex;
+    background-color: #121212;
+    border-radius: 1rem;
+    padding: 3%;
+    gap: 6.750px;
+}
+
+.review-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.payment-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review-delete {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.delete-icon {
+    cursor: pointer;
+    width: 2.2rem;
+}
+
+.pago-metodo {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+}
+
+.pedido {
+    display: flex;
+    flex-direction: row;
+    gap: 0.2px;
+}
+
+.pedido-texto {
+    font-weight: 800;
+}
+
+.status {
+    display: flex;
+    background-color: #FEBC2F;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    color: black;
+    padding: 0.125rem;
+    align-items: center;
+    gap: 5px;
+}
+
+a.status {
+    height: 25px;
+}
+
+.check {
+    width: 10px;
+}
+
+.approve-btn {
+    display: flex;
+    background-color: #009951;
+    padding: 7px 15px;
+    height: 35px;
+    width: 4.5rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 0.625rem;
+    text-decoration: none;
+    color: var(--text-white);
+    white-space: nowrap;
+}
+
+.payment-aprrove-button {
+    flex-grow: 1;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.payment-status {
+    font-size: 0.725rem;
+}
+
+.search {
+    width: 100%;
+    margin: 1rem auto 2rem;
+    background-color: var(--account-bg);
+    border: 1 px solid white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: block;
+    color: var(--text-white)
+}
+
+@media (min-width: 769px) {
+
+    .search-div {
+        width: 100%;
+    }
+
+    .card-form-container {
+        max-width: 1500px;
+    }
+
+    .header-data {
+        background-color: var(--blue);
+        padding: 0.8rem 1.5rem;
+        font-weight: bold;
+        color: var(--text-white);
+        font-size: 1rem;
+    }
+
+    .form-content {
+        padding: 2rem 1.5rem;
+        padding-bottom: 0.5675rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .payment-container {
+        display: flex;
+        background-color: #121212;
+        border-radius: 1rem;
+        padding: 3%;
+    }
+
+    .review-info {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        flex-shrink: 0;
+    }
+
+    .review-delete {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+    }
+
+    .delete-icon {
+        cursor: pointer;
+        width: 2.2rem;
+    }
+
+    .pedido {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .pedido-texto {
+        font-weight: 800;
+    }
+
+    .status {
+        display: flex;
+        background-color: #FEBC2F;
+        border-radius: 10px;
+        font-size: 0.725rem;
+        color: black;
+        padding: 0.325rem;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .check {
+        width: 20px;
+    }
+
+    .approve-btn {
+        display: flex;
+        background-color: #009951;
+        padding: 7px 15px;
+        height: 3.5rem;
+        width: 16rem;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: var(--text-white);
+        white-space: nowrap;
+    }
+
+    .payment-aprrove-button {
+        flex-grow: 1;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+
+    .payment-status {
+        font-size: 1.25rem;
+    }
+
+    .pago-metodo {
+        font-size: 1.25rem;
+    }
+
+    .pedido {
+        font-size: 1.25rem;
+    }
+}

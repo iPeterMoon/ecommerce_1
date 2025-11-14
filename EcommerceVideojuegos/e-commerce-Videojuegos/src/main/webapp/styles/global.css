@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Pixelify+Sans:wght@400..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Ponnala&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+    --bg-color: #1B2838;
+    --dark-blue: #171D25;
+    --tron-cyan: #00FFFF;
+    --text-white: #ffff;
+    --bg-color-black: #121212;
+    --bg-button-green: #009951;
+    --text-color-blue: #1A9FFF;
+    --text-color-gray: rgba(175,175,175,0.68);
+    --gray: #32353C;
+    --account-bg: #15202C;
+    --blue: #223D5A;
+    --blue-gray: #36414C;
+    --dark-input: #101923;
+    --bg-light-green : #DCFCE7;
+    --brown : #854D0E;
+    --bg-light-yellow: #FEF9C3;
+}
