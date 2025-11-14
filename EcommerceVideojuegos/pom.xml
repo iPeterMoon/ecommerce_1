@@ -8,6 +8,7 @@
     <modules>
         <module>DominioBD</module>
         <module>Persistencia</module>
+        <module>e-commerce-Videojuegos</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
