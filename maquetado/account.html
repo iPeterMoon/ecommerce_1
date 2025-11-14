@@ -27,7 +27,6 @@
             </a>
         </div>
 
-
         <nav>
             <ul>
                 <li class="nav-element">
@@ -43,15 +42,17 @@
                 </li>
                 <li class="nav-element">
                     <a href="login.html">
-                        <img src="icons/user.svg" alt="search">
+                        <img src="icons/user.svg" alt="user">
                     </a>
                 </li>
             </ul>
         </nav>
     </header>
+
     <main>
         <div class="info-account">
             <h2>Cuenta de Fulanito</h2>
+
             <section id="bought-history">
                 <div class="section-title">
                     <img src="icons/cart.svg" alt="carrito">
@@ -61,16 +62,19 @@
                     <a href="purchase-history.html"><button class="history-button">Ver historial de compras</button></a>
                 </div>
             </section>
+
             <section id="edit_account">
                 <div class="section-title">
                     <img src="icons/edit.svg" alt="edit">
                     <h3>Editar Cuenta</h3>
                 </div>
                 <div class="edit-bg">
+
                     <form name="edit_acc_form" action="">
                         <div class="contact-info">
                             <h3>Información de contacto</h3>
                             <hr>
+
                             <div class="two-column-wrapper">
                                 <div class="name-info">
                                     <label for="name">Nombre completo:</label>
@@ -81,22 +85,23 @@
                                     <input id="phone" name="phone" type="tel">
                                 </div>
                             </div>
+
                             <div class="mail-info">
                                 <label for="mail">Correo electrónico:</label>
                                 <input id="mail" name="mail" type="email">
                             </div>
                         </div>
+
                         <div class="addresses">
                             <div class="addresses-title">
                                 <h3>Mis direcciones</h3>
                                 <span>+</span>
                             </div>
                             <hr>
+
                             <div class="address">
                                 <div class="address-info">
-                                    <span class="address-name">
-                                        Casa
-                                    </span>
+                                    <span class="address-name">Casa</span>
                                     <div class="two-column-wrapper">
                                         <span>
                                             <p>Calle Falsa 123</p>
@@ -110,22 +115,21 @@
                                             <p>Ciudad Ejemplo</p>
                                         </span>
                                         <span>
-                                            <p>SON, CP 12345</p>
+                                            <p>SON, C.P. 12345</p>
                                         </span>
                                     </div>
                                 </div>
                                 <a href="#edit-address-modal" class="edit-icon">
-                                    <img src="icons/edit.svg" alt="edit">
+                                    <img src="icons/edit.svg" alt="editar">
                                 </a>
                                 <a href="#" class="delete-icon">
-                                    <img src="icons/trash.svg" alt="delete">
+                                    <img src="icons/trash.svg" alt="eliminar">
                                 </a>
                             </div>
+
                             <div class="address">
                                 <div class="address-info">
-                                    <span class="address-name">
-                                        Casa
-                                    </span>
+                                    <span class="address-name">Casa</span>
                                     <div class="two-column-wrapper">
                                         <span>
                                             <p>Calle Falsa 123</p>
@@ -139,61 +143,70 @@
                                             <p>Ciudad Ejemplo</p>
                                         </span>
                                         <span>
-                                            <p>SON, CP 12345</p>
+                                            <p>SON, C.P. 12345</p>
                                         </span>
                                     </div>
                                 </div>
                                 <a href="#edit-address-modal" class="edit-icon">
-                                    <img src="icons/edit.svg" alt="edit">
+                                    <img src="icons/edit.svg" alt="editar">
                                 </a>
                                 <a href="#" class="delete-icon">
-                                    <img src="icons/trash.svg" alt="delete">
+                                    <img src="icons/trash.svg" alt="eliminar">
                                 </a>
                             </div>
                         </div>
+
                         <div class="change-pswd">
-                            <h3>Cambiar Contraseña</h3>
+                            <h3>Cambiar contraseña</h3>
                             <hr>
+
                             <div class="pswd">
                                 <label for="actual-pswd">Contraseña actual:</label>
                                 <input id="actual-pswd" name="actual-pswd" type="password">
                             </div>
+
                             <div class="pswd">
                                 <label for="new-pswd">Nueva contraseña:</label>
                                 <input id="new-pswd" name="new-pswd" type="password">
                             </div>
                         </div>
+
                         <hr>
                         <button type="submit">Guardar cambios</button>
                     </form>
+
                 </div>
             </section>
         </div>
     </main>
 
-    <!-- Modal para editar direccion -->
+    <!-- Modal para editar dirección -->
     <div id="edit-address-modal" class="modal-overlay">
         <div class="modal-content">
             <h3>Editar Dirección</h3>
+
             <form action="">
                 <div class="modal-form-group full-width">
-                    <label for="address-name">Nombre de la Dirección</label>
+                    <label for="address-name">Nombre de la dirección</label>
                     <input type="text" id="address-name" name="address-name" value="Casa">
                 </div>
+
                 <div class="modal-form-row">
                     <div class="modal-form-group">
                         <label for="street">Calle</label>
                         <input type="text" id="street" name="street" value="Calle Falsa 123">
                     </div>
                     <div class="modal-form-group">
-                        <label for="ext-number">Numero Exterior</label>
+                        <label for="ext-number">Número exterior</label>
                         <input type="text" id="ext-number" name="ext-number" value="123">
                     </div>
                 </div>
+
                 <div class="modal-form-group full-width">
                     <label for="colonia">Colonia</label>
                     <input type="text" id="colonia" name="colonia" value="Colonia Centro">
                 </div>
+
                 <div class="modal-form-row">
                     <div class="modal-form-group">
                         <label for="postal-code">Código Postal</label>
@@ -204,10 +217,12 @@
                         <input type="text" id="city" name="city" value="Ciudad Ejemplo">
                     </div>
                 </div>
+
                 <div class="modal-form-group full-width">
                     <label for="state">Estado</label>
                     <input type="text" id="state" name="state" value="SON">
                 </div>
+
                 <div class="modal-buttons">
                     <a href="#" class="modal-button cancel">Cancelar</a>
                     <button type="submit" class="modal-button save">Guardar</button>
@@ -215,6 +230,7 @@
             </form>
         </div>
     </div>
+
     <footer class="site-footer">
         <div class="footer-container">
 
@@ -241,15 +257,16 @@
                 <h4 style="margin-top: 1.5rem;">Síguenos</h4>
                 <ul class="social-icons">
                     <li><a href="#" aria-label="Facebook"><img src="icons/facebook.svg" alt="Facebook"></a></li>
-                    <li><a href="#" aria-label="Instagram"><img src="icons/instagram.svg" alt="Instagram"></a>
-                    </li>
+                    <li><a href="#" aria-label="Instagram"><img src="icons/instagram.svg" alt="Instagram"></a></li>
                 </ul>
             </div>
         </div>
+
         <div class="footer-bottom">
             <p>&copy; 2025 MunditoGames. Todos los derechos reservados.</p>
         </div>
     </footer>
+
 </body>
 
 </html>
