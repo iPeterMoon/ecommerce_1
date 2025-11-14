@@ -1,0 +1,353 @@
+<%-- 
+    Document   : crud-games
+    Created on : 14 nov 2025, 1:31:19 a.m.
+    Author     : benja
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gestionar Videojuegos</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/admin.css" />
+  </head>
+
+  <body class="tron-grid grid-container">
+    <header>
+      <div class="brand-mobile">
+        <a href="index.html">
+          <img class="logo" src="imgs/logo-mundito.svg" alt="logo" />
+        </a>
+        <a href="index.html">
+          <h1>MunditoGames</h1>
+        </a>
+      </div>
+      <div class="brand-title-desktop">
+        <a href="index.html">
+          <h1>MunditoGames</h1>
+        </a>
+      </div>
+
+      <nav>
+        <ul>
+          <li class="nav-element">
+            <a href="">
+              <img src="icons/search.svg" alt="search" />
+            </a>
+          </li>
+
+          <li class="nav-element">
+            <a href="shopping-cart.html">
+              <img src="icons/cart.svg" alt="cart" />
+            </a>
+          </li>
+          <li class="nav-element">
+            <a href="login.html">
+              <img src="icons/user.svg" alt="search" />
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1>Gestionar Videojuegos</h1>
+      <div class="search-div">
+        <input type="text" id="search" class="search" placeholder="Buscar..." />
+      </div>
+      <div class="main-div">
+        <div class="add-videogame">
+          <a href="#game-modal"><img src="icons/+.svg" alt="add" /></a>
+        </div>
+        <div class="videogames">
+          <div class="videogame">
+            <div class="game-info">
+              <div class="game-title">
+                <h2>Minecraft</h2>
+                <a href="#edit-game-modal">
+                <img src="icons/edit.svg" alt="editar" class="icon-btn" />
+                </a>
+                <img src="icons/trash.svg" alt="eliminar" class="icon-btn" />
+                <a href="#game-modal-producto">
+                  <img src="icons/+.svg" alt="eliminar" class="icon-btn" />
+                </a>
+              </div>
+              <span><strong>Desarrollador: </strong> Mojang</span>
+              <span><strong>Clasificación: </strong>PEGI 7</span>
+              <span><strong>Categorías: </strong>Aventura, Supervivencia, Sandbox</span>
+              <span><strong>Año de lanzamiento: </strong>2009</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="modal-overlay" id="game-modal">
+      <div class="modal-container">
+        <h2>Agregar Videojuego</h2>
+        <form class="modal-form">
+          <div class="form-group full-width">
+            <label for="game-name">Nombre</label>
+            <input type="text" id="game-name" name="game-name" />
+          </div>
+
+          <div class="form-group">
+            <label for="developer">Desarrollador</label>
+            <input type="text" id="developer" name="developer" />
+          </div>
+
+          <div class="form-group">
+            <label for="classification">Clasificación</label>
+            <select id="classification" name="classification">
+              <option value="" disabled selected>Selecciona</option>
+              <option value="pegi3">PEGI 3</option>
+              <option value="pegi7">PEGI 7</option>
+              <option value="pegi12">PEGI 12</option>
+              <option value="pegi16">PEGI 16</option>
+              <option value="pegi18">PEGI 18</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="category">Categoría</label>
+            <select id="category" name="category">
+              <option value="" disabled selected>Añadir categoría...</option>
+              <option value="aventura">Aventura</option>
+              <option value="accion">Acción</option>
+              <option value="rpg">RPG</option>
+              <option value="estrategia">Estrategia</option>
+              <option value="deportes">Deportes</option>
+              <option value="sandbox">Sandbox</option>
+            </select>
+          </div>
+
+          <div class="chip-container">
+            <div class="chip">
+              <span>Aventura</span>
+              <span class="remove-chip">&times;</span>
+            </div>
+            <div class="chip">
+              <span>Sandbox</span>
+              <span class="remove-chip">&times;</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="release-year">Año de lanzamiento</label>
+            <input type="number" id="release-year" name="release-year" placeholder="Ej: 2025" />
+          </div>
+
+          <div class="form-actions">
+            <a href="#" class="form-button cancel">Cancelar</a>
+            <button type="submit" class="form-button save">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-overlay" id="game-modal-producto">
+      <div class="modal-container">
+        <h2 id="modal-title">Añadir Nuevo Producto</h2>
+        <form class="modal-form" id="game-form">
+          <input type="hidden" id="product-id" name="id" />
+          <div class="form-group full-width">
+            <label for="game-select">Videojuego</label>
+            <select id="game-select" name="gameId" required>
+              <option value="" disabled selected>Minecraft</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="platform">Plataforma</label>
+            <input type="text" id="platform" name="platform" required />
+          </div>
+          <div class="form-group">
+            <label for="stock">Stock</label>
+            <input type="number" id="stock" name="stock" min="0" required />
+          </div>
+          <div class="form-group">
+            <label for="price">Precio ($)</label>
+            <input type="number" id="price" name="price" min="0" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="image-url">URL de Imagen</label>
+            <input type="url" id="image-url" name="imageUrl" required />
+          </div>
+          <div class="form-group full-width">
+            <label for="description">Descripción</label>
+            <textarea id="description" name="description"></textarea>
+          </div>
+          <div class="form-actions">
+            <a href="#" class="form-button cancel">Cancelar</a>
+            <button type="submit" class="form-button save">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-column">
+          <a href="index.html" class="logo-container">
+            <img src="imgs/logo-mundito.svg" alt="logo" />
+            <h4>MunditoGames</h4>
+          </a>
+          <p>
+            Tu universo de videojuegos. Encuentra los mejores títulos, ofertas y la comunidad más apasionada del gaming.
+          </p>
+        </div>
+        <div class="modal-overlay" id="game-modal">
+          <div class="modal-container">
+            <h2>Agregar Videojuego</h2>
+            <form class="modal-form">
+              <div class="form-group full-width">
+                <label for="game-name">Nombre</label>
+                <input type="text" id="game-name" name="game-name" />
+              </div>
+
+              <div class="form-group">
+                <label for="developer">Desarrollador</label>
+                <input type="text" id="developer" name="developer" />
+              </div>
+
+              <div class="form-group">
+                <label for="classification">Clasificación</label>
+                <select id="classification" name="classification">
+                  <option value="" disabled selected>Selecciona</option>
+                  <option value="pegi3">PEGI 3</option>
+                  <option value="pegi7">PEGI 7</option>
+                  <option value="pegi12">PEGI 12</option>
+                  <option value="pegi16">PEGI 16</option>
+                  <option value="pegi18">PEGI 18</option>
+                </select>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="category">Categoría</label>
+                <select id="category" name="category">
+                  <option value="" disabled selected>Añadir categoría...</option>
+                  <option value="aventura">Aventura</option>
+                  <option value="accion">Acción</option>
+                  <option value="rpg">RPG</option>
+                  <option value="estrategia">Estrategia</option>
+                  <option value="deportes">Deportes</option>
+                  <option value="sandbox">Sandbox</option>
+                </select>
+              </div>
+
+              <div class="chip-container">
+                <div class="chip">
+                  <span>Aventura</span>
+                  <span class="remove-chip">&times;</span>
+                </div>
+                <div class="chip">
+                  <span>Sandbox</span>
+                  <span class="remove-chip">&times;</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="release-year">Año de lanzamiento</label>
+                <input type="number" id="release-year" name="release-year" placeholder="Ej: 2025" />
+              </div>
+
+              <div class="form-actions">
+                <a href="#" class="form-button cancel">Cancelar</a>
+                <button type="submit" class="form-button save">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="modal-overlay" id="edit-game-modal">
+          <div class="modal-container">
+            <h2>Modificar Videojuego</h2>
+            <form class="modal-form">
+              <div class="form-group full-width">
+                <label for="game-name">Nombre</label>
+                <input type="text" id="game-name" name="game-name" value="Minecraft" />
+              </div>
+
+              <div class="form-group">
+                <label for="developer">Desarrollador</label>
+                <input type="text" id="developer" name="developer" value="Mojang"/>
+              </div>
+
+              <div class="form-group">
+                <label for="classification">Clasificación</label>
+                <select id="classification" name="classification">
+                  <option value="" disabled selected>PEGI 7</option>
+                  <option value="pegi3">PEGI 3</option>
+                  <option value="pegi7">PEGI 7</option>
+                  <option value="pegi12">PEGI 12</option>
+                  <option value="pegi16">PEGI 16</option>
+                  <option value="pegi18">PEGI 18</option>
+                </select>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="category">Categoría</label>
+                <select id="category" name="category">
+                  <option value="" disabled selected>Aventura</option>
+                  <option value="aventura">Aventura</option>
+                  <option value="accion">Acción</option>
+                  <option value="rpg">RPG</option>
+                  <option value="estrategia">Estrategia</option>
+                  <option value="deportes">Deportes</option>
+                  <option value="sandbox">Sandbox</option>
+                </select>
+              </div>
+
+              <div class="chip-container">
+                <div class="chip">
+                  <span>Aventura</span>
+                  <span class="remove-chip">&times;</span>
+                </div>
+                <div class="chip">
+                  <span>Sandbox</span>
+                  <span class="remove-chip">&times;</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="release-year">Año de lanzamiento</label>
+                <input type="number" id="release-year" name="release-year" placeholder="Ej: 2025" value="2009" />
+              </div>
+
+              <div class="form-actions">
+                <a href="#" class="form-button cancel">Cancelar</a>
+                <button type="submit" class="form-button save">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="catalogo.html">Catálogo de Productos</a></li>
+            <li><a href="account.html">Mi Cuenta</a></li>
+            <li><a href="shopping-cart.html">Carrito de Compras</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 style="margin-top: 1.5rem">Síguenos</h4>
+          <ul class="social-icons">
+            <li>
+              <a href="#" aria-label="Facebook"><img src="icons/facebook.svg" alt="Facebook" /></a>
+            </li>
+            <li>
+              <a href="#" aria-label="Instagram"><img src="icons/instagram.svg" alt="Instagram" /></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 MunditoGames. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+

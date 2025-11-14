@@ -1,0 +1,144 @@
+<%-- 
+    Document   : realizar_pedido
+    Created on : 14 nov 2025, 1:40:01 a.m.
+    Author     : benja
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Realizar pedido</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/realizar_pedido.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/styles.css" />
+</head>
+
+<body class="tron-grid grid-container">
+    <header>
+        <div class="brand-mobile">
+            <a href="index.html">
+                <img class="logo" src="imgs/logo-mundito.svg" alt="logo" />
+            </a>
+            <a href="index.html">
+                <h1>MunditoGames</h1>
+            </a>
+        </div>
+        <div class="brand-title-desktop">
+            <a href="index.html">
+                <h1>MunditoGames</h1>
+            </a>
+        </div>
+
+        <nav>
+            <ul>
+                <li class="nav-element">
+                    <a href="">
+                        <img src="icons/search.svg" alt="search" />
+                    </a>
+                </li>
+
+                <li class="nav-element">
+                    <a href="">
+                        <img src="icons/cart.svg" alt="cart" />
+                    </a>
+                </li>
+                <li class="nav-element">
+                    <a href="login.html">
+                        <img src="icons/user.svg" alt="search" />
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1 class="tittle">Detalles de pedido</h1>
+        <div class="header-container">
+            <p class="details-paragraph">Confirmar pedido</p>
+        </div>
+        <div class="main-container">
+            <div class="order-information">
+                <div class="personal-information">
+                    <div class="shipment-information">
+                        <p>Dirección de Envío</p>
+                        <p>Calle Falsa 123, Colonia Centro</p>
+                        <p>Ciudad Obregón, SON, CP 12345</p>
+                    </div>
+                </div>
+                <hr />
+                <div class="items-content">
+                    <div class="product-row">
+                        <div class="product-info-left">
+                            <img src="imgs/minecraft.png" />
+                            <div class="tittle-quantity">
+                                <p>Minecraft</p>
+                                <p>Cantidad: 1</p>
+                            </div>
+                        </div>
+
+                        <p class="product-price">Mex$ 349.00</p>
+                    </div>
+                </div>
+                <hr />
+                <div class="prices-status-order">
+                    <div class="prices-subtittle">
+                        <p>Subtotal</p>
+                        <p>Envío</p>
+                        <p>Total</p>
+                    </div>
+                    <div class="prices">
+                        <div class="subtotal">$349.00</div>
+                        <div class="shipment-price">$0.00</div>
+                        <div class="total-price">$349.00</div>
+                    </div>
+                </div>
+
+                <div class="buttons-container">
+                    <a href="shopping-cart.html"><button class="cancel-button">Cancelar</button></a>
+                    <a href="seleccionar_metodo_pago.html" ><button class="payment-button">Proceder al pago</button></a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <div class="footer-column">
+                <a href="index.html" class="logo-container">
+                    <img src="imgs/logo-mundito.svg" alt="logo">
+                    <h4>MunditoGames</h4>
+                </a>
+                <p>Tu universo de videojuegos. Encuentra los mejores títulos, ofertas y la comunidad más apasionada del
+                    gaming.</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="catalogo.html">Catálogo de Productos</a></li>
+                    <li><a href="account.html">Mi Cuenta</a></li>
+                    <li><a href="shopping-cart.html">Carrito de Compras</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 style="margin-top: 1.5rem;">Síguenos</h4>
+                <ul class="social-icons">
+                    <li><a href="#" aria-label="Facebook"><img src="icons/facebook.svg" alt="Facebook"></a></li>
+                    <li><a href="#" aria-label="Instagram"><img src="icons/instagram.svg" alt="Instagram"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MunditoGames. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,186 @@
+<%-- 
+    Document   : shopping-cart
+    Created on : 14 nov 2025, 1:41:03 a.m.
+    Author     : benja
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Carrito</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/styles.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/shopping-cart.css" />
+</head>
+
+<body class="tron-grid grid-container">
+  <header>
+    <div class="brand-mobile">
+      <a href="index.html">
+        <img class="logo" src="imgs/logo-mundito.svg" alt="logo" />
+      </a>
+      <a href="index.html">
+        <h1>MunditoGames</h1>
+      </a>
+    </div>
+    <div class="brand-title-desktop">
+      <a href="index.html">
+        <h1>MunditoGames</h1>
+      </a>
+    </div>
+
+    <nav>
+      <ul>
+        <li class="nav-element">
+          <a href="">
+            <img src="icons/search.svg" alt="search" />
+          </a>
+        </li>
+
+        <li class="nav-element">
+          <a href="shopping-cart.html">
+            <img src="icons/cart.svg" alt="cart" />
+          </a>
+        </li>
+        <li class="nav-element">
+          <a href="login.html">
+            <img src="icons/user.svg" alt="search" />
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+
+    <div class="container">
+      <h1>Carrito</h1>
+      <div class="products">
+        <div class="product-row">
+          <img src="icons/x-button.svg" alt="" class="delete-button" />
+          <img src="imgs/minecraft.png" alt="" class="product-img" />
+          <div class="tittle">
+            <p>Título</p>
+            <p class="game-name">Minecraft</p>
+          </div>
+          <div class="quantity">
+            <p>Cantidad</p>
+            <p class="product-quantity">1</p>
+          </div>
+          <div class="price">
+            <p>Precio</p>
+            <p class="product-price">349.00</p>
+          </div>
+          <div class="subtotal">
+            <p>Subtotal</p>
+            <p class="product-subtotal">349.00</p>
+          </div>
+        </div>
+        <div class="product-row">
+          <img src="icons/x-button.svg" alt="" class="delete-button" />
+          <img src="imgs/minecraft.png" alt="" class="product-img" />
+          <div class="tittle">
+            <p>Título</p>
+            <p class="game-name">Minecraft</p>
+          </div>
+          <div class="quantity">
+            <p>Cantidad</p>
+            <p class="product-quantity">1</p>
+          </div>
+          <div class="price">
+            <p>Precio</p>
+            <p class="product-price">349.00</p>
+          </div>
+          <div class="subtotal">
+            <p>Subtotal</p>
+            <p class="product-subtotal">349.00</p>
+          </div>
+        </div>
+
+        <div class="product-row">
+          <img src="icons/x-button.svg" alt="" class="delete-button" />
+          <img src="imgs/minecraft.png" alt="" class="product-img" />
+          <div class="tittle">
+            <p>Título</p>
+            <p class="game-name">Minecraft</p>
+          </div>
+          <div class="quantity">
+            <p>Cantidad</p>
+            <p class="product-quantity">1</p>
+          </div>
+          <div class="price">
+            <p>Precio</p>
+            <p class="product-price">349.00</p>
+          </div>
+          <div class="subtotal">
+            <p>Subtotal</p>
+            <p class="product-subtotal">349.00</p>
+          </div>
+        </div>
+      </div>
+      <section class="resume-products">
+        <div class="subtittles">
+          <p>Artículos totales</p>
+          <p>Total estimado:</p>
+          <p>Envío estimado:</p>
+        </div>
+
+        <div class="results">
+          <p class="total-products">(1)</p>
+          <p class="estimated-total">$349.00</p>
+          <p class="estimated-shipment">5 días hábiles.</p>
+        </div>
+        <div class="information">
+          <div class="purchase-information">
+            <img src="icons/lock.svg" />
+            <p>No se te cobrará hasta que revises este pedido en la página siguiente</p>
+          </div>
+          <div class="button-with-price">
+            <span class="price-purchase">MEX 349.00</span>
+            <a href="realizar_pedido.html" class="add-to-car"> Realizar Pedido </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-container">
+
+      <div class="footer-column">
+        <a href="index.html" class="logo-container">
+          <img src="imgs/logo-mundito.svg" alt="logo">
+          <h4>MunditoGames</h4>
+        </a>
+        <p>Tu universo de videojuegos. Encuentra los mejores títulos, ofertas y la comunidad más apasionada del
+          gaming.</p>
+      </div>
+
+      <div class="footer-column">
+        <h4>Navegación</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="catalogo.html">Catálogo de Productos</a></li>
+          <li><a href="account.html">Mi Cuenta</a></li>
+          <li><a href="shopping-cart.html">Carrito de Compras</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4 style="margin-top: 1.5rem;">Síguenos</h4>
+        <ul class="social-icons">
+          <li><a href="#" aria-label="Facebook"><img src="icons/facebook.svg" alt="Facebook"></a></li>
+          <li><a href="#" aria-label="Instagram"><img src="icons/instagram.svg" alt="Instagram"></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 MunditoGames. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+</body>
+
+</html>

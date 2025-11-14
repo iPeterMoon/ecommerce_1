@@ -1,0 +1,107 @@
+<%-- 
+    Document   : login
+    Created on : 14 nov 2025, 1:36:49 a.m.
+    Author     : benja
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/form_login_register.css">
+
+</head>
+
+<body class="tron-grid grid-container">
+    <header>
+
+        <div class="brand-mobile">
+            <a href="index.html">
+                <img class="logo" src="imgs/logo-mundito.svg" alt="logo">
+            </a>
+            <a href="index.html">
+                <h1>MunditoGames</h1>
+            </a>
+        </div>
+        <div class="brand-title-desktop">
+            <a href="index.html">
+                <h1>MunditoGames</h1>
+            </a>
+        </div>
+
+
+        <nav>
+            <ul>
+                <li class="nav-element">
+                    <a href="">
+                        <img src="icons/search.svg" alt="search">
+                    </a>
+                </li>
+
+                <li class="nav-element">
+                    <a href="shopping-cart.html">
+                        <img src="icons/cart.svg" alt="cart">
+                    </a>
+                </li>
+                <li class="nav-element">
+                    <a href="login.html">
+                        <img src="icons/user.svg" alt="search">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form action="">
+            <h2 class="form-title">Inicio de sesión</h2>
+            <label for="mail">Correo electrónico</label>
+            <input id="mail" name="mail" type="email">
+            <label for="pswd">Contraseña</label>
+            <input id="pswd" name="pswd" type="password">
+            <span>¿No tienes una cuenta? <a href="register.html">Crear cuenta</a></span>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <div class="footer-column">
+                <a href="index.html" class="logo-container">
+                    <img src="imgs/logo-mundito.svg" alt="logo">
+                    <h4>MunditoGames</h4>
+                </a>
+                <p>Tu universo de videojuegos. Encuentra los mejores títulos, ofertas y la comunidad más apasionada del
+                    gaming.</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="catalogo.html">Catálogo de Productos</a></li>
+                    <li><a href="account.html">Mi Cuenta</a></li>
+                    <li><a href="shopping-cart.html">Carrito de Compras</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 style="margin-top: 1.5rem;">Síguenos</h4>
+                <ul class="social-icons">
+                    <li><a href="#" aria-label="Facebook"><img src="icons/facebook.svg" alt="Facebook"></a></li>
+                    <li><a href="#" aria-label="Instagram"><img src="icons/instagram.svg" alt="Instagram"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MunditoGames. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

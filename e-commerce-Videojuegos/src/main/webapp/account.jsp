@@ -1,0 +1,279 @@
+<%-- 
+    Document   : account
+    Created on : 14 nov 2025, 1:28:14 a.m.
+    Author     : benja
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/account.css">
+
+</head>
+
+<body class="tron-grid grid-container">
+    <header>
+
+        <div class="brand-mobile">
+            <a href="index.html">
+                <img class="logo" src="imgs/logo-mundito.svg" alt="logo">
+            </a>
+            <a href="index.html">
+                <h1>MunditoGames</h1>
+            </a>
+        </div>
+        <div class="brand-title-desktop">
+            <a href="index.html">
+                <h1>MunditoGames</h1>
+            </a>
+        </div>
+
+        <nav>
+            <ul>
+                <li class="nav-element">
+                    <a href="">
+                        <img src="icons/search.svg" alt="search">
+                    </a>
+                </li>
+
+                <li class="nav-element">
+                    <a href="shopping-cart.html">
+                        <img src="icons/cart.svg" alt="cart">
+                    </a>
+                </li>
+                <li class="nav-element">
+                    <a href="login.html">
+                        <img src="icons/user.svg" alt="user">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="info-account">
+            <h2>Cuenta de Fulanito</h2>
+
+            <section id="bought-history">
+                <div class="section-title">
+                    <img src="icons/cart.svg" alt="carrito">
+                    <h3>Historial de Compras</h3>
+                </div>
+                <div class="edit-bg">
+                    <a href="purchase-history.html"><button class="history-button">Ver historial de compras</button></a>
+                </div>
+            </section>
+
+            <section id="edit_account">
+                <div class="section-title">
+                    <img src="icons/edit.svg" alt="edit">
+                    <h3>Editar Cuenta</h3>
+                </div>
+                <div class="edit-bg">
+
+                    <form name="edit_acc_form" action="">
+                        <div class="contact-info">
+                            <h3>Información de contacto</h3>
+                            <hr>
+
+                            <div class="two-column-wrapper">
+                                <div class="name-info">
+                                    <label for="name">Nombre completo:</label>
+                                    <input id="name" name="name" type="text">
+                                </div>
+                                <div class="phone-info">
+                                    <label for="phone">Teléfono:</label>
+                                    <input id="phone" name="phone" type="tel">
+                                </div>
+                            </div>
+
+                            <div class="mail-info">
+                                <label for="mail">Correo electrónico:</label>
+                                <input id="mail" name="mail" type="email">
+                            </div>
+                        </div>
+
+                        <div class="addresses">
+                            <div class="addresses-title">
+                                <h3>Mis direcciones</h3>
+                                <span>+</span>
+                            </div>
+                            <hr>
+
+                            <div class="address">
+                                <div class="address-info">
+                                    <span class="address-name">Casa</span>
+                                    <div class="two-column-wrapper">
+                                        <span>
+                                            <p>Calle Falsa 123</p>
+                                        </span>
+                                        <span>
+                                            <p>Colonia Centro</p>
+                                        </span>
+                                    </div>
+                                    <div class="two-column-wrapper">
+                                        <span>
+                                            <p>Ciudad Ejemplo</p>
+                                        </span>
+                                        <span>
+                                            <p>SON, C.P. 12345</p>
+                                        </span>
+                                    </div>
+                                </div>
+                                <a href="#edit-address-modal" class="edit-icon">
+                                    <img src="icons/edit.svg" alt="editar">
+                                </a>
+                                <a href="#" class="delete-icon">
+                                    <img src="icons/trash.svg" alt="eliminar">
+                                </a>
+                            </div>
+
+                            <div class="address">
+                                <div class="address-info">
+                                    <span class="address-name">Casa</span>
+                                    <div class="two-column-wrapper">
+                                        <span>
+                                            <p>Calle Falsa 123</p>
+                                        </span>
+                                        <span>
+                                            <p>Colonia Centro</p>
+                                        </span>
+                                    </div>
+                                    <div class="two-column-wrapper">
+                                        <span>
+                                            <p>Ciudad Ejemplo</p>
+                                        </span>
+                                        <span>
+                                            <p>SON, C.P. 12345</p>
+                                        </span>
+                                    </div>
+                                </div>
+                                <a href="#edit-address-modal" class="edit-icon">
+                                    <img src="icons/edit.svg" alt="editar">
+                                </a>
+                                <a href="#" class="delete-icon">
+                                    <img src="icons/trash.svg" alt="eliminar">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="change-pswd">
+                            <h3>Cambiar contraseña</h3>
+                            <hr>
+
+                            <div class="pswd">
+                                <label for="actual-pswd">Contraseña actual:</label>
+                                <input id="actual-pswd" name="actual-pswd" type="password">
+                            </div>
+
+                            <div class="pswd">
+                                <label for="new-pswd">Nueva contraseña:</label>
+                                <input id="new-pswd" name="new-pswd" type="password">
+                            </div>
+                        </div>
+
+                        <hr>
+                        <button type="submit">Guardar cambios</button>
+                    </form>
+
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal para editar dirección -->
+    <div id="edit-address-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Editar Dirección</h3>
+
+            <form action="">
+                <div class="modal-form-group full-width">
+                    <label for="address-name">Nombre de la dirección</label>
+                    <input type="text" id="address-name" name="address-name" value="Casa">
+                </div>
+
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="street">Calle</label>
+                        <input type="text" id="street" name="street" value="Calle Falsa 123">
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="ext-number">Número exterior</label>
+                        <input type="text" id="ext-number" name="ext-number" value="123">
+                    </div>
+                </div>
+
+                <div class="modal-form-group full-width">
+                    <label for="colonia">Colonia</label>
+                    <input type="text" id="colonia" name="colonia" value="Colonia Centro">
+                </div>
+
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="postal-code">Código Postal</label>
+                        <input type="text" id="postal-code" name="postal-code" value="12345">
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="city">Ciudad</label>
+                        <input type="text" id="city" name="city" value="Ciudad Ejemplo">
+                    </div>
+                </div>
+
+                <div class="modal-form-group full-width">
+                    <label for="state">Estado</label>
+                    <input type="text" id="state" name="state" value="SON">
+                </div>
+
+                <div class="modal-buttons">
+                    <a href="#" class="modal-button cancel">Cancelar</a>
+                    <button type="submit" class="modal-button save">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <div class="footer-column">
+                <a href="index.html" class="logo-container">
+                    <img src="imgs/logo-mundito.svg" alt="logo">
+                    <h4>MunditoGames</h4>
+                </a>
+                <p>Tu universo de videojuegos. Encuentra los mejores títulos, ofertas y la comunidad más apasionada del
+                    gaming.</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="catalogo.html">Catálogo de Productos</a></li>
+                    <li><a href="account.html">Mi Cuenta</a></li>
+                    <li><a href="shopping-cart.html">Carrito de Compras</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 style="margin-top: 1.5rem;">Síguenos</h4>
+                <ul class="social-icons">
+                    <li><a href="#" aria-label="Facebook"><img src="icons/facebook.svg" alt="Facebook"></a></li>
+                    <li><a href="#" aria-label="Instagram"><img src="icons/instagram.svg" alt="Instagram"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 MunditoGames. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
