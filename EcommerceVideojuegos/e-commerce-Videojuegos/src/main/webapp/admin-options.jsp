@@ -23,7 +23,7 @@
         <main>
             <div class="options">
                 <a href="manage-users.jsp"><button>Gestionar usuarios</button></a>
-                <a href="crud-games.jsp"><button>Gestionar videojuegos</button></a>
+                <a href="VideojuegoServlet"><button>Gestionar videojuegos</button></a>
                 <a href="crud-products.jsp"><button>Gestionar catálogo</button></a>
                 <a href="consultarPedidos"><button>Gestionar pedidos</button></a>
                 <a href="historial-pagos.jsp"><button>Historial de pagos</button></a>
