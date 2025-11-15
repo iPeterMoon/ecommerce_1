@@ -25,7 +25,7 @@
                 <a href="manage-users.jsp"><button>Gestionar usuarios</button></a>
                 <a href="crud-games.jsp"><button>Gestionar videojuegos</button></a>
                 <a href="crud-products.jsp"><button>Gestionar catálogo</button></a>
-                <a href="pedidos-pendientes.jsp"><button>Gestionar pedidos</button></a>
+                <a href="consultarPedidos"><button>Gestionar pedidos</button></a>
                 <a href="historial-pagos.jsp"><button>Historial de pagos</button></a>
                 <a href="moderar-resenas.jsp"><button>Moderar reseñas</button></a>
             </div>

@@ -1,24 +1,21 @@
 
 package controlador;
 
-import DTO.PedidoDTO;
-import jakarta.servlet.RequestDispatcher;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import modelo.PedidoBO;
 
 /**
  *
- * @author Sebastian Moreno
+ * @author moren
  */
-@WebServlet(name = "ConsultaPedido", urlPatterns = {"/consultarPedidos"})
-public class ConsultaPedido extends HttpServlet {
+@WebServlet(name = "ActualizarPedido", urlPatterns = {"/actualizarPedido"})
+public class ActualizarPedido extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +34,10 @@ public class ConsultaPedido extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConsultaPedido</title>");
+            out.println("<title>Servlet CancelarPedido</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ConsultaPedido at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CancelarPedido at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,11 +55,7 @@ public class ConsultaPedido extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PedidoBO pedidoBO = new PedidoBO();
-        List<PedidoDTO> pedidos = pedidoBO.consultarPedidos();
-        request.setAttribute("listaPedidos", pedidos);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pedidos-pendientes.jsp");
-        dispatcher.forward(request, response);
+        this.doPost(request, response);
     }
 
     /**
@@ -76,7 +69,27 @@ public class ConsultaPedido extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String idParam = request.getParameter("id");
+        String action = request.getParameter("action"); 
+
+        if (idParam != null && action != null) {
+            try {
+                Long pedidoId = Long.parseLong(idParam);
+                PedidoBO pedidoBO = new PedidoBO();
+
+                if (action.equals("cancelar")) {
+                    pedidoBO.cancelarPedido(pedidoId);
+                } else if (action.equals("enviar")) {
+                    pedidoBO.enviarPedido(pedidoId);
+                }
+
+            } catch (NumberFormatException e) {
+                System.err.println("ID de pedido inválido: " + idParam);
+            }
+        }
+
+        response.sendRedirect("consultarPedidos");
+
     }
 
     /**
@@ -86,7 +99,7 @@ public class ConsultaPedido extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet para actualizar el estado de un pedido.";
     }// </editor-fold>
 
 }

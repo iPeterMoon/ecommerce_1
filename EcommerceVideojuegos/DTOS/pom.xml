@@ -9,7 +9,7 @@
     <artifactId>DTOS</artifactId>
     <packaging>jar</packaging>
     <properties>
-        <maven.compiler.release>24</maven.compiler.release>
+        <maven.compiler.release>11</maven.compiler.release>
         <exec.mainClass>com.mycompany.dtos.DTOS</exec.mainClass>
     </properties>
 </project>
