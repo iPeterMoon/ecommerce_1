@@ -13,7 +13,7 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
     private Long idProducto;
-    
+
     @Column(name = "nombre_producto", nullable = false)
     private String nombreProducto;
 
@@ -22,8 +22,9 @@ public class Producto {
 
     @Column(name = "precio", nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
-
-    @Lob 
+    @Column(name = "stock")
+    private Integer stock;
+    @Lob
     @Column(name = "descripcion")
     private String descripcion;
 
@@ -34,10 +35,10 @@ public class Producto {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_videojuego")
     private Videojuego videojuego;
-    
+
     @OneToMany(mappedBy = "producto")
     private List<Resena> resenas;
-    
+
     @OneToMany(mappedBy = "producto")
     private List<Item> items;
 
@@ -116,10 +117,18 @@ public class Producto {
         this.items = items;
     }
 
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", imagenUrl=" + imagenUrl + ", precio=" + precio + ", descripcion=" + descripcion + ", plataforma=" + plataforma + ", videojuego=" + videojuego + ", resenas=" + resenas + ", items=" + items + '}';
+        return "Producto{" + "idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", imagenUrl=" + imagenUrl + ", precio=" + precio + ", stock=" + stock + ", descripcion=" + descripcion + ", plataforma=" + plataforma + ", videojuego=" + videojuego + ", resenas=" + resenas + ", items=" + items + '}';
     }
     
-    
+
 }
