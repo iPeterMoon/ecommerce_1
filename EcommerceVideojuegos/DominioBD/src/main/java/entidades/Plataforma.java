@@ -1,8 +1,6 @@
 package entidades;
 import jakarta.persistence.*;
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity

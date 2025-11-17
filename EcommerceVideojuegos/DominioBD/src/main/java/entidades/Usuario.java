@@ -2,6 +2,8 @@ package entidades;
 import jakarta.persistence.*;
 import java.util.List;
 
+import enums.RolUsuario;
+
 
 @Entity
 @Table(name = "usuario")
@@ -27,8 +29,9 @@ public class Usuario {
     @Column(name = "cuenta_activa")
     private Boolean cuentaActiva;
 
-    @Column(name = "rol", length = 50)
-    private String rol;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "rol", nullable = false, length = 50)
+    private RolUsuario rol;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_carrito", unique = true, nullable = false)
@@ -94,11 +97,11 @@ public class Usuario {
         this.cuentaActiva = cuentaActiva;
     }
 
-    public String getRol() {
+    public RolUsuario getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(RolUsuario rol) {
         this.rol = rol;
     }
 

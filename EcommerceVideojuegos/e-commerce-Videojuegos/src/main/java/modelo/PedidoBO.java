@@ -98,7 +98,7 @@ public class PedidoBO {
         dto.setIdUsuario(usuario.getIdUsuario());
         dto.setNombre(usuario.getNombre());
         dto.setCorreo(usuario.getCorreo());
-        dto.setRol(usuario.getRol());
+        dto.setRol(usuario.getRol().toString());
         return dto;
     }
 
