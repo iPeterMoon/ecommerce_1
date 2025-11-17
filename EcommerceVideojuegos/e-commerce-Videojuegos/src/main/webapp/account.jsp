@@ -145,7 +145,10 @@
                             <hr>
                             <button type="submit">Guardar cambios</button>
                         </form>
-
+                        <hr>
+                        <form action="CerrarSesion" method="post">
+                            <button type="submit" style="color: var(--red-error-text)">Cerrar sesión</button>
+                        </form>
                     </div>
                 </section>
             </div>

@@ -20,7 +20,7 @@
 <body class="tron-grid grid-container">
      <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
     <main>
-        <form action="${pageContext.request.contextPath}/InicioSesion" method="get">
+        <form action="InicioSesion" method="get">
             <h2 class="form-title">Inicio de sesión</h2>  
             
             <%

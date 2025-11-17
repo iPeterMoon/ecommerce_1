@@ -66,9 +66,9 @@ button:hover {
 }
 
 .error-message{
-    color: #ff6b6b;
+    color: var(--red-error-text);
     background-color: #2a1a1a;
-    border: 1px solid #ff6b6b;
+    border: 1px solid var(--red-error-text);
     padding: 0.75rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;

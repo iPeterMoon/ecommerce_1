@@ -86,6 +86,10 @@ main {
     padding: 2rem 5%;
 }
 
+button {
+    cursor: pointer;
+}
+
 /* ESTILOS DEL FOOTER */
 
 .site-footer {

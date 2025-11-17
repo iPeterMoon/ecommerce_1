@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
 
         <div class="brand-mobile">
@@ -28,10 +29,26 @@
                         <img src="icons/cart.svg" alt="cart">
                     </a>
                 </li>
+                <c:if test="${sessionScope.usuario != null and sessionScope.usuario.rol == 'ADMIN'}">
+                    <li class="nav-element">
+                        <a href="admin-options.jsp">
+                            <img src="icons/settings.svg" alt="admin">
+                        </a>
+                    </li>                    
+                </c:if>
                 <li class="nav-element">
-                    <a href="login.jsp">
-                        <img src="icons/user.svg" alt="search">
-                    </a>
+                    <c:choose>
+                        <c:when test="${sessionScope.usuario != null}">
+                            <a href="account.jsp">
+                                <img src="icons/user.svg" alt="account">
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="login.jsp">
+                                <img src="icons/user.svg" alt="login">
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
             </ul>
         </nav>
