@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import DTO.UsuarioDTO;
 import enums.RolUsuario;
@@ -27,7 +28,8 @@ import jakarta.servlet.annotation.WebFilter;
 @WebFilter("/*")
 public class FiltroAutenticacion implements Filter{
     
-    String[] paginasPublicas = {"index.jsp", "catalogo.jsp", "producto.jsp", "login.jsp", "register.jsp"};
+
+    String[] paginasUsuario = {"account.jsp", "agregar-direccion.jsp", "detalles-pedido-contraentrega.jsp", "detalles-pedido-tarjeta-pagado.jsp", "detalles-pedido-transfe.jsp", "introducir_datos_bancarios.jsp", "order.jsp", "purchase-history.jsp", "realizar_pedido.jsp", "shopping-cart.jsp", "seleccionar_metodo_pago.jsp"};
     String[] paginasAdmin = {"admin-options.jsp", "manage-users.jsp", "crud-products.jsp", "crud-games.jsp", "historial-pagos.jsp", "moderar-resenas.jsp", "pedidos-pendientes.jsp"};
 
     /**
@@ -42,17 +44,18 @@ public class FiltroAutenticacion implements Filter{
     }
 
     /**
-     * Metodo para saber si una url es privada
+     * Metodo para saber si una url es de usuario (si solo se puede
+     * acceder con sesión iniciada)
      * @param path url a la que se quiere acceder
-     * @return true si es privada, falso si no es privada
+     * @return true si es de usuario, false si no 
      */
-    private boolean isURLPrivada(String path) {
-        for (String url : paginasPublicas) {
+    private boolean isURLUsuario(String path) {
+        for (String url : paginasUsuario) {
             if(path.startsWith("/" + url)) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
     
     /**
@@ -114,12 +117,13 @@ public class FiltroAutenticacion implements Filter{
         HttpServletRequest peticion = (HttpServletRequest) sr;
         HttpServletResponse respuesta = (HttpServletResponse) sr1;
         String path = getPathSolicitado(peticion);
-        boolean privada = this.isURLPrivada(path);
+
+        boolean userPage = this.isURLUsuario(path);
         boolean loggedIn = this.isLoggedIn(peticion);
         boolean adminPage = this.isURLAdmin(path);
         boolean isAdmin = this.isAdmin(peticion);
         
-        if(privada && !loggedIn){
+        if(userPage && !loggedIn){
             String referer = peticion.getHeader("Referer");
             String redirectURL = (referer != null && !referer.isEmpty()) ? referer : peticion.getContextPath() + "/index.jsp";
             respuesta.sendRedirect(redirectURL);
