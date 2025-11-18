@@ -1,10 +1,14 @@
 package modelo;
 
+import java.util.List;
+
 import DAO.UsuarioDAO;
 import DAO.interfaces.IUsuarioDAO;
 import DTO.NuevoUsuarioDTO;
 import DTO.UsuarioDTO;
+import DTO.DireccionDTO;
 import entidades.CarritoCompra;
+import entidades.Direccion;
 import entidades.Usuario;
 import enums.RolUsuario;
 import excepciones.RegistroException;
@@ -69,7 +73,23 @@ public class UsuarioBO {
         dto.setNombre(usuario.getNombre());
         dto.setCorreo(usuario.getCorreo());
         dto.setRol(usuario.getRol().toString());
+        dto.setDirecciones(toDireccionesDTO(usuario.getDirecciones()));
         return dto;
     }
+
+    private List<DireccionDTO> toDireccionesDTO(List<Direccion> direcciones){
+        List<DireccionDTO> direccionesDTO = direcciones.stream().map(direccion -> {
+            DireccionDTO dto = new DireccionDTO();
+            dto.setIdDireccion(direccion.getIdDireccion());
+            dto.setCalle(direccion.getCalle());
+            dto.setColonia(direccion.getColonia());
+            dto.setCiudad(direccion.getCiudad());
+            dto.setEstado(direccion.getEstado());
+            dto.setCodigoPostal(direccion.getCodigoPostal());
+            return dto;
+        }).toList();
+        return direccionesDTO;
+    }
+
     
 }

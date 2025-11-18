@@ -37,7 +37,7 @@ public class Usuario {
     @JoinColumn(name = "id_carrito", unique = true, nullable = false)
     private CarritoCompra carritoCompra;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Direccion> direcciones;
 
     @OneToMany(mappedBy = "usuario")

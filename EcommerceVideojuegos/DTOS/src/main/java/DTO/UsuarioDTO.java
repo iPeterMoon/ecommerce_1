@@ -4,6 +4,8 @@
  */
 package DTO;
 
+import java.util.List;
+
 /**
  *
  * @author moren
@@ -12,6 +14,8 @@ public class UsuarioDTO {
     Long idUsuario;
     String nombre;
     String correo;
+    String telefono;
+    List<DireccionDTO> direcciones;
     String rol;
 
     public UsuarioDTO() {
@@ -33,14 +37,32 @@ public class UsuarioDTO {
         this.nombre = nombre;
     }
 
+    
     public String getCorreo() {
         return correo;
     }
-
+    
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+    
+    public String getTelefono() {
+        return telefono;
+    }
 
+    public void setTelefono(String telefono){
+        this.telefono = telefono;
+    }
+
+    public List<DireccionDTO> getDirecciones() {
+        return direcciones;
+    }
+
+    public void setDirecciones(List<DireccionDTO> direcciones) {
+        this.direcciones = direcciones;
+    }
+    
+    
     public String getRol() {
         return rol;
     }
