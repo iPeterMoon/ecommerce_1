@@ -15,11 +15,23 @@ public class ProductoDAO extends GenericDAO<Producto, Long> implements IProducto
     }
 
     @Override
+    public List<Producto> buscarTodos() {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Producto> query = em.createQuery(
+                    "SELECT p FROM Producto p LEFT JOIN FETCH p.plataforma LEFT JOIN FETCH p.videojuego", Producto.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
     public List<Producto> buscarPorNombre(String nombre) {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Producto> query = em.createQuery(
-                "SELECT p FROM Producto p WHERE p.nombreProducto LIKE :nombre", Producto.class);
+                    "SELECT p FROM Producto p JOIN FETCH p.plataforma JOIN FETCH p.videojuego WHERE p.nombreProducto LIKE :nombre", Producto.class);
             query.setParameter("nombre", "%" + nombre + "%");
             return query.getResultList();
         } finally {
@@ -32,7 +44,7 @@ public class ProductoDAO extends GenericDAO<Producto, Long> implements IProducto
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Producto> query = em.createQuery(
-                "SELECT p FROM Producto p WHERE p.plataforma = :plataforma", Producto.class);
+                    "SELECT p FROM Producto p JOIN FETCH p.plataforma JOIN FETCH p.videojuego WHERE p.plataforma = :plataforma", Producto.class);
             query.setParameter("plataforma", plataforma);
             return query.getResultList();
         } finally {
@@ -45,7 +57,7 @@ public class ProductoDAO extends GenericDAO<Producto, Long> implements IProducto
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Producto> query = em.createQuery(
-                "SELECT p FROM Producto p JOIN p.videojuego v JOIN v.categorias c WHERE c = :categoria", Producto.class);
+                    "SELECT p FROM Producto p JOIN FETCH p.plataforma JOIN FETCH p.videojuego JOIN v.categorias c WHERE c = :categoria", Producto.class);
             query.setParameter("categoria", categoria);
             return query.getResultList();
         } finally {

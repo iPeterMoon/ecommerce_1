@@ -96,60 +96,56 @@
                     <h2 id="modal-title-edit">Modificar Producto</h2>
                     
                     <form class="modal-form" id="game-form-edit" action="ProductoServlet" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="_method" value="PUT">
-                        <input type="hidden" name="idProducto" value="${productoAEditar.idProducto}">
+    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="idProducto" value="${productoAEditar.idProducto}">
 
-                        <div class="form-group full-width">
-                            <label for="nombre-edit">Nombre del Producto</label>
-                            <input type="text" id="nombre-edit" name="nombreProducto" value="${productoAEditar.nombreProducto}" required>
-                        </div>
-                        
-                        <div class="form-group full-width">
-                            <label>Videojuego Base (No editable)</label>
-                            <input type="text" value="<c:out value="${productoAEditar.nombreVideojuego}"/>" readonly 
-                                   style="background-color: #333; color: #aaa; cursor: not-allowed;">
-                        </div>
+    <div class="form-group full-width">
+        <label for="nombre-edit">Nombre del Producto</label>
+        <input type="text" id="nombre-edit" name="nombreProducto" value="${productoAEditar.nombreProducto}" required>
+    </div>
+    
+    <div class="form-group full-width">
+        <label>Videojuego Base (No editable)</label>
+        <input type="text" value="<c:out value="${productoAEditar.nombreVideojuego}"/>" readonly style="background-color: #333; color: #aaa; cursor: not-allowed;">
+    </div>
 
-                        <div class="form-group">
-                            <label for="platform-edit">Plataforma</label>
-                            <select id="platform-edit" name="idPlataforma" required>
-                                <option value="" disabled>Selecciona...</option>
-                                <c:forEach var="plat" items="${listaPlataformas}">
-                                    <option value="${plat.idPlataforma}" ${productoAEditar.idPlataforma == plat.idPlataforma ? 'selected' : ''}>
-                                        ${plat.nombre}
-                                    </option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="stock-edit">Stock</label>
-                            <input type="number" id="stock-edit" name="stock" min="0" value="${productoAEditar.stock}" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="price-edit">Precio ($)</label>
-                            <input type="number" id="price-edit" name="precio" min="0" step="0.01" value="${productoAEditar.precio}" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="imagen-edit">Imagen (Dejar vacío para mantener la actual)</label>
-                            <input type="file" id="imagen-edit" name="imagen" accept="image/png, image/jpeg, image/jpg" />
-                            <small style="color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                Actual: <c:out value="${productoAEditar.imagenUrl}"/>
-                            </small>
-                        </div>
+    <div class="form-group">
+        <label for="platform-edit">Plataforma</label>
+        <select id="platform-edit" name="idPlataforma" required>
+            <option value="" disabled>Selecciona...</option>
+            <c:forEach var="plat" items="${listaPlataformas}">
+                <option value="${plat.idPlataforma}" ${productoAEditar.idPlataforma == plat.idPlataforma ? 'selected' : ''}>
+                    ${plat.nombre}
+                </option>
+            </c:forEach>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="stock-edit">Stock</label>
+        <input type="number" id="stock-edit" name="stock" min="0" value="${productoAEditar.stock}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="price-edit">Precio ($)</label>
+        <input type="number" id="price-edit" name="precio" min="0" step="0.01" value="${productoAEditar.precio}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="imagen-edit">Imagen (Dejar vacío para mantener la actual)</label>
+        <input type="file" id="imagen-edit" name="imagen" accept="image/png, image/jpeg, image/jpg" />
+    </div>
 
-                        <div class="form-group full-width">
-                            <label for="description-edit">Descripción</label>
-                            <textarea id="description-edit" name="description"><c:out value="${productoAEditar.descripcion}"/></textarea>
-                        </div>
+    <div class="form-group full-width">
+        <label for="description-edit">Descripción</label>
+        <textarea id="description-edit" name="description" required><c:out value="${productoAEditar.descripcion}"/></textarea>
+    </div>
 
-                        <div class="form-actions">
-                            <a href="ProductoServlet" class="form-button cancel">Cancelar</a>
-                            <button type="submit" class="form-button save">Guardar Cambios</button>
-                        </div>
-                    </form>
+    <div class="form-actions">
+        <a href="ProductoServlet" class="form-button cancel">Cancelar</a>
+        <button type="submit" class="form-button save">Guardar Cambios</button>
+    </div>
+</form>
                 </div>
             </div>
         </c:if>

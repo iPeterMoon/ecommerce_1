@@ -82,3 +82,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     color: white;
     text-decoration: none;
 }
+
+
+.game-photo {
+    width: 6rem;          
+    height: 10rem;        
+    object-fit: cover;    
+    object-position: center;
+}
+
+@media screen and (min-width: 768px) {
+    .game-photo {
+        width: 10rem;     
+        height: 15rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .game-photo {
+        width: 13rem;
+        height: 17rem;
+    }
+}
