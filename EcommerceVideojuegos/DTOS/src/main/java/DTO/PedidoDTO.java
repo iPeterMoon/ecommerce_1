@@ -5,6 +5,7 @@
 package DTO;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
 public class PedidoDTO {
 
     Long idPedido;
-    LocalDateTime fechaHora;
+    Date fechaHora;
     String estadoPedido;
     UsuarioDTO usuario;
     PagoDTO pago;
@@ -63,14 +64,15 @@ public class PedidoDTO {
         this.items = items;
     }
 
-    public LocalDateTime getFechaHora() {
+    public Date getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(LocalDateTime fechaHora) {
+    public void setFechaHora(Date fechaHora) {
         this.fechaHora = fechaHora;
     }
 
+    
     @Override
     public String toString() {
         return "PedidoDTO{" + "idPedido=" + idPedido + ", fechaHora=" + fechaHora + ", estadoPedido=" + estadoPedido + ", usuario=" + usuario + ", pago=" + pago + ", items=" + items + '}';

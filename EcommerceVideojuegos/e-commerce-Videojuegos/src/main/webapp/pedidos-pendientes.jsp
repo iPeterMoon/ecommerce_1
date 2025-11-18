@@ -1,7 +1,7 @@
 <%-- 
     Document   : pedidos-pendientes
     Created on : 14 nov 2025, 1:38:30 a.m.
-    Author     : benja
+    Author     : moren
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,13 +16,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" type="text/css" media="screen" href="styles/pedidos_pendientes.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="styles/styles.css" />
+        <link rel="stylesheet" href="styles/crud-games.css"/>
     </head>
 
     <body class="tron-grid grid-container">
         <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
         <main class="container">
             <div class="search-div">
-                <input type="text" id="search" class="search" placeholder="Buscar...">
+                <form action="consultarPedidos" method="GET" class="buscador">
+                    <input type="text" 
+                           name="busqueda"  
+                           class="search" 
+                           placeholder="Buscar por nombre de usuario o No.Pedido" 
+                           value="<c:out value='${param.busqueda}'/>" />
+
+                    <div class="items-busqueda">   
+                        <button type="submit" class="boton" >
+                            <img src="icons/search.svg" alt="buscar" class="search-img"/>
+                        </button>
+
+                        <c:if test="${not empty param.busqueda}">
+                            <a class="x-button" href="consultarPedidos">✖</a>
+                        </c:if>
+                    </div>
+                </form>
             </div>
             <div class="card-form-container">
                 <div class="header-data">
@@ -35,6 +52,7 @@
                                 <div class="pedido">
                                     <p class="pedido-texto">Pedido - </p>
                                     <p class="pedido">N°: <c:out value="${pedido.idPedido}" /></p>
+                                    <div><a href="consultarDetallePedido?id=${pedido.idPedido}" class="detalle">Ver detalle</a></div>
 
                                 </div>
                                 <div class="pago-metodo">
@@ -56,7 +74,7 @@
                                                 <img src="icons/check.svg" class="check" />
                                                 <c:out value="REALIZADO" />
                                             </c:when>
-                                                
+
                                             <c:otherwise>
                                                 <img src="icons/pending.svg" class="check" />
                                                 <c:out value="PENDIENTE" />
@@ -74,8 +92,6 @@
                                 </div>
                             </div>
                             <c:if test="${pedido.estadoPedido != 'CANCELADO' && pedido.estadoPedido != 'ENTREGADO'}">
-
-
                                 <div class="payment-aprrove-button">
                                     <c:if test="${pedido.estadoPedido != 'ENVIADO'}">
                                         <a href="actualizarPedido?id=${pedido.idPedido}&action=enviar" class="approve-btn">Marcar como Enviado</a>
@@ -86,18 +102,12 @@
                                         Cancelar pedido
                                     </a>
                                 </div>
-
                             </c:if>
                         </div>
-
                     </c:forEach> 
                 </div>
-
-
             </div>
         </main>
-
         <%@include file="WEB-INF/fragmentos/footer.jspf" %>
     </body>
-
 </html>

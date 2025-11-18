@@ -8,6 +8,9 @@ public interface IPedidoDAO extends IGenericDAO<Pedido, Long> {
 
     List<Pedido> buscarPorUsuario(Usuario usuario);
 
-    public List<Pedido> buscarTodosLosPedidos();
-    
+    List<Pedido> buscarTodosLosPedidos();
+
+    List<Pedido> buscarPorIdPedidoOIdUsuario(String busqueda);
+
+    Pedido buscarPorIdEspecifico(Long id);
 }

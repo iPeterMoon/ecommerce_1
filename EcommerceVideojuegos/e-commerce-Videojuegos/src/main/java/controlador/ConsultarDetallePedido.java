@@ -1,24 +1,22 @@
 package controlador;
 
 import DTO.PedidoDTO;
-import jakarta.servlet.RequestDispatcher;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import modelo.PedidoBO;
 
 /**
  *
  * @author Sebastian Moreno
  */
-@WebServlet(name = "ConsultaPedido", urlPatterns = {"/consultarPedidos"})
-public class ConsultaPedido extends HttpServlet {
+@WebServlet(name = "consultarDetallePedido", urlPatterns = {"/consultarDetallePedido"})
+public class ConsultarDetallePedido extends HttpServlet {
 
     private PedidoBO pedidoBO;
 
@@ -39,10 +37,10 @@ public class ConsultaPedido extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConsultaPedido</title>");
+            out.println("<title>Servlet consultarDetallePedido</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ConsultaPedido at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet consultarDetallePedido at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -50,10 +48,8 @@ public class ConsultaPedido extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     @Override
-    public void init(ServletConfig config)
-            throws ServletException {
+    public void init(ServletConfig config) throws ServletException {
         this.pedidoBO = new PedidoBO();
-
     }
 
     /**
@@ -65,17 +61,25 @@ public class ConsultaPedido extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String busqueda = request.getParameter("busqueda");
-        if (busqueda != null && !busqueda.trim().isEmpty()) {
-            List<PedidoDTO> pedidos = pedidoBO.buscarPorNombre(busqueda);
-            request.setAttribute("listaPedidos", pedidos);
-        } else {
-            List<PedidoDTO> pedidos = pedidoBO.consultarPedidos();
-            request.setAttribute("listaPedidos", pedidos);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String idStr = request.getParameter("id");
+
+        try {
+            if (idStr != null) {
+                Long idPedido = Long.parseLong(idStr);
+
+                PedidoDTO pedido = pedidoBO.buscarPorId(idPedido); 
+
+                request.setAttribute("pedidoDetalle", pedido);
+
+                request.getRequestDispatcher("order.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("consultarPedidos?error=noEncontrado");
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pedidos-pendientes.jsp");
-        dispatcher.forward(request, response);
     }
 
     /**

@@ -174,14 +174,27 @@ a.status {
     display: block;
     color: var(--text-white)
 }
+.detalle {
+    color: #f9f9f9;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.detalle:hover {
+    color: #007bff;     
+    transform: scale(1.05);
+    text-shadow: 0px 0px 10px rgba(0, 123, 255, 0.3); 
+}
 
 @media (min-width: 769px) {
 
     .search-div {
-        width: 100%;
+        width: 90%;
+        max-width: 1500px;
     }
 
     .card-form-container {
+        width: 90%;
         max-width: 1500px;
     }
 
@@ -260,7 +273,7 @@ a.status {
         justify-content: center;
         align-items: center;
         border-radius: 10px;
-        font-size: 1.5rem;
+        font-size: 1rem;
         text-decoration: none;
         color: var(--text-white);
         white-space: nowrap;
@@ -275,7 +288,7 @@ a.status {
         justify-content: center;
         align-items: center;
         border-radius: 10px;
-        font-size: 1.5rem;
+        font-size: 1rem;
         text-decoration: none;
         color: var(--text-white);
         white-space: nowrap;
