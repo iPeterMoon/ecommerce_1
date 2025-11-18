@@ -1,0 +1,84 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 17 nov 2025, 4:12:20 p.m.
+    Author     : Sebastian Moreno
+*/
+
+.checkbox-container{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.checkbox-item{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+#checkbox-games{
+    background-color: var(--dark-input);
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+    color: var(--text-white);
+    height: 40px;
+    padding: 10px;
+    font-size: 0.875rem;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.boton{
+    background: none;
+    border: none;
+
+}
+
+.error-message{
+    color: var(--red-error-text);
+    background-color: #2a1a1a;
+    border: 1px solid var(--red-error-text);
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.buscador{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    justify-content: center;
+
+}
+#search{
+    width:95%
+}
+.items-busqueda{
+    margin-left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 4rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.search-img{
+    width: 24px;
+    height: 24px;
+}
+.x-button{
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+}

@@ -23,7 +23,21 @@ public class VideojuegoDAO extends GenericDAO<Videojuego, Long> implements IVide
             return query.getSingleResult();
         } catch (NoResultException e) {
             return null;
-        } 
+        }
+    }
+
+    @Override 
+    public List<Videojuego> buscarPorNombre(String busqueda) {
+        EntityManager em = getEntityManager();
+
+        String jpql = "SELECT DISTINCT v FROM Videojuego v "
+                + "LEFT JOIN FETCH v.categorias "
+                + "WHERE LOWER(v.nombre) LIKE LOWER(:busqueda)";
+
+        TypedQuery<Videojuego> query = em.createQuery(jpql, Videojuego.class);
+        query.setParameter("busqueda", "%" + busqueda + "%");
+
+        return query.getResultList();
     }
 
     @Override
@@ -44,7 +58,7 @@ public class VideojuegoDAO extends GenericDAO<Videojuego, Long> implements IVide
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {
-            return null; 
+            return null;
         }
     }
 }

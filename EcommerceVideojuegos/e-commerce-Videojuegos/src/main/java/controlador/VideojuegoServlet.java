@@ -74,6 +74,7 @@ public class VideojuegoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String idParam = request.getParameter("id");
+        String busqueda = request.getParameter("busqueda");
 
         try {
             if (idParam != null) {
@@ -84,8 +85,15 @@ public class VideojuegoServlet extends HttpServlet {
                 }
                 request.setAttribute("videojuegoAEditar", dto);
             }
+            
+            List<VideojuegoDTO> lista;
 
-            List<VideojuegoDTO> lista = videojuegoBO.listarTodosLosVideojuegos();
+            if (busqueda != null && !busqueda.trim().isEmpty()) {
+                lista = videojuegoBO.buscarPorNombre(busqueda);
+            } else {
+                lista = videojuegoBO.listarTodosLosVideojuegos();
+            }
+
             request.setAttribute("listaVideojuegos", lista);
 
             List<ClasificacionDTO> clasificaciones = clasificacionBO.listarTodas();
@@ -131,13 +139,15 @@ public class VideojuegoServlet extends HttpServlet {
         }
 
         try {
-            VideojuegoDTO dto = poblarDTODesdeRequest(request);
-            videojuegoBO.crearVideojuego(dto);
-            response.sendRedirect("VideojuegoServlet");
+            VideojuegoDTO dto = poblarDTODesdeRequest(request, response);
+            if (dto != null) {
+                videojuegoBO.crearVideojuego(dto);
+                response.sendRedirect("VideojuegoServlet");
+            }
 
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
-            recargarListasParaError(request); // Recargar listas para el forward
+            recargarListasParaError(request); 
             request.getRequestDispatcher("crud-games.jsp").forward(request, response);
         }
     }
@@ -147,7 +157,7 @@ public class VideojuegoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            VideojuegoDTO dto = poblarDTODesdeRequest(request);
+            VideojuegoDTO dto = poblarDTODesdeRequest(request, response);
             Long id = Long.parseLong(request.getParameter("idVideojuego"));
             dto.setIdVideojuego(id);
             videojuegoBO.actualizarVideojuego(dto);
@@ -155,7 +165,7 @@ public class VideojuegoServlet extends HttpServlet {
 
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
-            recargarListasParaError(request); // Recargar listas para el forward
+            recargarListasParaError(request);
             request.getRequestDispatcher("crud-games.jsp").forward(request, response);
         }
     }
@@ -177,15 +187,19 @@ public class VideojuegoServlet extends HttpServlet {
         response.sendRedirect("VideojuegoServlet");
     }
 
-    private VideojuegoDTO poblarDTODesdeRequest(HttpServletRequest request) {
+    private VideojuegoDTO poblarDTODesdeRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         VideojuegoDTO dto = new VideojuegoDTO();
         dto.setNombre(request.getParameter("game-name"));
         dto.setDesarrollador(request.getParameter("developer"));
         dto.setAnoLanzamiento(request.getParameter("release-year"));
 
         String idClasif = request.getParameter("classification");
+
         if (idClasif != null && !idClasif.isEmpty()) {
             dto.setIdClasificacion(Long.parseLong(idClasif));
+        } else {
+            response.sendRedirect("VideojuegoServlet?error=1#game-modal");
+            return null;
         }
 
         String[] idsCats = request.getParameterValues("category");
@@ -194,6 +208,9 @@ public class VideojuegoServlet extends HttpServlet {
                     .map(Long::parseLong)
                     .collect(Collectors.toSet());
             dto.setIdsCategorias(ids);
+        } else {
+            response.sendRedirect("VideojuegoServlet?error=1#game-modal");
+            return null;
         }
         return dto;
     }
@@ -208,7 +225,7 @@ public class VideojuegoServlet extends HttpServlet {
         List<PlataformaDTO> plataformas = plataformaBO.listarTodas();
         request.setAttribute("listaPlataformas", plataformas);
     }
-    
+
     /**
      * Returns a short description of the servlet.
      *
