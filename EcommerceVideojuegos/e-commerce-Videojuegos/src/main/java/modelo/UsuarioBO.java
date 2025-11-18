@@ -2,8 +2,13 @@ package modelo;
 
 import DAO.UsuarioDAO;
 import DAO.interfaces.IUsuarioDAO;
+import DTO.NuevoUsuarioDTO;
 import DTO.UsuarioDTO;
+import entidades.CarritoCompra;
 import entidades.Usuario;
+import enums.RolUsuario;
+import excepciones.RegistroException;
+import util.Security;
 
 /**
  *
@@ -24,6 +29,36 @@ public class UsuarioBO {
         }
         return null;
     }
+    
+    public void registrarUsuario(NuevoUsuarioDTO usuario) throws RegistroException{
+        if(usuarioDAO.buscarPorEmail(usuario.getCorreo()) == null){
+            Usuario usuarioEntidad = new Usuario();
+            usuarioEntidad.setNombre(usuario.getNombre());
+            usuarioEntidad.setCorreo(usuario.getCorreo());
+            usuarioEntidad.setContrasena(Security.hashear(usuario.getContrasena()));
+            usuarioEntidad.setRol(RolUsuario.CLIENTE);
+            usuarioEntidad.setCuentaActiva(true);
+            
+            CarritoCompra carrito = new CarritoCompra();
+            
+            usuarioEntidad.setCarritoCompra(carrito);
+            
+            carrito.setUsuario(usuarioEntidad);
+            
+            usuarioDAO.crear(usuarioEntidad);
+            
+        } else {
+            throw new RegistroException(2);
+        }
+    }
+    
+    public UsuarioDTO getUsuarioPorEmail(String email){
+        Usuario usuarioEntidad = usuarioDAO.buscarPorEmail(email);
+        if(usuarioEntidad != null){
+            return toUsuarioDTO(usuarioEntidad);
+        }
+        return null;
+    }
 
     private UsuarioDTO toUsuarioDTO(Usuario usuario) {
         if (usuario == null) {
@@ -36,5 +71,5 @@ public class UsuarioBO {
         dto.setRol(usuario.getRol().toString());
         return dto;
     }
-
+    
 }
