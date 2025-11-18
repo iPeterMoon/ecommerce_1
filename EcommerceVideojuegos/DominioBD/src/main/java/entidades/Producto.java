@@ -1,9 +1,9 @@
 package entidades;
+
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 
 @Entity
 @Table(name = "producto")
@@ -28,11 +28,11 @@ public class Producto {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_plataforma")
     private Plataforma plataforma;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_videojuego")
     private Videojuego videojuego;
 
@@ -129,6 +129,5 @@ public class Producto {
     public String toString() {
         return "Producto{" + "idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", imagenUrl=" + imagenUrl + ", precio=" + precio + ", stock=" + stock + ", descripcion=" + descripcion + ", plataforma=" + plataforma + ", videojuego=" + videojuego + ", resenas=" + resenas + ", items=" + items + '}';
     }
-    
 
 }

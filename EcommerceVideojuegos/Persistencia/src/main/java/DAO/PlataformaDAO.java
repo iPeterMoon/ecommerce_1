@@ -4,13 +4,14 @@
  */
 package DAO;
 
+import DAO.interfaces.IPlataformaDAO;
 import entidades.Plataforma;
 
 /**
  *
  * @author benja
  */
-public class PlataformaDAO extends GenericDAO<Plataforma, Long> {
+public class PlataformaDAO extends GenericDAO<Plataforma, Long> implements IPlataformaDAO {
 
     public PlataformaDAO() {
         super(Plataforma.class);

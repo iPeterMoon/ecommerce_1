@@ -5,6 +5,7 @@
 package modelo;
 
 import DAO.CategoriaDAO;
+import DAO.interfaces.ICategoriaDAO;
 import DTO.CategoriaDTO;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
  */
 public class CategoriaBO {
 
-    private CategoriaDAO categoriaDAO;
+    private ICategoriaDAO categoriaDAO;
 
     public CategoriaBO() {
         this.categoriaDAO = new CategoriaDAO();

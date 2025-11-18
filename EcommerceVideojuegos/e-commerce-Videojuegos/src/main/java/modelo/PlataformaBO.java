@@ -5,6 +5,7 @@
 package modelo;
 
 import DAO.PlataformaDAO;
+import DAO.interfaces.IPlataformaDAO;
 import DTO.PlataformaDTO;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
  */
 public class PlataformaBO {
 
-    private PlataformaDAO plataformaDAO;
+    private IPlataformaDAO plataformaDAO;
 
     public PlataformaBO() {
         this.plataformaDAO = new PlataformaDAO();

@@ -4,13 +4,14 @@
  */
 package DAO;
 
+import DAO.interfaces.IClasificacionDAO;
 import entidades.Clasificacion;
 
 /**
  *
  * @author benja
  */
-public class ClasificacionDAO extends GenericDAO<Clasificacion, Long> {
+public class ClasificacionDAO extends GenericDAO<Clasificacion, Long> implements IClasificacionDAO{
     
     public ClasificacionDAO() {
         super(Clasificacion.class);

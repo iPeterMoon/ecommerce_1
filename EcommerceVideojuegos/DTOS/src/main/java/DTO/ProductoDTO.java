@@ -13,19 +13,15 @@ import java.math.BigDecimal;
 public class ProductoDTO {
 
     private Long idProducto;
-    private String nombreProducto;
-    private String imagenUrl;
-    private BigDecimal precio;
-    private String descripcion;
-    private Integer stock; 
-    private String plataformaNombre;
-    private String videojuegoNombre;
-    private String desarrollador;
-    private String anoLanzamiento;
-    private String clasificacionNombre;
-    
-    private Long idPlataforma;
     private Long idVideojuego;
+    private Long idPlataforma;
+    private String nombreProducto;
+    private BigDecimal precio; 
+    private int stock;
+    private String imagenUrl;
+    private String descripcion;
+    private String nombreVideojuego;
+    private String nombrePlataforma;
 
     public ProductoDTO() {
     }
@@ -38,20 +34,28 @@ public class ProductoDTO {
         this.idProducto = idProducto;
     }
 
+    public Long getIdVideojuego() {
+        return idVideojuego;
+    }
+
+    public void setIdVideojuego(Long idVideojuego) {
+        this.idVideojuego = idVideojuego;
+    }
+
+    public Long getIdPlataforma() {
+        return idPlataforma;
+    }
+
+    public void setIdPlataforma(Long idPlataforma) {
+        this.idPlataforma = idPlataforma;
+    }
+
     public String getNombreProducto() {
         return nombreProducto;
     }
 
     public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
-    }
-
-    public String getImagenUrl() {
-        return imagenUrl;
-    }
-
-    public void setImagenUrl(String imagenUrl) {
-        this.imagenUrl = imagenUrl;
     }
 
     public BigDecimal getPrecio() {
@@ -62,6 +66,22 @@ public class ProductoDTO {
         this.precio = precio;
     }
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -70,68 +90,19 @@ public class ProductoDTO {
         this.descripcion = descripcion;
     }
 
-    public Integer getStock() {
-        return stock;
+    public String getNombreVideojuego() {
+        return nombreVideojuego;
     }
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
+    public void setNombreVideojuego(String nombreVideojuego) {
+        this.nombreVideojuego = nombreVideojuego;
     }
 
-    public String getPlataformaNombre() {
-        return plataformaNombre;
+    public String getNombrePlataforma() {
+        return nombrePlataforma;
     }
 
-    public void setPlataformaNombre(String plataformaNombre) {
-        this.plataformaNombre = plataformaNombre;
-    }
-
-    public String getVideojuegoNombre() {
-        return videojuegoNombre;
-    }
-
-    public void setVideojuegoNombre(String videojuegoNombre) {
-        this.videojuegoNombre = videojuegoNombre;
-    }
-
-    public String getDesarrollador() {
-        return desarrollador;
-    }
-
-    public void setDesarrollador(String desarrollador) {
-        this.desarrollador = desarrollador;
-    }
-
-    public String getAnoLanzamiento() {
-        return anoLanzamiento;
-    }
-
-    public void setAnoLanzamiento(String anoLanzamiento) {
-        this.anoLanzamiento = anoLanzamiento;
-    }
-
-    public String getClasificacionNombre() {
-        return clasificacionNombre;
-    }
-
-    public void setClasificacionNombre(String clasificacionNombre) {
-        this.clasificacionNombre = clasificacionNombre;
-    }
-    
-    
-    public Long getIdPlataforma() {
-        return idPlataforma;
-    }
-
-    public void setIdPlataforma(Long idPlataforma) {
-        this.idPlataforma = idPlataforma;
-    }
-
-    public Long getIdVideojuego() {
-        return idVideojuego;
-    }
-
-    public void setIdVideojuego(Long idVideojuego) {
-        
+    public void setNombrePlataforma(String nombrePlataforma) {
+        this.nombrePlataforma = nombrePlataforma;
     }
 }

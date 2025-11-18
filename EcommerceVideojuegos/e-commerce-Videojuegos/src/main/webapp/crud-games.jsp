@@ -17,8 +17,6 @@
         <link rel="stylesheet" href="styles/styles.css" />
         <link rel="stylesheet" href="styles/admin.css" />
         <link rel="stylesheet" href="styles/crud-games.css"/>
-
-
     </head>
 
     <body class="tron-grid grid-container">
@@ -93,7 +91,7 @@
                         <div class="modal-overlay" id="game-modal-producto-${vj.idVideojuego}">
                             <div class="modal-container">
                                 <h2 id="modal-title">Añadir Producto para: <c:out value="${vj.nombre}"/></h2>
-                                <form class="modal-form" id="game-form-${vj.idVideojuego}" action="ProductoServlet" method="POST">
+                                                                <form class="modal-form" id="game-form-${vj.idVideojuego}" action="ProductoServlet" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="idVideojuego" value="${vj.idVideojuego}" />
 
                                     <div class="form-group full-width">
@@ -123,10 +121,11 @@
                                         <label for="price-${vj.idVideojuego}">Precio ($)</label>
                                         <input type="number" id="price-${vj.idVideojuego}" name="precio" min="0" step="0.01" required />
                                     </div>
-                                    <div class="form-group">
-                                        <label for="image-url-${vj.idVideojuego}">URL de Imagen</label>
-                                        <input type="url" id="image-url-${vj.idVideojuego}" name="imagenUrl" required />
+                                                                        <div class="form-group">
+                                        <label for="imagen-${vj.idVideojuego}">Imagen del Producto</label>
+                                        <input type="file" id="imagen-${vj.idVideojuego}" name="imagen" accept="image/png, image/jpeg, image/jpg" required />
                                     </div>
+                                    
                                     <div class="form-group full-width">
                                         <label for="description-${vj.idVideojuego}">Descripción</label>
                                         <textarea id="description-${vj.idVideojuego}" name="description"></textarea>

@@ -5,6 +5,7 @@
 package modelo;
 
 import DAO.ClasificacionDAO;
+import DAO.interfaces.IClasificacionDAO;
 import DTO.ClasificacionDTO;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
  */
 public class ClasificacionBO {
 
-    private ClasificacionDAO clasificacionDAO;
+    private IClasificacionDAO clasificacionDAO;
 
     public ClasificacionBO() {
         this.clasificacionDAO = new ClasificacionDAO();

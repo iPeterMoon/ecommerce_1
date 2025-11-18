@@ -8,6 +8,9 @@ import DAO.CategoriaDAO;
 import DAO.ClasificacionDAO;
 import DAO.ProductoDAO;
 import DAO.VideojuegoDAO;
+import DAO.interfaces.ICategoriaDAO;
+import DAO.interfaces.IClasificacionDAO;
+import DAO.interfaces.IProductoDAO;
 import DAO.interfaces.IVideojuegoDAO;
 import DTO.VideojuegoDTO;
 import entidades.Categoria;
@@ -24,9 +27,9 @@ import java.util.stream.Collectors;
 public class VideojuegoBO {
 
     private IVideojuegoDAO videojuegoDAO;
-    private ClasificacionDAO clasificacionDAO;
-    private CategoriaDAO categoriaDAO;
-    private ProductoDAO productoDAO;
+    private IClasificacionDAO clasificacionDAO;
+    private ICategoriaDAO categoriaDAO;
+    private IProductoDAO productoDAO;
 
     public VideojuegoBO() {
         this.videojuegoDAO = new VideojuegoDAO();
@@ -125,10 +128,10 @@ public class VideojuegoBO {
 
     private List<VideojuegoDTO> listaEntidadAListaDTO(List<Videojuego> listaEntidades) {
         if (listaEntidades == null) {
-            return new java.util.ArrayList<>(); // Regresa lista vacía para evitar NullPointerException
+            return new java.util.ArrayList<>(); 
         }
         return listaEntidades.stream()
-                .map(this::convertirEntidadADTO) // Reutiliza tu método individual existente
+                .map(this::convertirEntidadADTO) 
                 .collect(Collectors.toList());
     }
 

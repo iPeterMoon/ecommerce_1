@@ -4,13 +4,14 @@
  */
 package DAO;
 
+import DAO.interfaces.ICategoriaDAO;
 import entidades.Categoria;
 
 /**
  *
  * @author benja
  */
-public class CategoriaDAO extends GenericDAO<Categoria, Long> {
+public class CategoriaDAO extends GenericDAO<Categoria, Long> implements ICategoriaDAO {
     
     public CategoriaDAO() {
         super(Categoria.class);
