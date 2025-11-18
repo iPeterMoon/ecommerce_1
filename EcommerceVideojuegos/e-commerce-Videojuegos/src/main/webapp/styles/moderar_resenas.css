@@ -99,8 +99,203 @@ p.user {
     color: var(--text-white)
 }
 
-@media (min-width: 769px) {
+.review-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+}
 
+.action-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    line-height: 0;
+}
+
+.action-button .action-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.action-button:hover {
+    opacity: 0.7;
+}
+
+.errorTxt {
+    color: red;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.noResenas {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-white);
+}
+
+.modal-toggle-edit,
+.modal-toggle-delete {
+    display: none;
+}
+
+.edit-label,
+.delete-label {
+    cursor: pointer;
+    line-height: 0;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.edit-label:hover,
+.delete-label:hover {
+    opacity: 0.7;
+}
+
+.modal-container {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.modal-toggle-edit:checked ~ .modal-edit-container {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-toggle-delete:checked ~ .modal-delete-container {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content-pure {
+    background-color: var(--dark-input, #333);
+    color: var(--text-white, #fff);
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.modal-close-label {
+    color: #aaa;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-close-label:hover {
+    color: var(--text-white, #fff);
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-form label {
+    font-weight: bold;
+}
+
+.modal-form input[type="number"],
+.modal-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #555;
+    background-color: #121212;
+    color: var(--text-white, #fff);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.modal-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.modal-save-button {
+    background-color: var(--blue, #007bff);
+    color: var(--text-white, #fff);
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.modal-content-pure h2 {
+    margin-top: 0;
+}
+
+.modal-content-delete {
+    background-color: var(--dark-input, #333);
+    color: var(--text-white, #fff);
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    text-align: center;
+}
+
+.modal-delete-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.modal-delete-confirm {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.modal-delete-cancel {
+    background-color: #6c757d;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.modal-delete-confirm:hover,
+.modal-delete-cancel:hover {
+    opacity: 0.8;
+}
+
+@media (min-width: 769px) {
     .main-title {
         font-size: 2.2rem;
         text-align: left;

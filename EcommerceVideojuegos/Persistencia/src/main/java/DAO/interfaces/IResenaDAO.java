@@ -10,4 +10,6 @@ public interface IResenaDAO extends IGenericDAO<Resena, Long> {
     List<Resena> buscarPorProducto(Producto producto);
     
     List<Resena> buscarPorUsuario(Usuario usuario);
+    
+    List<Resena> buscarPorIdProducto(Long idProducto);
 }

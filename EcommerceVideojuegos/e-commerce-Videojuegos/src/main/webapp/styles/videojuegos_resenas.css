@@ -92,6 +92,35 @@ body {
     width: 190px;
 }
 
+.game-selector-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.game-list {
+    list-style-type: none;
+    padding: 0;
+}
+.game-list-item {
+    border-bottom: 1px solid #eee;
+}
+.game-list-item a {
+    display: block;
+    padding: 1rem 0.5rem;
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+.game-list-item a:hover {
+    background-color: #f9f9f9;
+    color: #007bff;
+}
+
 @media (min-width: 769px) {
 
     .main-title {

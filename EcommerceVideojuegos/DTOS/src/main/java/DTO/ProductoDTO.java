@@ -23,6 +23,9 @@ public class ProductoDTO {
     private String desarrollador;
     private String anoLanzamiento;
     private String clasificacionNombre;
+    
+    private Long idPlataforma;
+    private Long idVideojuego;
 
     public ProductoDTO() {
     }
@@ -113,5 +116,22 @@ public class ProductoDTO {
 
     public void setClasificacionNombre(String clasificacionNombre) {
         this.clasificacionNombre = clasificacionNombre;
+    }
+    
+    
+    public Long getIdPlataforma() {
+        return idPlataforma;
+    }
+
+    public void setIdPlataforma(Long idPlataforma) {
+        this.idPlataforma = idPlataforma;
+    }
+
+    public Long getIdVideojuego() {
+        return idVideojuego;
+    }
+
+    public void setIdVideojuego(Long idVideojuego) {
+        
     }
 }

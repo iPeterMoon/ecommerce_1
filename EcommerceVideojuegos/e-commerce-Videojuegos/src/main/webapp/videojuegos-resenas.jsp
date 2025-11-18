@@ -1,72 +1,61 @@
-<%-- 
-    Document   : videojuegos-resenas
-    Created on : 14 nov 2025, 1:41:36 a.m.
-    Author     : benja
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Seleccionar Producto</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/styles.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/videojuegos_resenas.css" />
+    </head>
+    <body class="tron-grid grid-container">
+        <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Videojuegos reseñas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="styles/videojuegos_resenas.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="styles/styles.css" />
-</head>
+        <main class="container">
+            <h1 class="main-title" style="text-align: center; margin-bottom: 1.5rem; max-width: 750px; color: var(--text-white);">Seleccionar Producto</h1>
+            <c:if test="${not empty error}">
+                <p style="color: red; text-align: center;">${error}</p>
+            </c:if>
 
-<body class="tron-grid grid-container">
-     <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
-    <main class="container">
-        <div class="card-form-container">
-            <div class="header-data">
-            </div>
-            <div class="form-content">
-                <div class="product-row">
-                    <img src="imgs/minecraft.png" alt="Minecraft" class="product-img" />
-                    <div class="product-info-wrapper">
-                        <p class="game-name">Minecraft</p>
-                        <div class="review-container">
-                            <span class="review-status">Gestionar reseñas</span>
-                            <a href="resenas-videojuego.jsp" class="edit-icon-link">
-                                <img src="icons/edit.svg" alt="Editar" class="edit-icon" />
-                            </a>
+            <div class="card-form-container">
+                <div class="form-content"> 
+                    
+                    <c:forEach var="producto" items="${listaProductos}">
+                        <div class="product-row">
+                            
+                            <c:if test="${not empty producto.imagenUrl}">
+                                <img class="product-img" 
+                                     src="${producto.imagenUrl}"
+                                     alt="${producto.nombreProducto}" />
+                            </c:if>
+
+                            <div class="product-info-wrapper">
+                                <p class="game-name">
+                                    ${producto.nombreProducto}
+                                </p>
+                                
+                                <div class="review-container">
+                                    <span class="review-status">
+                                        Moderar Reseñas
+                                    </span>
+                                    <a href="ResenaServlet?accion=cargarResenas&idProducto=${producto.idProducto}">
+                                        <img class="edit-icon" src="${pageContext.request.contextPath}/icons/edit.svg" alt="edit" />
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </c:forEach>
 
-                <div class="product-row">
-                    <img src="https://preview.redd.it/will-gta-vi-cover-art-follow-tradition-or-do-something-new-v0-vsd1bzi5fz3e1.jpg?width=493&format=pjpg&auto=webp&s=e43544cbd7e751aae8bdf4a37e84bb38d3c18322"
-                        alt="GTA6" class="product-img" />
-                    <div class="product-info-wrapper">
-                        <p class="game-name">GTA 6</p>
-                        <div class="review-container">
-                            <span class="review-status">Gestionar reseñas</span>
-                            <a href="resenas-videojuego.jsp" class="edit-icon-link">
-                                <img src="icons/edit.svg" alt="Editar" class="edit-icon" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    <c:if test="${empty listaProductos}">
+                        <p style="text-align: center; color: var(--text-white);">
+                            No hay productos registrados en la base de datos.
+                        </p>
+                    </c:if>
 
-                <div class="product-row">
-                    <img src="https://juegosdigitalesmexico.mx/files/images/productos/1644881681-1637887722-the-legend-of-zelda-breath-of-the-wild-nintendo-switch.jpg"
-                        alt="Zelda-BreathOfTheWild" class="product-img" />
-                    <div class="product-info-wrapper">
-                        <p class="game-name">Zelda: Breath of the Wild</p>
-                        <div class="review-container">
-                            <span class="review-status">Gestionar reseñas</span>
-                            <a href="resenas-videojuego.jsp" class="edit-icon-link">
-                                <img src="icons/edit.svg" alt="Editar" class="edit-icon" />
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
-    </main>
-      <%@include file="WEB-INF/fragmentos/footer.jspf" %>
-</body>
+        </main>
 
+        <%@include file="WEB-INF/fragmentos/footer.jspf" %>
+    </body>
 </html>

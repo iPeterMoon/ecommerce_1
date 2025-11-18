@@ -39,4 +39,18 @@ public class ResenaDAO extends GenericDAO<Resena, Long> implements IResenaDAO {
             em.close();
         }
     }
+    
+    @Override
+    public List<Resena> buscarPorIdProducto(Long idProducto) {
+        EntityManager em = getEntityManager();
+        try {
+            // Esta consulta JPQL busca reseñas por el ID del producto
+            TypedQuery<Resena> query = em.createQuery(
+                    "SELECT r FROM Resena r WHERE r.producto.idProducto = :idProducto", Resena.class);
+            query.setParameter("idProducto", idProducto);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }
