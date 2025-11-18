@@ -1,55 +1,57 @@
-
+<%@ taglib uri="jakarta.tags.core" prefix="c" %> 
 <header>
 
-        <div class="brand-mobile">
-            <a href="index.jsp">
-                <img class="logo" src="imgs/logo-mundito.svg" alt="logo">
-            </a>
-            <a href="index.jsp">
-                <h1>MunditoGames</h1>
-            </a>
-        </div>
-        <div class="brand-title-desktop">
-            <a href="index.jsp">
-                <h1>MunditoGames</h1>
-            </a>
-        </div>
+    <div class="brand-mobile">
+        <a href="${pageContext.request.contextPath}/index.jsp">
+            <img class="logo" src="${pageContext.request.contextPath}/imgs/logo-mundito.svg" alt="logo">
+        </a>
+        <a href="${pageContext.request.contextPath}/index.jsp">
+            <h1>MunditoGames</h1>
+        </a>
+    </div>
+    <div class="brand-title-desktop">
+        <a href="${pageContext.request.contextPath}/index.jsp">
+            <h1>MunditoGames</h1>
+        </a>
+    </div>
 
 
-        <nav>
-            <ul>
+    <nav>
+        <ul>
+            <li class="nav-element">
+                <a href="${pageContext.request.contextPath}/catalogo.jsp">
+                    <img src="${pageContext.request.contextPath}/icons/search.svg" alt="search">
+                </a>
+            </li>
+
+            <li class="nav-element">
+                <a href="${pageContext.request.contextPath}/shopping-cart.jsp">
+                    <img src="${pageContext.request.contextPath}/icons/cart.svg" alt="cart">
+                </a>
+            </li>
+
+            <c:if test="${sessionScope.usuario != null and sessionScope.usuario.rol == 'ADMIN'}">
                 <li class="nav-element">
-                    <a href="">
-                        <img src="icons/search.svg" alt="search">
+                    <a href="${pageContext.request.contextPath}/admin-options.jsp">
+                        <img src="${pageContext.request.contextPath}/icons/settings.svg" alt="admin">
                     </a>
-                </li>
+                </li>                
+            </c:if>
 
-                <li class="nav-element">
-                    <a href="shopping-cart.jsp">
-                        <img src="icons/cart.svg" alt="cart">
+            <li class="nav-element">
+            <c:choose>
+                <c:when test="${sessionScope.usuario != null}">
+                    <a href="${pageContext.request.contextPath}/account.jsp">
+                        <img src="${pageContext.request.contextPath}/icons/user.svg" alt="account">
                     </a>
-                </li>
-                <c:if test="${sessionScope.usuario != null and sessionScope.usuario.rol == 'ADMIN'}">
-                    <li class="nav-element">
-                        <a href="admin-options.jsp">
-                            <img src="icons/settings.svg" alt="admin">
-                        </a>
-                    </li>                    
-                </c:if>
-                <li class="nav-element">
-                    <c:choose>
-                        <c:when test="${sessionScope.usuario != null}">
-                            <a href="account.jsp">
-                                <img src="icons/user.svg" alt="account">
-                            </a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="login.jsp">
-                                <img src="icons/user.svg" alt="login">
-                            </a>
-                        </c:otherwise>
-                    </c:choose>
-                </li>
-            </ul>
-        </nav>
-    </header>
+                </c:when>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/login.jsp">
+                        <img src="${pageContext.request.contextPath}/icons/user.svg" alt="login">
+                    </a>
+                </c:otherwise>
+            </c:choose>
+            </li>
+        </ul>
+    </nav>
+</header>
