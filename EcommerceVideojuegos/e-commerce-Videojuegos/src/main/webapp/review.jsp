@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="styles/styles.css">
         <link rel="stylesheet" href="styles/review.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
     </head>
 
     <body class="tron-grid grid-container">

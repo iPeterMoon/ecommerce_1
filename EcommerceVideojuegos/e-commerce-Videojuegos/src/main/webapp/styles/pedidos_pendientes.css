@@ -175,15 +175,15 @@ a.status {
     color: var(--text-white)
 }
 .detalle {
-    color: #f9f9f9;
+    color:#007bff;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 }
 
 .detalle:hover {
-    color: #007bff;     
+    color:#f9f9f9;
     transform: scale(1.05);
-    text-shadow: 0px 0px 10px rgba(0, 123, 255, 0.3); 
+    text-shadow: 0px 0px 10px rgba(0, 123, 255, 0.3);
 }
 
 @media (min-width: 769px) {
@@ -312,5 +312,80 @@ a.status {
 
     .pedido {
         font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .card-form-container {
+        max-width: 100%;
+        width: 100%;
+        border-radius: 0; 
+        box-shadow: none; 
+    }
+
+    .form-content {
+        padding: 1rem; 
+    }
+
+    .payment-container {
+        flex-direction: column;
+        gap: 1rem; 
+        padding: 1rem;
+    }
+
+    .payment-info {
+        width: 100%;
+        gap: 0.8rem;
+    }
+
+    .pedido {
+        justify-content: space-between; 
+        align-items: center;
+        width: 100%;
+    }
+    .pedido-texto{
+        width: 10rem;
+    }
+    .pedido-texto, .pedido, .header-data {
+        font-size: 0.9rem; 
+    }
+
+    .payment-method, .payment-status {
+        font-size: 0.85rem;
+        margin: 2px 0;
+    }
+
+    .payment-aprrove-button {
+        width: 100%;
+        align-items: stretch;
+        flex-direction: column; 
+        gap: 10px;
+        margin-top: 0.5rem;
+    }
+
+    .approve-btn, .disapprove-btn {
+        width: 100%;
+        height: 45px; 
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+
+    .pago-metodo .pedido {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .status {
+        display: inline-flex; 
+        font-size: 0.75rem;
+        padding: 0.4rem 0.5rem;
+        width: 5.8rem; 
+        margin-right: .5rem;
+    }
+
+    .search-div {
+        width: 100%;
+        padding: 0 1rem;
     }
 }

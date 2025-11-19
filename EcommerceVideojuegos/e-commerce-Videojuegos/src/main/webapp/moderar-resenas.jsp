@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,6 +7,7 @@
         <title>Moderar reseñas videojuego</title>
         <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/styles/moderar_resenas.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/styles/styles.css" />
+        <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
     </head>
     <body class="tron-grid grid-container">
         <%@include file="WEB-INF/fragmentos/navbar.jspf" %>

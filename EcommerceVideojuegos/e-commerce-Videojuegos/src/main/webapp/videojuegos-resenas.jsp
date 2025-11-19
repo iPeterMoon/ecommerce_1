@@ -7,6 +7,7 @@
         <title>Seleccionar Producto</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/styles.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/videojuegos_resenas.css" />
+        <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
     </head>
     <body class="tron-grid grid-container">
         <%@include file="WEB-INF/fragmentos/navbar.jspf" %>

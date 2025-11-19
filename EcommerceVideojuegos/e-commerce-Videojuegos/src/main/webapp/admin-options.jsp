@@ -14,7 +14,8 @@
 
         <link rel="stylesheet" href="styles/styles.css">
         <link rel="stylesheet" href="styles/admin.css">
-
+        <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
+        <title>Panel de Administrador</title>
     </head>
 
     <body class="tron-grid grid-container">
@@ -26,8 +27,7 @@
                 <a href="VideojuegoServlet"><button>Gestionar videojuegos</button></a>
                 <a href="ProductoServlet"><button>Gestionar catálogo</button></a>
                 <a href="consultarPedidos"><button>Gestionar pedidos</button></a>
-                <a href="historial-pagos.jsp"><button>Historial de pagos</button></a>
-                <a href="moderar-resenas.jsp"><button>Moderar reseñas</button></a>
+                <a href="ResenaServlet"><button>Moderar reseñas</button></a>
             </div>
         </main>
 

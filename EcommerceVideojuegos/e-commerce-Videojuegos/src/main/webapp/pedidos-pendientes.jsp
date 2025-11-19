@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -17,6 +18,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="styles/pedidos_pendientes.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="styles/styles.css" />
         <link rel="stylesheet" href="styles/crud-games.css"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
     </head>
 
     <body class="tron-grid grid-container">
@@ -27,7 +29,7 @@
                     <input type="text" 
                            name="busqueda"  
                            class="search" 
-                           placeholder="Buscar por nombre de usuario o No.Pedido" 
+                           placeholder="Buscar por id de usuario o número de pedido" 
                            value="<c:out value='${param.busqueda}'/>" />
 
                     <div class="items-busqueda">   
@@ -56,7 +58,15 @@
 
                                 </div>
                                 <div class="pago-metodo">
-                                    <p class="payment-method">Fecha del pedido: <c:out value="${pedido.fechaHora}" /></p>
+                                    <p class="payment-method">
+                                        Fecha del pedido:
+                                        <fmt:formatDate value="${pedido.fechaHora}" 
+                                                        pattern="d 'de' MMMM 'de' yyyy 'a las' h:mm a" 
+                                                        timeZone="MST" 
+                                                        type="both"
+                                                        dateStyle="full" 
+                                                        />
+                                    </p>
                                     <p class="payment-method">Método de pago: <c:out value="${pedido.pago.metodoPago}" /></p>
                                 </div>
                                 <div class="pedido">

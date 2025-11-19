@@ -14,6 +14,8 @@
 
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/form_login_register.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
+    <title>Registrate</title>
 
 </head>
 

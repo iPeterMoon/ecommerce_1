@@ -15,6 +15,8 @@
 
         <link rel="stylesheet" href="styles/styles.css">
         <link rel="stylesheet" href="styles/account.css">
+        <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
+        <title>Mi Cuenta</title>
 
     </head>
 

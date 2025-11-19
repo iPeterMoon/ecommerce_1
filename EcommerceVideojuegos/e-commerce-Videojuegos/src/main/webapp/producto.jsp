@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="styles/producto.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
   </head>
   <body class="tron-grid grid-container">
      <%@include file="WEB-INF/fragmentos/navbar.jspf" %>

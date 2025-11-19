@@ -18,6 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" type="text/css" media="screen" href="styles/order.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="styles/styles.css" />
+        <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
     </head>
 
     <body class="tron-grid grid-container">
