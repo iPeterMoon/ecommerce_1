@@ -6,6 +6,7 @@ package controlador;
 
 import DTO.PlataformaDTO;
 import DTO.ProductoDTO;
+import DTO.VideojuegoDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,7 +23,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.UUID;
 import modelo.PlataformaBO;
 import modelo.ProductoBO;
 import modelo.VideojuegoBO;
@@ -33,9 +33,9 @@ import modelo.VideojuegoBO;
  */
 @WebServlet(name = "ProductoServlet", urlPatterns = {"/ProductoServlet"})
 @MultipartConfig(
-    fileSizeThreshold = 1024 * 1024 * 1, 
-    maxFileSize = 1024 * 1024 * 10,     
-    maxRequestSize = 1024 * 1024 * 15   
+        fileSizeThreshold = 1024 * 1024 * 1,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 15
 )
 public class ProductoServlet extends HttpServlet {
 
@@ -93,7 +93,7 @@ public class ProductoServlet extends HttpServlet {
         String busqueda = request.getParameter("busqueda");
 
         try {
-            if (action != null && action.equals("editar")) {
+            if ("editar".equals(action)) {
                 Long id = Long.parseLong(request.getParameter("id"));
                 ProductoDTO dto = productoBO.obtenerProductoParaEditar(id);
                 request.setAttribute("productoAEditar", dto);
@@ -106,15 +106,11 @@ public class ProductoServlet extends HttpServlet {
                 lista = productoBO.listarTodosLosProductos();
             }
             request.setAttribute("listaProductos", lista);
-
-            List<PlataformaDTO> plataformas = plataformaBO.listarTodas();
-            request.setAttribute("listaPlataformas", plataformas);
+            request.setAttribute("listaPlataformas", plataformaBO.listarTodas());
 
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
-            e.printStackTrace();
         }
-
         request.getRequestDispatcher("crud-products.jsp").forward(request, response);
     }
 
@@ -129,9 +125,8 @@ public class ProductoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String method = request.getParameter("_method");
 
+        String method = request.getParameter("_method");
         if (method != null) {
             switch (method.toUpperCase()) {
                 case "PUT":
@@ -145,31 +140,42 @@ public class ProductoServlet extends HttpServlet {
 
         try {
             ProductoDTO dto = new ProductoDTO();
-            dto.setIdVideojuego(Long.parseLong(request.getParameter("idVideojuego")));
-            dto.setNombreProducto(request.getParameter("nombreProducto"));
-            dto.setIdPlataforma(Long.parseLong(request.getParameter("idPlataforma")));
-            dto.setStock(Integer.parseInt(request.getParameter("stock")));
-            
-            String precioStr = request.getParameter("precio");
-            dto.setPrecio(new BigDecimal(precioStr));
-            
+            String idVj = request.getParameter("idVideojuego");
+            String nom = request.getParameter("nombreProducto");
+            String idPlat = request.getParameter("idPlataforma");
+            String stock = request.getParameter("stock");
+            String precio = request.getParameter("precio");
+
+            if (idVj == null || nom == null || idPlat == null || stock == null || precio == null) {
+                throw new Exception("Faltan campos obligatorios.");
+            }
+
+            dto.setIdVideojuego(Long.parseLong(idVj));
+            dto.setNombreProducto(nom);
+            dto.setIdPlataforma(Long.parseLong(idPlat));
+            dto.setStock(Integer.parseInt(stock));
+            dto.setPrecio(new BigDecimal(precio));
             dto.setDescripcion(request.getParameter("description"));
+
+            VideojuegoDTO vjDto = videojuegoBO.obtenerVideojuegoParaEditar(dto.getIdVideojuego());
+            String nombrePlataforma = obtenerNombrePlataforma(dto.getIdPlataforma());
 
             Part filePart = request.getPart("imagen");
             if (filePart != null && filePart.getSize() > 0) {
-                String rutaImagen = guardarImagen(filePart, request);
-                dto.setImagenUrl(rutaImagen);
+                String rutaGuardada = guardarImagenInterna(filePart, request, vjDto, nombrePlataforma);
+                dto.setImagenUrl(rutaGuardada);
             } else {
-                dto.setImagenUrl("imgs/minecraft.png"); // Imagen por defecto
+                dto.setImagenUrl("imgs/minecraft.png");
             }
 
             productoBO.crearProducto(dto);
-            
             response.sendRedirect("VideojuegoServlet?exito=1");
 
         } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("VideojuegoServlet?error=" + java.net.URLEncoder.encode(e.getMessage(), "UTF-8"));
+            request.setAttribute("error", "Error al crear: " + e.getMessage());
+            request.setAttribute("errorCrearProducto", "1");
+            recargarListasParaError(request);
+            request.getRequestDispatcher("crud-games.jsp").forward(request, response);
         }
     }
 
@@ -178,7 +184,6 @@ public class ProductoServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             Long idProducto = Long.parseLong(request.getParameter("idProducto"));
-            
             ProductoDTO productoActual = productoBO.obtenerProductoParaEditar(idProducto);
 
             ProductoDTO dto = new ProductoDTO();
@@ -186,16 +191,16 @@ public class ProductoServlet extends HttpServlet {
             dto.setNombreProducto(request.getParameter("nombreProducto"));
             dto.setIdPlataforma(Long.parseLong(request.getParameter("idPlataforma")));
             dto.setStock(Integer.parseInt(request.getParameter("stock")));
-            
-            String precioStr = request.getParameter("precio");
-            dto.setPrecio(new BigDecimal(precioStr));
-
+            dto.setPrecio(new BigDecimal(request.getParameter("precio")));
             dto.setDescripcion(request.getParameter("description"));
+
+            VideojuegoDTO vjDto = videojuegoBO.obtenerVideojuegoParaEditar(productoActual.getIdVideojuego());
+            String nombrePlataforma = obtenerNombrePlataforma(dto.getIdPlataforma());
 
             Part filePart = request.getPart("imagen");
             if (filePart != null && filePart.getSize() > 0) {
-                String rutaImagen = guardarImagen(filePart, request);
-                dto.setImagenUrl(rutaImagen);
+                String rutaGuardada = guardarImagenInterna(filePart, request, vjDto, nombrePlataforma);
+                dto.setImagenUrl(rutaGuardada);
             } else {
                 dto.setImagenUrl(productoActual.getImagenUrl());
             }
@@ -204,9 +209,14 @@ public class ProductoServlet extends HttpServlet {
             response.sendRedirect("ProductoServlet");
 
         } catch (Exception e) {
-            request.setAttribute("error", e.getMessage());
-            recargarListasParaError(request);
-            request.getRequestDispatcher("crud-products.jsp").forward(request, response);
+            if (request.getParameter("idProducto") != null) {
+                String id = request.getParameter("idProducto");
+                response.sendRedirect("ProductoServlet?action=editar&id=" + id + "&errorEditar=1#game-edit-modal");
+            } else {
+                request.setAttribute("error", e.getMessage());
+                recargarListasParaError(request);
+                request.getRequestDispatcher("crud-products.jsp").forward(request, response);
+            }
         }
     }
 
@@ -216,44 +226,75 @@ public class ProductoServlet extends HttpServlet {
         try {
             Long id = Long.parseLong(request.getParameter("idProducto"));
             productoBO.eliminarProducto(id);
+            response.sendRedirect("ProductoServlet");
         } catch (Exception e) {
-            request.setAttribute("error", e.getMessage());
-            recargarListasParaError(request);
-            request.getRequestDispatcher("crud-products.jsp").forward(request, response);
-            return;
+            if (e.getMessage().contains("pedidos") || e.getMessage().contains("asociados")) {
+                response.sendRedirect("ProductoServlet?errorEliminar=1");
+            } else {
+                request.setAttribute("error", e.getMessage());
+                recargarListasParaError(request);
+                request.getRequestDispatcher("crud-products.jsp").forward(request, response);
+            }
         }
-        response.sendRedirect("ProductoServlet");
     }
 
     private void recargarListasParaError(HttpServletRequest request) {
         try {
+            if (request.getServletPath().contains("Videojuego")) {
+                request.setAttribute("listaVideojuegos", videojuegoBO.listarTodosLosVideojuegos());
+            }
             request.setAttribute("listaProductos", productoBO.listarTodosLosProductos());
             request.setAttribute("listaPlataformas", plataformaBO.listarTodas());
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "Error crítico al recargar listas: " + e.getMessage());
         }
     }
 
-    private String guardarImagen(Part filePart, HttpServletRequest request) throws IOException {
-        String rutaRelativa = "temp"; 
-        
-        String uploadPath = request.getServletContext().getRealPath("") + File.separator + rutaRelativa;
+    private String guardarImagenInterna(Part filePart, HttpServletRequest request, VideojuegoDTO vjDto, String nombrePlataforma) throws IOException {
+        String uploadPath = request.getServletContext().getRealPath("/imgs");
 
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
-            uploadDir.mkdirs(); 
+            uploadDir.mkdirs();
         }
 
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
-        
-        String fullPath = uploadPath + File.separator + uniqueFileName;
+        String nombreJuego = limpiarCadena(vjDto.getNombre());
+        String plataforma = limpiarCadena(nombrePlataforma);
+        String desarrolladora = limpiarCadena(vjDto.getDesarrollador());
+
+        String fileNameOriginal = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        String extension = "";
+        int i = fileNameOriginal.lastIndexOf('.');
+        if (i > 0) {
+            extension = fileNameOriginal.substring(i);
+        }
+
+        String finalName = nombreJuego + "_" + plataforma + "_" + desarrolladora + extension;
+
+        String fullPath = uploadPath + File.separator + finalName;
+
         try (InputStream input = filePart.getInputStream()) {
             Files.copy(input, Paths.get(fullPath), StandardCopyOption.REPLACE_EXISTING);
         }
 
-        return rutaRelativa + "/" + uniqueFileName; 
+        return "imgs/" + finalName;
+    }
+
+    private String limpiarCadena(String input) {
+        if (input == null) {
+            return "Desconocido";
+        }
+        return input.replaceAll("[^a-zA-Z0-9]", "");
+    }
+
+    private String obtenerNombrePlataforma(Long idPlataforma) {
+        List<PlataformaDTO> lista = plataformaBO.listarTodas();
+        for (PlataformaDTO p : lista) {
+            if (p.getIdPlataforma().equals(idPlataforma)) {
+                return p.getNombre();
+            }
+        }
+        return "Generica";
     }
 
     /**

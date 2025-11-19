@@ -1,6 +1,6 @@
 /*
-     * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-     * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package modelo;
 
@@ -40,9 +40,7 @@ public class VideojuegoBO {
 
     public List<VideojuegoDTO> listarTodosLosVideojuegos() {
         List<Videojuego> listaEntidades = videojuegoDAO.buscarTodos();
-        return listaEntidades.stream()
-                .map(this::convertirEntidadADTO)
-                .collect(Collectors.toList());
+        return listaEntidades.stream().map(this::convertirEntidadADTO).collect(Collectors.toList());
     }
 
     public List<VideojuegoDTO> buscarPorNombre(String nombre) throws Exception {
@@ -55,7 +53,7 @@ public class VideojuegoBO {
         return (entidad != null) ? convertirEntidadADTO(entidad) : null;
     }
 
-    public void crearVideojuego(VideojuegoDTO dto) throws Exception {
+    public VideojuegoDTO crearVideojuego(VideojuegoDTO dto) throws Exception {
         if (dto.getNombre() == null || dto.getNombre().trim().isEmpty()) {
             throw new Exception("El nombre es obligatorio.");
         }
@@ -67,9 +65,10 @@ public class VideojuegoBO {
 
         Videojuego entidad = convertirDTOAEntidad(dto, new Videojuego());
         videojuegoDAO.crear(entidad);
+        return convertirEntidadADTO(entidad);
     }
 
-    public void actualizarVideojuego(VideojuegoDTO dto) throws Exception {
+    public VideojuegoDTO actualizarVideojuego(VideojuegoDTO dto) throws Exception {
         if (dto.getIdVideojuego() == null) {
             throw new Exception("ID de videojuego no válido.");
         }
@@ -86,15 +85,21 @@ public class VideojuegoBO {
 
         Videojuego entidadActualizada = convertirDTOAEntidad(dto, entidad);
         videojuegoDAO.actualizar(entidadActualizada);
+        return convertirEntidadADTO(entidadActualizada);
     }
 
     public void eliminarVideojuego(Long id) throws Exception {
         if (id == null) {
             throw new Exception("ID no puede ser nulo.");
         }
+
         Videojuego entidad = videojuegoDAO.buscarPorId(id);
         if (entidad != null) {
-            videojuegoDAO.eliminar(entidad);
+            try {
+                videojuegoDAO.eliminar(entidad);
+            } catch (Exception e) {
+                throw new Exception("No se puede eliminar: El videojuego tiene productos asociados.");
+            }
         } else {
             throw new Exception("No se encontró el videojuego para eliminar.");
         }
@@ -106,21 +111,14 @@ public class VideojuegoBO {
         dto.setNombre(v.getNombre());
         dto.setDesarrollador(v.getDesarrollador());
         dto.setAnoLanzamiento(v.getAnoLanzamiento());
-
         if (v.getClasificacion() != null) {
             dto.setIdClasificacion(v.getClasificacion().getIdClasificacion());
             dto.setNombreClasificacion(v.getClasificacion().getNombre());
         }
-
         if (v.getCategorias() != null && !v.getCategorias().isEmpty()) {
-            Set<Long> ids = v.getCategorias().stream()
-                    .map(Categoria::getIdCategoria)
-                    .collect(Collectors.toSet());
+            Set<Long> ids = v.getCategorias().stream().map(Categoria::getIdCategoria).collect(Collectors.toSet());
             dto.setIdsCategorias(ids);
-
-            String nombres = v.getCategorias().stream()
-                    .map(Categoria::getNombre)
-                    .collect(Collectors.joining(", "));
+            String nombres = v.getCategorias().stream().map(Categoria::getNombre).collect(Collectors.joining(", "));
             dto.setNombresCategorias(nombres);
         }
         return dto;
@@ -128,18 +126,15 @@ public class VideojuegoBO {
 
     private List<VideojuegoDTO> listaEntidadAListaDTO(List<Videojuego> listaEntidades) {
         if (listaEntidades == null) {
-            return new java.util.ArrayList<>(); 
+            return new java.util.ArrayList<>();
         }
-        return listaEntidades.stream()
-                .map(this::convertirEntidadADTO) 
-                .collect(Collectors.toList());
+        return listaEntidades.stream().map(this::convertirEntidadADTO).collect(Collectors.toList());
     }
 
     private Videojuego convertirDTOAEntidad(VideojuegoDTO dto, Videojuego entidad) {
         entidad.setNombre(dto.getNombre());
         entidad.setDesarrollador(dto.getDesarrollador());
         entidad.setAnoLanzamiento(dto.getAnoLanzamiento());
-
         if (dto.getIdClasificacion() != null) {
             Clasificacion clasificacion = clasificacionDAO.buscarPorId(dto.getIdClasificacion());
             entidad.setClasificacion(clasificacion);
@@ -148,9 +143,7 @@ public class VideojuegoBO {
         }
         if (dto.getIdsCategorias() != null && !dto.getIdsCategorias().isEmpty()) {
             Set<Categoria> categorias = dto.getIdsCategorias().stream()
-                    .map(id -> categoriaDAO.buscarPorId(id))
-                    .filter(c -> c != null)
-                    .collect(Collectors.toSet());
+                    .map(id -> categoriaDAO.buscarPorId(id)).filter(c -> c != null).collect(Collectors.toSet());
             entidad.setCategorias(categorias);
         } else {
             if (entidad.getCategorias() != null) {
@@ -159,7 +152,6 @@ public class VideojuegoBO {
                 entidad.setCategorias(new java.util.HashSet<>());
             }
         }
-
         return entidad;
     }
 }

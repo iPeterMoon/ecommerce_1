@@ -13,7 +13,6 @@
         <title>Gestionar Videojuegos</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
         <link rel="stylesheet" href="styles/styles.css" />
         <link rel="stylesheet" href="styles/admin.css" />
         <link rel="stylesheet" href="styles/crud-games.css"/>
@@ -21,44 +20,51 @@
 
     <body class="tron-grid grid-container">
         <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
+
         <main>
             <h1>Gestionar Videojuegos</h1>
 
             <div class="search-div">
                 <form action="VideojuegoServlet" method="GET" class="buscador">
-                    <input type="text" 
-                           name="busqueda" 
-                           id="search" 
-                           class="search" 
+                    <input type="text" name="busqueda" id="search" class="search" 
                            placeholder="Buscar videojuego..." 
                            value="<c:out value='${param.busqueda}'/>" />
 
                     <div class="items-busqueda">   
-                        <button type="submit" class="boton" >
+                        <button type="submit" class="boton">
                             <img src="icons/search.svg" alt="buscar" class="search-img"/>
                         </button>
-
                         <c:if test="${not empty param.busqueda}">
                             <a class="x-button" href="VideojuegoServlet">✖</a>
                         </c:if>
                     </div>
-
                 </form>
             </div>
+
+            <c:if test="${param.errorEliminar == '1'}">
+                <div class="error-message">
+                    No se puede eliminar un videojuego con un producto asociado.
+                </div>
+            </c:if>
+            
+            <c:if test="${param.exito == '1'}">
+                 <div class="success-message" style="text-align:center; color: green; margin: 1rem; border: 1px solid green; padding: 10px;">
+                    Producto agregado exitosamente.
+                </div>
+            </c:if>
 
             <div class="main-div">
                 <div class="add-videogame">
                     <a href="#game-modal"><img src="icons/+.svg" alt="add" /></a>
                 </div>
 
-                <c:if test="${not empty error}">
-                    <p style="color: red; text-align: center; font-size: 1.2rem; margin: 1rem;">
+                <c:if test="${not empty error && empty videojuegoAEditar && empty abrirModalAgregar}">
+                    <div class="error-message" style="margin: 1rem auto;">
                         <c:out value="${error}" />
-                    </p>
+                    </div>
                 </c:if>
 
                 <div class="videogames">
-
                     <c:forEach var="vj" items="${listaVideojuegos}">
                         <div class="videogame">
                             <div class="game-info">
@@ -89,24 +95,21 @@
                         </div>
 
                         <div class="modal-overlay" id="game-modal-producto-${vj.idVideojuego}">
-                            <div class="modal-container">
+                             <div class="modal-container">
                                 <h2 id="modal-title">Añadir Producto para: <c:out value="${vj.nombre}"/></h2>
-                                                                <form class="modal-form" id="game-form-${vj.idVideojuego}" action="ProductoServlet" method="POST" enctype="multipart/form-data">
+                                <form class="modal-form" action="ProductoServlet" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="idVideojuego" value="${vj.idVideojuego}" />
-
                                     <div class="form-group full-width">
                                         <label>Videojuego Base</label>
                                         <input type="text" value="<c:out value="${vj.nombre}"/>" readonly />
                                     </div>
-
                                     <div class="form-group full-width">
-                                        <label for="nombreProducto-${vj.idVideojuego}">Nombre del Producto</label>
-                                        <input type="text" id="nombreProducto-${vj.idVideojuego}" name="nombreProducto" value="<c:out value="${vj.nombre}"/>" required />
+                                        <label>Nombre del Producto</label>
+                                        <input type="text" name="nombreProducto" value="<c:out value="${vj.nombre}"/>" required />
                                     </div>
-
                                     <div class="form-group">
-                                        <label for="platform-${vj.idVideojuego}">Plataforma</label>
-                                        <select id="platform-${vj.idVideojuego}" name="idPlataforma" required>
+                                        <label>Plataforma</label>
+                                        <select name="idPlataforma" required>
                                             <option value="" disabled selected>Selecciona...</option>
                                             <c:forEach var="plat" items="${listaPlataformas}">
                                                 <option value="${plat.idPlataforma}">${plat.nombre}</option>
@@ -114,21 +117,20 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="stock-${vj.idVideojuego}">Stock</label>
-                                        <input type="number" id="stock-${vj.idVideojuego}" name="stock" min="0" required />
+                                        <label>Stock</label>
+                                        <input type="number" name="stock" min="0" required />
                                     </div>
                                     <div class="form-group">
-                                        <label for="price-${vj.idVideojuego}">Precio ($)</label>
-                                        <input type="number" id="price-${vj.idVideojuego}" name="precio" min="0" step="0.01" required />
+                                        <label>Precio ($)</label>
+                                        <input type="number" name="precio" min="0" step="0.01" required />
                                     </div>
-                                                                        <div class="form-group">
-                                        <label for="imagen-${vj.idVideojuego}">Imagen del Producto</label>
-                                        <input type="file" id="imagen-${vj.idVideojuego}" name="imagen" accept="image/png, image/jpeg, image/jpg" required />
+                                    <div class="form-group">
+                                        <label>Imagen</label>
+                                        <input type="file" name="imagen" accept="image/png, image/jpeg, image/jpg" required />
                                     </div>
-                                    
                                     <div class="form-group full-width">
-                                        <label for="description-${vj.idVideojuego}">Descripción</label>
-                                        <textarea id="description-${vj.idVideojuego}" name="description"></textarea>
+                                        <label>Descripción</label>
+                                        <textarea name="description"></textarea>
                                     </div>
                                     <div class="form-actions">
                                         <a href="#" class="form-button cancel">Cancelar</a>
@@ -137,25 +139,24 @@
                                 </form>
                             </div>
                         </div>
-
                     </c:forEach>          
                 </div>
             </div>
         </main>
 
-        <div class="modal-overlay" id="game-modal">
+        <div class="modal-overlay" id="game-modal" style="${not empty abrirModalAgregar ? 'display: flex;' : ''}">
             <div class="modal-container">
                 <h2>Agregar Videojuego</h2>
-                <%
-              String error = request.getParameter("error");
-              if(error != null && error.equals("1")) {
-                %>
-                <div class="error-message">
-                    Llena todos los campos del formulario.
-                </div>
-                <%
-                    }
-                %>
+                
+                <c:if test="${not empty abrirModalAgregar && not empty error}">
+                    <div class="error-message">
+                        <c:out value="${error}"/>
+                    </div>
+                </c:if>
+                <c:if test="${param.errorCrear == '1'}">
+                     <div class="error-message">Ya existe un videojuego con ese nombre.</div>
+                </c:if>
+                
                 <form class="modal-form" action="VideojuegoServlet" method="POST">
                     <div class="form-group full-width">
                         <label for="game-name">Nombre</label>
@@ -182,13 +183,19 @@
                         <div class="checkbox-container">
                             <c:forEach var="cat" items="${listaCategorias}">
                                 <div class="checkbox-item">
-                                    <input type="checkbox" name="category" value="${cat.idCategoria}" id="checkbox-games" ${isSelected ? 'checked' : ''}>
-                                    <label for="cat-edit-${cat.idCategoria}">${cat.nombre}</label>
+                                    <input type="checkbox" 
+                                           name="category" 
+                                           value="${cat.idCategoria}" 
+                                           id="cat-new-${cat.idCategoria}" 
+                                           class="input-checkbox-style">
+                                    
+                                    <label for="cat-new-${cat.idCategoria}" style="cursor: pointer;">
+                                        ${cat.nombre}
+                                    </label>
                                 </div>
                             </c:forEach>
                         </div>
                     </div>
-
 
                     <div class="form-group">
                         <label for="release-year">Año de lanzamiento</label>
@@ -196,7 +203,7 @@
                     </div>
 
                     <div class="form-actions">
-                        <a href="#" class="form-button cancel">Cancelar</a>
+                        <a href="VideojuegoServlet" class="form-button cancel">Cancelar</a>
                         <button type="submit" class="form-button save">Guardar</button>
                     </div>
                 </form>
@@ -207,6 +214,18 @@
             <div class="modal-overlay" id="edit-game-modal" style="display: flex;">
                 <div class="modal-container">
                     <h2>Modificar Videojuego</h2>
+
+                    <c:if test="${not empty error}">
+                        <div class="error-message">
+                            <c:out value="${error}" />
+                        </div>
+                    </c:if>
+                    <c:if test="${param.errorEditar == '1'}">
+                        <div class="error-message">
+                            No se pudo actualizar. Verifique que el nombre no esté duplicado.
+                        </div>
+                    </c:if>
+
                     <form class="modal-form" action="VideojuegoServlet" method="POST">
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="idVideojuego" value="${videojuegoAEditar.idVideojuego}">
@@ -246,13 +265,20 @@
                                     </c:forEach>
 
                                     <div class="checkbox-item">
-                                        <input type="checkbox" name="category" value="${cat.idCategoria}" id="checkbox-games" ${isSelected ? 'checked' : ''}>
-                                        <label for="cat-edit-${cat.idCategoria}">${cat.nombre}</label>
+                                        <input type="checkbox" 
+                                               name="category" 
+                                               value="${cat.idCategoria}" 
+                                               id="cat-edit-${cat.idCategoria}" 
+                                               class="input-checkbox-style" 
+                                               ${isSelected ? 'checked' : ''}>
+                                        
+                                        <label for="cat-edit-${cat.idCategoria}" style="cursor: pointer;">
+                                            ${cat.nombre}
+                                        </label>
                                     </div>
                                 </c:forEach>
                             </div>
                         </div>
-
 
                         <div class="form-group">
                             <label for="release-year-edit">Año de lanzamiento</label>
@@ -269,6 +295,5 @@
         </c:if>
 
         <%@include file="WEB-INF/fragmentos/footer.jspf" %>
-
     </body>
 </html>

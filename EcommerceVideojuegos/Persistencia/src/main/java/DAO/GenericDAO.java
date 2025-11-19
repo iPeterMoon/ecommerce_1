@@ -32,7 +32,7 @@ public class GenericDAO<T, ID> implements IGenericDAO<T, ID> {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            e.printStackTrace(); // Manejo de excepciones
+            e.printStackTrace();
         } finally {
             em.close();
         }
@@ -53,7 +53,7 @@ public class GenericDAO<T, ID> implements IGenericDAO<T, ID> {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.merge(entity); // merge es para actualizar
+            em.merge(entity); 
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
@@ -70,7 +70,6 @@ public class GenericDAO<T, ID> implements IGenericDAO<T, ID> {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            // Asegurarse de que la entidad esté gestionada antes de eliminar
             if (!em.contains(entity)) {
                 entity = em.merge(entity);
             }
@@ -81,6 +80,7 @@ public class GenericDAO<T, ID> implements IGenericDAO<T, ID> {
                 em.getTransaction().rollback();
             }
             e.printStackTrace();
+            throw new RuntimeException("Error al eliminar: " + e.getMessage(), e);
         } finally {
             em.close();
         }
@@ -90,7 +90,6 @@ public class GenericDAO<T, ID> implements IGenericDAO<T, ID> {
     public List<T> buscarTodos() {
         EntityManager em = getEntityManager();
         try {
-            // Usando JPQL (más simple que Criteria API para un "buscarTodos")
             String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e";
             TypedQuery<T> query = em.createQuery(jpql, entityClass);
             return query.getResultList();

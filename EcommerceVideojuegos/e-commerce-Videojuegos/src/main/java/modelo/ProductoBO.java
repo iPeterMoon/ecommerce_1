@@ -13,6 +13,10 @@ import entidades.Videojuego;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *
+ * @author benja
+ */
 public class ProductoBO {
 
     private IProductoDAO productoDAO;
@@ -46,9 +50,7 @@ public class ProductoBO {
 
     public List<ProductoDTO> listarTodosLosProductos() {
         List<Producto> productos = productoDAO.buscarTodos();
-        return productos.stream()
-                .map(this::convertirADTO)
-                .collect(Collectors.toList());
+        return productos.stream().map(this::convertirADTO).collect(Collectors.toList());
     }
 
     public List<ProductoDTO> buscarPorNombre(String nombre) throws Exception {
@@ -61,14 +63,12 @@ public class ProductoBO {
         return (p != null) ? convertirADTO(p) : null;
     }
 
-    public void crearProducto(ProductoDTO dto) throws Exception {
+    public ProductoDTO crearProducto(ProductoDTO dto) throws Exception {
         if (dto.getIdVideojuego() == null || dto.getIdPlataforma() == null) {
             throw new Exception("Videojuego y Plataforma son obligatorios.");
         }
-
         Videojuego vj = videojuegoDAO.buscarPorId(dto.getIdVideojuego());
         Plataforma plat = plataformaDAO.buscarPorId(dto.getIdPlataforma());
-
         if (vj == null || plat == null) {
             throw new Exception("Videojuego o Plataforma no encontrados.");
         }
@@ -76,16 +76,17 @@ public class ProductoBO {
         Producto p = new Producto();
         p.setNombreProducto(dto.getNombreProducto());
         p.setStock(dto.getStock());
-        p.setPrecio(dto.getPrecio()); 
+        p.setPrecio(dto.getPrecio());
         p.setImagenUrl(dto.getImagenUrl());
         p.setDescripcion(dto.getDescripcion());
         p.setVideojuego(vj);
         p.setPlataforma(plat);
 
         productoDAO.crear(p);
+        return convertirADTO(p);
     }
 
-    public void actualizarProducto(ProductoDTO dto) throws Exception {
+    public ProductoDTO actualizarProducto(ProductoDTO dto) throws Exception {
         if (dto.getIdProducto() == null) {
             throw new Exception("ID de producto no válido.");
         }
@@ -94,7 +95,7 @@ public class ProductoBO {
         if (p == null) {
             throw new Exception("Producto no encontrado.");
         }
-        
+
         Plataforma plat = plataformaDAO.buscarPorId(dto.getIdPlataforma());
         if (plat == null) {
             throw new Exception("Plataforma no válida.");
@@ -108,6 +109,7 @@ public class ProductoBO {
         p.setPlataforma(plat);
 
         productoDAO.actualizar(p);
+        return convertirADTO(p);
     }
 
     public void eliminarProducto(Long id) throws Exception {
@@ -115,6 +117,10 @@ public class ProductoBO {
         if (p == null) {
             throw new Exception("Producto no encontrado.");
         }
-        productoDAO.eliminar(p);
+        try {
+            productoDAO.eliminar(p);
+        } catch (Exception e) {
+            throw new Exception("No se pudo eliminar el producto (posiblemente está en pedidos).");
+        }
     }
 }

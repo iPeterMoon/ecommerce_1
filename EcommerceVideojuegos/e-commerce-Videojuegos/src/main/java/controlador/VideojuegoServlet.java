@@ -1,9 +1,6 @@
 package controlador;
 
-import DTO.CategoriaDTO;
-import DTO.ClasificacionDTO;
 import DTO.VideojuegoDTO;
-import DTO.PlataformaDTO; // <-- NUEVO
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +16,10 @@ import modelo.CategoriaBO;
 import modelo.ClasificacionBO;
 import modelo.VideojuegoBO;
 import modelo.PlataformaBO;
-
+/**
+ *
+ * @author benja
+ */
 @WebServlet(name = "VideojuegoServlet", urlPatterns = {"/VideojuegoServlet"})
 public class VideojuegoServlet extends HttpServlet {
 
@@ -85,31 +85,20 @@ public class VideojuegoServlet extends HttpServlet {
                 }
                 request.setAttribute("videojuegoAEditar", dto);
             }
-            
-            List<VideojuegoDTO> lista;
 
+            List<VideojuegoDTO> lista;
             if (busqueda != null && !busqueda.trim().isEmpty()) {
                 lista = videojuegoBO.buscarPorNombre(busqueda);
             } else {
                 lista = videojuegoBO.listarTodosLosVideojuegos();
             }
-
             request.setAttribute("listaVideojuegos", lista);
-
-            List<ClasificacionDTO> clasificaciones = clasificacionBO.listarTodas();
-            request.setAttribute("listaClasificaciones", clasificaciones);
-
-            List<CategoriaDTO> categorias = categoriaBO.listarTodas();
-            request.setAttribute("listaCategorias", categorias);
-
-            List<PlataformaDTO> plataformas = plataformaBO.listarTodas();
-            request.setAttribute("listaPlataformas", plataformas);
+            recargarListas(request);
 
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
-            e.printStackTrace();
+            recargarListas(request);
         }
-
         request.getRequestDispatcher("crud-games.jsp").forward(request, response);
     }
 
@@ -126,7 +115,6 @@ public class VideojuegoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String method = request.getParameter("_method");
-
         if (method != null) {
             switch (method.toUpperCase()) {
                 case "PUT":
@@ -138,16 +126,20 @@ public class VideojuegoServlet extends HttpServlet {
             }
         }
 
+        VideojuegoDTO dto = new VideojuegoDTO();
         try {
-            VideojuegoDTO dto = poblarDTODesdeRequest(request, response);
-            if (dto != null) {
-                videojuegoBO.crearVideojuego(dto);
-                response.sendRedirect("VideojuegoServlet");
-            }
+            poblarDTO(dto, request);
+            validarDTO(dto);
+
+            videojuegoBO.crearVideojuego(dto);
+            response.sendRedirect("VideojuegoServlet");
 
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
-            recargarListasParaError(request); 
+            if (e.getMessage().contains("existe") || e.getMessage().contains("campos")) {
+                request.setAttribute("abrirModalAgregar", true);
+            }
+            recargarListas(request);
             request.getRequestDispatcher("crud-games.jsp").forward(request, response);
         }
     }
@@ -156,16 +148,24 @@ public class VideojuegoServlet extends HttpServlet {
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        VideojuegoDTO dto = new VideojuegoDTO();
         try {
-            VideojuegoDTO dto = poblarDTODesdeRequest(request, response);
-            Long id = Long.parseLong(request.getParameter("idVideojuego"));
-            dto.setIdVideojuego(id);
+            String idStr = request.getParameter("idVideojuego");
+            if (idStr != null && !idStr.isEmpty()) {
+                dto.setIdVideojuego(Long.parseLong(idStr));
+            }
+
+            poblarDTO(dto, request);
+            validarDTO(dto);
+
             videojuegoBO.actualizarVideojuego(dto);
             response.sendRedirect("VideojuegoServlet");
 
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
-            recargarListasParaError(request);
+            request.setAttribute("videojuegoAEditar", dto);
+
+            recargarListas(request);
             request.getRequestDispatcher("crud-games.jsp").forward(request, response);
         }
     }
@@ -173,57 +173,58 @@ public class VideojuegoServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         try {
             Long id = Long.parseLong(request.getParameter("idVideojuego"));
             videojuegoBO.eliminarVideojuego(id);
+            response.sendRedirect("VideojuegoServlet");
         } catch (Exception e) {
-            request.setAttribute("error", e.getMessage());
-            recargarListasParaError(request);
-            request.getRequestDispatcher("crud-games.jsp").forward(request, response);
-            return;
+            if (e.getMessage().contains("asociados")) {
+                response.sendRedirect("VideojuegoServlet?errorEliminar=1");
+            } else {
+                request.setAttribute("error", e.getMessage());
+                recargarListas(request);
+                request.getRequestDispatcher("crud-games.jsp").forward(request, response);
+            }
         }
-
-        response.sendRedirect("VideojuegoServlet");
     }
 
-    private VideojuegoDTO poblarDTODesdeRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        VideojuegoDTO dto = new VideojuegoDTO();
+    private void poblarDTO(VideojuegoDTO dto, HttpServletRequest request) {
         dto.setNombre(request.getParameter("game-name"));
         dto.setDesarrollador(request.getParameter("developer"));
         dto.setAnoLanzamiento(request.getParameter("release-year"));
 
         String idClasif = request.getParameter("classification");
-
         if (idClasif != null && !idClasif.isEmpty()) {
-            dto.setIdClasificacion(Long.parseLong(idClasif));
-        } else {
-            response.sendRedirect("VideojuegoServlet?error=1#game-modal");
-            return null;
+            try {
+                dto.setIdClasificacion(Long.parseLong(idClasif));
+            } catch (NumberFormatException e) {
+            }
         }
 
         String[] idsCats = request.getParameterValues("category");
         if (idsCats != null) {
-            Set<Long> ids = Arrays.stream(idsCats)
-                    .map(Long::parseLong)
-                    .collect(Collectors.toSet());
+            Set<Long> ids = Arrays.stream(idsCats).map(Long::parseLong).collect(Collectors.toSet());
             dto.setIdsCategorias(ids);
-        } else {
-            response.sendRedirect("VideojuegoServlet?error=1#game-modal");
-            return null;
         }
-        return dto;
     }
 
-    private void recargarListasParaError(HttpServletRequest request) {
-        List<VideojuegoDTO> lista = videojuegoBO.listarTodosLosVideojuegos();
-        request.setAttribute("listaVideojuegos", lista);
-        List<ClasificacionDTO> clasificaciones = clasificacionBO.listarTodas();
-        request.setAttribute("listaClasificaciones", clasificaciones);
-        List<CategoriaDTO> categorias = categoriaBO.listarTodas();
-        request.setAttribute("listaCategorias", categorias);
-        List<PlataformaDTO> plataformas = plataformaBO.listarTodas();
-        request.setAttribute("listaPlataformas", plataformas);
+    private void validarDTO(VideojuegoDTO dto) throws Exception {
+        if (dto.getNombre() == null || dto.getNombre().trim().isEmpty()
+                || dto.getDesarrollador() == null || dto.getDesarrollador().trim().isEmpty()
+                || dto.getAnoLanzamiento() == null || dto.getAnoLanzamiento().trim().isEmpty()
+                || dto.getIdClasificacion() == null
+                || dto.getIdsCategorias() == null || dto.getIdsCategorias().isEmpty()) {
+            throw new Exception("Llena todos los campos del formulario.");
+        }
+    }
+
+    private void recargarListas(HttpServletRequest request) {
+        if (request.getAttribute("listaVideojuegos") == null) {
+            request.setAttribute("listaVideojuegos", videojuegoBO.listarTodosLosVideojuegos());
+        }
+        request.setAttribute("listaClasificaciones", clasificacionBO.listarTodas());
+        request.setAttribute("listaCategorias", categoriaBO.listarTodas());
+        request.setAttribute("listaPlataformas", plataformaBO.listarTodas());
     }
 
     /**

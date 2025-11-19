@@ -12,25 +12,20 @@
         <title>Gestionar Productos</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <link rel="stylesheet" href="styles/styles.css">
         <link rel="stylesheet" href="styles/admin.css">
         <link rel="stylesheet" href="styles/crud-games.css"/> 
     </head>
 
     <body class="tron-grid grid-container">
-
         <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
-        
+
         <main>
             <h1>Gestionar Productos</h1>
-            
+
             <div class="search-div">
                 <form action="ProductoServlet" method="GET" class="buscador">
-                    <input type="text" 
-                           name="busqueda" 
-                           id="search" 
-                           class="search" 
+                    <input type="text" name="busqueda" id="search" class="search" 
                            placeholder="Buscar producto..." 
                            value="<c:out value='${param.busqueda}'/>" />
                     <div class="items-busqueda">   
@@ -43,28 +38,43 @@
                     </div>
                 </form>
             </div>
-            
+
+            <c:if test="${param.errorEliminar == '1'}">
+                <div class="error-message" style="margin-bottom: 1rem;">
+                    No se pudo eliminar el producto. Es posible que tenga pedidos o dependencias asociadas.
+                </div>
+            </c:if>
+
             <div class="main-div">
-                <c:if test="${not empty error}">
-                    <p style="color: red; text-align: center; font-size: 1.2rem; margin: 1rem;">
+                <c:if test="${not empty error && empty productoAEditar}">
+                    <div class="error-message" style="margin: 1rem auto; text-align: center; max-width: 800px; padding: 10px; border-radius: 5px;">
                         <c:out value="${error}" />
-                    </p>
+                    </div>
                 </c:if>
 
                 <div class="videogames" id="videogames-list">
-                    
                     <c:forEach var="prod" items="${listaProductos}">
                         <div class="videogame">
-                            <img class="game-photo" src="${prod.imagenUrl}" alt="<c:out value="${prod.nombreProducto}"/>">
+                            
+                            <c:choose>
+                                <c:when test="${prod.imagenUrl.startsWith('imgs/')}">
+                                    <img class="game-photo" src="${prod.imagenUrl}" alt="<c:out value="${prod.nombreProducto}"/>">
+                                </c:when>
+                                
+                                <c:otherwise>
+                                    <img class="game-photo" src="ProductoServlet?action=verImagen&id=${prod.imagenUrl}" alt="<c:out value="${prod.nombreProducto}"/>">
+                                </c:otherwise>
+                            </c:choose>
+                            
                             <div class="game-info">
                                 <div class="game-title">
                                     <h2><c:out value="${prod.nombreProducto}"/></h2>
-                                    
+
                                     <a href="ProductoServlet?action=editar&id=${prod.idProducto}#game-edit-modal">
                                         <img src="icons/edit.svg" alt="editar" class="icon-btn">
                                     </a>
-                                    
-                                    <form action="ProductoServlet" method="POST" class="form-delete" onsubmit="return confirm('¿Estás seguro de eliminar este producto?');">
+
+                                    <form action="ProductoServlet" method="POST" class="form-delete">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="idProducto" value="${prod.idProducto}">
                                         <button type="submit" class="boton">
@@ -79,13 +89,6 @@
                             </div>
                         </div>
                     </c:forEach>
-                    
-                    <c:if test="${empty listaProductos}">
-                        <p style="text-align: center; font-size: 1.2rem; margin-top: 2rem;">
-                            No se encontraron productos.
-                        </p>
-                    </c:if>
-                    
                 </div>
             </div>
         </main>
@@ -94,63 +97,74 @@
             <div class="modal-overlay" id="game-edit-modal" style="display: flex;">
                 <div class="modal-container">
                     <h2 id="modal-title-edit">Modificar Producto</h2>
-                    
+
+                    <c:if test="${param.errorEditar == '1'}">
+                        <div class="error-message">
+                            No se pudo actualizar el producto. Verifica los datos e intenta de nuevo.
+                        </div>
+                    </c:if>
+
+                    <c:if test="${not empty error}">
+                        <div class="error-message">
+                            <c:out value="${error}" />
+                        </div>
+                    </c:if>
+
                     <form class="modal-form" id="game-form-edit" action="ProductoServlet" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="_method" value="PUT">
-    <input type="hidden" name="idProducto" value="${productoAEditar.idProducto}">
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" name="idProducto" value="${productoAEditar.idProducto}">
 
-    <div class="form-group full-width">
-        <label for="nombre-edit">Nombre del Producto</label>
-        <input type="text" id="nombre-edit" name="nombreProducto" value="${productoAEditar.nombreProducto}" required>
-    </div>
-    
-    <div class="form-group full-width">
-        <label>Videojuego Base (No editable)</label>
-        <input type="text" value="<c:out value="${productoAEditar.nombreVideojuego}"/>" readonly style="background-color: #333; color: #aaa; cursor: not-allowed;">
-    </div>
+                        <div class="form-group full-width">
+                            <label for="nombre-edit">Nombre del Producto</label>
+                            <input type="text" id="nombre-edit" name="nombreProducto" value="${productoAEditar.nombreProducto}" required>
+                        </div>
 
-    <div class="form-group">
-        <label for="platform-edit">Plataforma</label>
-        <select id="platform-edit" name="idPlataforma" required>
-            <option value="" disabled>Selecciona...</option>
-            <c:forEach var="plat" items="${listaPlataformas}">
-                <option value="${plat.idPlataforma}" ${productoAEditar.idPlataforma == plat.idPlataforma ? 'selected' : ''}>
-                    ${plat.nombre}
-                </option>
-            </c:forEach>
-        </select>
-    </div>
-    
-    <div class="form-group">
-        <label for="stock-edit">Stock</label>
-        <input type="number" id="stock-edit" name="stock" min="0" value="${productoAEditar.stock}" required>
-    </div>
-    
-    <div class="form-group">
-        <label for="price-edit">Precio ($)</label>
-        <input type="number" id="price-edit" name="precio" min="0" step="0.01" value="${productoAEditar.precio}" required>
-    </div>
-    
-    <div class="form-group">
-        <label for="imagen-edit">Imagen (Dejar vacío para mantener la actual)</label>
-        <input type="file" id="imagen-edit" name="imagen" accept="image/png, image/jpeg, image/jpg" />
-    </div>
+                        <div class="form-group full-width">
+                            <label>Videojuego Base (No editable)</label>
+                            <input type="text" value="<c:out value="${productoAEditar.nombreVideojuego}"/>" readonly style="background-color: #333; color: #aaa; cursor: not-allowed;">
+                        </div>
 
-    <div class="form-group full-width">
-        <label for="description-edit">Descripción</label>
-        <textarea id="description-edit" name="description" required><c:out value="${productoAEditar.descripcion}"/></textarea>
-    </div>
+                        <div class="form-group">
+                            <label for="platform-edit">Plataforma</label>
+                            <select id="platform-edit" name="idPlataforma" required>
+                                <option value="" disabled>Selecciona...</option>
+                                <c:forEach var="plat" items="${listaPlataformas}">
+                                    <option value="${plat.idPlataforma}" ${productoAEditar.idPlataforma == plat.idPlataforma ? 'selected' : ''}>
+                                        ${plat.nombre}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                        </div>
 
-    <div class="form-actions">
-        <a href="ProductoServlet" class="form-button cancel">Cancelar</a>
-        <button type="submit" class="form-button save">Guardar Cambios</button>
-    </div>
-</form>
+                        <div class="form-group">
+                            <label for="stock-edit">Stock</label>
+                            <input type="number" id="stock-edit" name="stock" min="0" value="${productoAEditar.stock}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price-edit">Precio ($)</label>
+                            <input type="number" id="price-edit" name="precio" min="0" step="0.01" value="${productoAEditar.precio}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="imagen-edit">Imagen (Dejar vacío para mantener la actual)</label>
+                            <input type="file" id="imagen-edit" name="imagen" accept="image/png, image/jpeg, image/jpg" />
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="description-edit">Descripción</label>
+                            <textarea id="description-edit" name="description" required><c:out value="${productoAEditar.descripcion}"/></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <a href="ProductoServlet" class="form-button cancel">Cancelar</a>
+                            <button type="submit" class="form-button save">Guardar Cambios</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </c:if>
 
         <%@include file="WEB-INF/fragmentos/footer.jspf" %>
-
     </body>
 </html>
