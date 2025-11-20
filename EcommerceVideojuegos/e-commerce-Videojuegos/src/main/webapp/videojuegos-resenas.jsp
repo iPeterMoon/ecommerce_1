@@ -5,9 +5,10 @@
     <head>
         <meta charset="utf-8" />
         <title>Seleccionar Producto</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/styles.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/videojuegos_resenas.css" />
+        <link rel="stylesheet" href="styles/styles.css" />
+        <link rel="stylesheet" href="styles/videojuegos_resenas.css" />
         <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body class="tron-grid grid-container">
         <%@include file="WEB-INF/fragmentos/navbar.jspf" %>

@@ -5,9 +5,11 @@
     <head>
         <meta charset="utf-8" />
         <title>Moderar reseñas videojuego</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/styles/moderar_resenas.css" />
-        <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/styles/styles.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="styles/moderar_resenas.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="styles/styles.css" />
         <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     </head>
     <body class="tron-grid grid-container">
         <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
@@ -29,8 +31,12 @@
                             <div class="review-info">
                                 <p class="user">${resena.nombreUsuario}</p>
                                 <div class="calification">
-                                    <span>Calificación: ${resena.calificacion}</span>
-                                    <img src="${pageContext.request.contextPath}/imgs/stars.png" alt="stars-image" class="stars" />
+                                    <span>Calificación: </span>
+                                    <div class="stars-display">
+                                        <c:forEach begin="1" end="5" var="i">
+                                            <i class="fas fa-star ${resena.calificacion >= i ? 'filled-star' : 'empty-star'}"></i>
+                                        </c:forEach>
+                                    </div>
                                 </div>
                                 <p class="review-date">Reseña realizada el ${resena.fecha}</p>
                                 <p class="review-message">
