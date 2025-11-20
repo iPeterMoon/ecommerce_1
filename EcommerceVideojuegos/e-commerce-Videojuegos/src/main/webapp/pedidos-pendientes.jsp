@@ -18,12 +18,21 @@
         <link rel="stylesheet" type="text/css" media="screen" href="styles/pedidos_pendientes.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="styles/styles.css" />
         <link rel="stylesheet" href="styles/crud-games.css"/>
+        <link rel="stylesheet" href="styles/breadcrumb.css">
         <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
     </head>
 
     <body class="tron-grid grid-container">
         <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
         <main class="container">
+            <nav id="breadcrumb-nav" aria-label="breadcrumb">
+                <ol class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="admin-options.jsp">Panel Admin</a></li>
+
+                    <li class="breadcrumb-item active" aria-current="page">Pedidos</li>
+                </ol>
+            </nav>
+            <h1>Pedidos</h1>
             <div class="search-div">
                 <form action="consultarPedidos" method="GET" class="buscador">
                     <input type="text" 

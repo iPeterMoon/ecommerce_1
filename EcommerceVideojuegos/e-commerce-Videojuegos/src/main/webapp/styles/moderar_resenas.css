@@ -23,7 +23,6 @@ body {
     color: var(--text-white);
     text-align: left;
     width: 100%;
-    /* CORRECCIÓN: Eliminado max-width: 450px; para usar el ancho completo en móvil */
     margin-bottom: 1rem;
     padding-left: 0.5rem;
 }
@@ -32,7 +31,6 @@ body {
     background-color: var(--dark-input);
     border-radius: 13px;
     width: 100%;
-    /* CORRECCIÓN: Eliminado max-width: 450px; para usar el ancho completo en móvil */
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -308,16 +306,16 @@ p.user {
 }
 
 .filled-star {
-    color: #FFC107; /* Color dorado/amarillo */
+    color: #FFC107;
     text-shadow: 0 0 3px rgba(255, 193, 7, 0.5);
 }
 
 .empty-star {
-    color: var(--text-color-gray); /* Color gris para estrellas sin calificar */
+    color: var(--text-color-gray); 
 }
 
 .rating-text {
-    font-size: 0.725rem; /* Ajuste el tamaño para que coincida con el texto adyacente */
+    font-size: 0.725rem; 
 }
 
 @media (min-width: 769px) {

@@ -14,7 +14,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles/styles.css">
         <link rel="stylesheet" href="styles/admin.css">
-        <link rel="stylesheet" href="styles/crud-games.css"/> 
+        <link rel="stylesheet" href="styles/crud-games.css"/>
+        <link rel="stylesheet" href="styles/breadcrumb.css">
         <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
     </head>
 
@@ -22,6 +23,13 @@
         <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
 
         <main>
+            <nav id="breadcrumb-nav" aria-label="breadcrumb">
+                <ol class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="admin-options.jsp">Panel Admin</a></li>
+
+                    <li class="breadcrumb-item active" aria-current="page">Gestionar Productos</li>
+                </ol>
+            </nav>  
             <h1>Gestionar Productos</h1>
 
             <div class="search-div">
@@ -57,11 +65,11 @@
                 <div class="videogames" id="videogames-list">
                     <c:forEach var="prod" items="${listaProductos}">
                         <div class="videogame">
-                            
+
                             <img class="game-photo" 
                                  src="data:image/jpeg;base64,${prod.imagenBase64}" 
                                  alt="<c:out value="${prod.nombreProducto}"/>">
-                            
+
                             <div class="game-info">
                                 <div class="game-title">
                                     <h2><c:out value="${prod.nombreProducto}"/></h2>

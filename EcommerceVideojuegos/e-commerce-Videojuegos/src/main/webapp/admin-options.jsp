@@ -14,6 +14,7 @@
 
         <link rel="stylesheet" href="styles/styles.css">
         <link rel="stylesheet" href="styles/admin.css">
+        <link rel="stylesheet" href="styles/breadcrumb.css">
         <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
         <title>Panel de Administrador</title>
     </head>
@@ -22,6 +23,7 @@
         <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
 
         <main>
+            <h1>Panel de Administración</h1>
             <div class="options">
                 <a href="manage-users.jsp"><button>Gestionar usuarios</button></a>
                 <a href="VideojuegoServlet"><button>Gestionar videojuegos</button></a>

@@ -18,6 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" type="text/css" media="screen" href="styles/order.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="styles/styles.css" />
+        <link rel="stylesheet" href="styles/breadcrumb.css">    
         <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
     </head>
 
@@ -26,6 +27,16 @@
 
         <main class="container">
 
+            <nav id="breadcrumb-nav" aria-label="breadcrumb">
+                <ol class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="admin-options.jsp">Panel Admin</a></li>
+
+                    <li class="breadcrumb-item"><a href="consultarPedidos">Pedidos</a></li>
+
+                    <li class="breadcrumb-item active" aria-current="page">Detalle de pedido</li>
+
+                </ol>
+            </nav>
             <c:if test="${empty pedidoDetalle}">
                 <h1 class="tittle">Error</h1>
                 <p>El pedido que buscas no fue encontrado o no existe.</p>
@@ -60,12 +71,12 @@
                             </div>
                         </div>
                         <hr />
-                        
+
                         <div class="items-content">
                             <c:forEach var="item" items="${pedidoDetalle.items}">
                                 <div class="product-row">
                                     <div class="product-info-left"> 
-                                    
+
                                         <img src="data:image/jpeg;base64,${item.imagenBase64}" 
                                              alt="<c:out value='${item.nombreProducto}'/>" 
                                              style="width: 80px; height: 80px; object-fit: cover;" />
@@ -76,12 +87,12 @@
                                         </div>
                                     </div>
                                     <p class="product-price">
-                                       <fmt:formatNumber value="${item.precioUnitario}" type="currency" currencySymbol="$" minFractionDigits="2" maxFractionDigits="2"/>
+                                        <fmt:formatNumber value="${item.precioUnitario}" type="currency" currencySymbol="$" minFractionDigits="2" maxFractionDigits="2"/>
                                     </p>
                                 </div>
                             </c:forEach>
                         </div>
-                        
+
                         <hr />
                         <div class="prices-status-order">
                             <div class="prices-subtittle">

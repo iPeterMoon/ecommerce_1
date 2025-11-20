@@ -8,12 +8,22 @@
         <link rel="stylesheet" type="text/css" media="screen" href="styles/moderar_resenas.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="styles/styles.css" />
         <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
+        <link rel="stylesheet" href="styles/breadcrumb.css">    
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     </head>
     <body class="tron-grid grid-container">
         <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
         <main class="container">
+
+            <nav id="breadcrumb-nav" aria-label="breadcrumb">
+                <ol class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="admin-options.jsp">Panel Admin</a></li>
+                    <li class="breadcrumb-item"><a href="ResenaServlet">Gestionar Reseñas</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Reseña Especifica</li>
+
+                </ol>
+            </nav>
             <h1 class="main-title">Moderar Reseñas</h1>
 
             <c:if test="${not empty error}">

@@ -1,0 +1,61 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 19 nov 2025, 10:09:46 p.m.
+    Author     : Sebastian Moreno
+*/
+
+#breadcrumb-nav {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: rgba(0, 0, 0, 0.6); 
+    border-left: 4px solid #00d2ff; 
+    border-radius: 0 8px 8px 0;
+    box-sizing: border-box;
+    justify-self: flex-start;
+    justify-content: flex-start;
+}
+
+.breadcrumb-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+}
+
+.breadcrumb-item {
+    color: #e0e0e0;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "/";
+    color: #666;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: #00d2ff; 
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px #00d2ff; 
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: #aaa;
+    pointer-events: none; 
+    font-weight: 500;
+}
