@@ -25,7 +25,7 @@
         <main>
             <h1>Panel de Administración</h1>
             <div class="options">
-                <a href="manage-users.jsp"><button>Gestionar usuarios</button></a>
+                <a href="ConsultaUsuarios"><button>Gestionar usuarios</button></a>
                 <a href="VideojuegoServlet"><button>Gestionar videojuegos</button></a>
                 <a href="ProductoServlet"><button>Gestionar catálogo</button></a>
                 <a href="consultarPedidos"><button>Gestionar pedidos</button></a>

@@ -10,5 +10,8 @@ public interface IUsuarioDAO extends IGenericDAO<Usuario, Long> {
     Usuario buscarPorCredenciales(String email, String password);
 
     List<Usuario> buscarPorNombre(String nombre);
-
+    
+    Usuario alternarActividad(Long idUsuario);
+    
+    void eliminarConCascada(Long idUsuario);
 }

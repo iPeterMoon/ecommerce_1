@@ -28,7 +28,7 @@ CREATE TABLE videojuegos (
     desarrollador VARCHAR(255),
     ano_lanzamiento VARCHAR(4),
     id_clasificacion BIGINT,
-    FOREIGN KEY (id_clasificacion) REFERENCES clasificacion(id_clasificacion)
+    FOREIGN KEY (id_clasificacion) REFERENCES clasificaciones(id_clasificacion)
 );
 
 CREATE TABLE usuarios (
@@ -40,7 +40,7 @@ CREATE TABLE usuarios (
     cuenta_activa BOOLEAN DEFAULT TRUE,
     rol VARCHAR(50),
     id_carrito BIGINT NOT NULL UNIQUE,
-    FOREIGN KEY (id_carrito) REFERENCES carrito_compra(id_carrito)
+    FOREIGN KEY (id_carrito) REFERENCES carritos_compra(id_carrito)
 );
 
 CREATE TABLE productos (
@@ -51,8 +51,8 @@ CREATE TABLE productos (
     descripcion TEXT,
     id_plataforma BIGINT,
     id_videojuego BIGINT,
-    FOREIGN KEY (id_videojuego) REFERENCES videojuego(id_videojuego) ON DELETE CASCADE,
-    FOREIGN KEY (id_plataforma) REFERENCES plataforma(id_plataforma)
+    FOREIGN KEY (id_videojuego) REFERENCES videojuegos(id_videojuego) ON DELETE CASCADE,
+    FOREIGN KEY (id_plataforma) REFERENCES plataformas(id_plataforma)
 );
 
 CREATE TABLE videojuego_categoria (
@@ -72,7 +72,7 @@ CREATE TABLE direcciones (
     estado VARCHAR(100) NOT NULL,
     codigo_postal VARCHAR(10) NOT NULL,
     id_usuario BIGINT NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
 CREATE TABLE pedidos (
@@ -80,7 +80,7 @@ CREATE TABLE pedidos (
     estado_pedido VARCHAR(20) NOT NULL 
         CHECK (estado_pedido IN ('PENDIENTE', 'ENVIADO', 'ENTREGADO')),
     id_usuario BIGINT NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
 CREATE TABLE resenas (
@@ -90,8 +90,8 @@ CREATE TABLE resenas (
     fecha DATE NOT NULL,
     calificacion INT,
     comentario TEXT,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
-    FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );
 
 CREATE TABLE pagos (
@@ -104,7 +104,7 @@ CREATE TABLE pagos (
     estado_pago VARCHAR(20) NOT NULL 
         CHECK (estado_pago IN ('PENDIENTE', 'REALIZADO')),
     id_pedido BIGINT NOT NULL UNIQUE, -- 'UNIQUE' asegura la relación 1:1
-    FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido)
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido)
 );
 
 CREATE TABLE items (
@@ -114,7 +114,7 @@ CREATE TABLE items (
     id_producto BIGINT NOT NULL,
     id_carrito BIGINT, -- NULO si está en un pedido
     id_pedido BIGINT,  -- NULO si está en un carrito
-    FOREIGN KEY (id_producto) REFERENCES producto(id_producto),
-    FOREIGN KEY (id_carrito) REFERENCES carrito_compra(id_carrito),
-    FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido)
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto),
+    FOREIGN KEY (id_carrito) REFERENCES carritos_compra(id_carrito),
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido)
 );

@@ -12,6 +12,7 @@ import entidades.Direccion;
 import entidades.Usuario;
 import enums.RolUsuario;
 import excepciones.RegistroException;
+import java.util.LinkedList;
 import util.Security;
 
 /**
@@ -64,6 +65,41 @@ public class UsuarioBO {
         return null;
     }
 
+    public List<UsuarioDTO> cargarUsuarios(){
+        List<Usuario> usuariosEntidades = usuarioDAO.buscarTodos();
+        List<UsuarioDTO> usuariosDTOs = new LinkedList<>();  
+        for(Usuario usuario : usuariosEntidades) {
+            usuariosDTOs.add(toUsuarioDTO(usuario));
+        }
+        return usuariosDTOs;
+    }
+    
+    public UsuarioDTO getUsuarioPorId(Long id){
+        Usuario usuarioEntidad = usuarioDAO.buscarPorId(id);
+        if(usuarioEntidad != null) {
+            return toUsuarioDTO(usuarioEntidad);
+        }
+        return null;
+    }
+
+    public UsuarioDTO alternarActividadUsuario(Long id){
+        Usuario usuarioEntidad = usuarioDAO.alternarActividad(id);
+        if(usuarioEntidad != null){
+            return toUsuarioDTO(usuarioEntidad);
+        }
+        return null;
+    }
+
+    public UsuarioDTO eliminarUsuario(Long id){
+        Usuario usuarioEntidad = usuarioDAO.buscarPorId(id);
+        if(usuarioEntidad != null) {
+            usuarioDAO.eliminarConCascada(id);
+            return toUsuarioDTO(usuarioEntidad);
+        } else {
+            return null;
+        }
+    }
+
     private UsuarioDTO toUsuarioDTO(Usuario usuario) {
         if (usuario == null) {
             return null;
@@ -74,6 +110,7 @@ public class UsuarioBO {
         dto.setCorreo(usuario.getCorreo());
         dto.setRol(usuario.getRol().toString());
         dto.setDirecciones(toDireccionesDTO(usuario.getDirecciones()));
+        dto.setCuentaActiva(usuario.getCuentaActiva());
         return dto;
     }
 

@@ -17,6 +17,7 @@ public class UsuarioDTO {
     String telefono;
     List<DireccionDTO> direcciones;
     String rol;
+    boolean cuentaActiva;
 
     public UsuarioDTO() {
     }
@@ -70,6 +71,13 @@ public class UsuarioDTO {
     public void setRol(String rol) {
         this.rol = rol;
     }
- 
+
+    public boolean isCuentaActiva() {
+        return cuentaActiva;
+    }
+
+    public void setCuentaActiva(boolean cuentaActiva) {
+        this.cuentaActiva = cuentaActiva;
+    }   
     
 }
