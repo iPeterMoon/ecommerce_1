@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="styles/styles.css" />
         <link rel="stylesheet" href="styles/admin.css" />
         <link rel="stylesheet" href="styles/crud-games.css"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
     </head>
 
     <body class="tron-grid grid-container">

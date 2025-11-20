@@ -13,7 +13,10 @@ import entidades.Videojuego;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ *
+ * @author benja
+ */
 public class ProductoBO {
 
     private IProductoDAO productoDAO;

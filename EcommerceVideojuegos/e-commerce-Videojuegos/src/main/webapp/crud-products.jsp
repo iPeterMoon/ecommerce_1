@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="styles/styles.css">
         <link rel="stylesheet" href="styles/admin.css">
         <link rel="stylesheet" href="styles/crud-games.css"/> 
+        <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
     </head>
 
     <body class="tron-grid grid-container">
@@ -57,7 +58,6 @@
                     <c:forEach var="prod" items="${listaProductos}">
                         <div class="videogame">
                             
-                            <%-- CORRECCIÓN: Uso directo de Base64 eliminado la lógica condicional antigua --%>
                             <img class="game-photo" 
                                  src="data:image/jpeg;base64,${prod.imagenBase64}" 
                                  alt="<c:out value="${prod.nombreProducto}"/>">

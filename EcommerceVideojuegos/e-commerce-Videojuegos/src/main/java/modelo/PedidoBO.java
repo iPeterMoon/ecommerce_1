@@ -82,7 +82,6 @@ public class PedidoBO {
         }
     }
 
-    // --- Métodos de Conversión a DTO ---
     private PedidoDTO convertirPedidoADTO(Pedido pedido) {
         if (pedido == null) {
             return null;
@@ -167,7 +166,6 @@ public class PedidoBO {
         dto.setPrecioUnitario(item.getPrecioUnitario());
         dto.setSubtotal(item.getPrecioUnitario().multiply(new java.math.BigDecimal(item.getCantidad())));
         
-        // Conversión de BLOB a Base64 para la imagen
         if (item.getProducto().getImagen() != null) {
             String base64 = Base64.getEncoder().encodeToString(item.getProducto().getImagen());
             dto.setImagenBase64(base64);
