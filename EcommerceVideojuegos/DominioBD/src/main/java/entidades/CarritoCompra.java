@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "carrito_compra")
+@Table(name = "carritos_compra")
 public class CarritoCompra {
 
     @Id

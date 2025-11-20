@@ -2,27 +2,27 @@ create database ecommerceVideojuegos;
 USE ecommerceVideojuegos;
 
 
-CREATE TABLE plataforma (
+CREATE TABLE plataformas (
     id_plataforma BIGINT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE clasificacion (
+CREATE TABLE clasificaciones (
     id_clasificacion BIGINT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE categoria (
+CREATE TABLE categorias (
     id_categoria BIGINT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE carrito_compra (
+CREATE TABLE carritos_compra (
     id_carrito BIGINT PRIMARY KEY,
     total DECIMAL(10, 2) DEFAULT 0.00
 );
 
-CREATE TABLE videojuego (
+CREATE TABLE videojuegos (
     id_videojuego BIGINT PRIMARY KEY,
     nombre varchar(255) NOT NULL,
     desarrollador VARCHAR(255),
@@ -31,7 +31,7 @@ CREATE TABLE videojuego (
     FOREIGN KEY (id_clasificacion) REFERENCES clasificacion(id_clasificacion)
 );
 
-CREATE TABLE usuario (
+CREATE TABLE usuarios (
     id_usuario BIGINT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     telefono VARCHAR(15),
@@ -43,7 +43,7 @@ CREATE TABLE usuario (
     FOREIGN KEY (id_carrito) REFERENCES carrito_compra(id_carrito)
 );
 
-CREATE TABLE producto (
+CREATE TABLE productos (
     id_producto BIGINT PRIMARY KEY,
     nombre_producto varchar (255) NOT NULL,
     imagen_url VARCHAR(500),
@@ -63,7 +63,7 @@ CREATE TABLE videojuego_categoria (
     FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
 );
 
-CREATE TABLE direccion (
+CREATE TABLE direcciones (
     id_direccion BIGINT PRIMARY KEY,
     calle VARCHAR(255) NOT NULL,
     numero_exterior VARCHAR(50),
@@ -75,7 +75,7 @@ CREATE TABLE direccion (
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
-CREATE TABLE pedido (
+CREATE TABLE pedidos (
     id_pedido BIGINT PRIMARY KEY,
     estado_pedido VARCHAR(20) NOT NULL 
         CHECK (estado_pedido IN ('PENDIENTE', 'ENVIADO', 'ENTREGADO')),
@@ -83,7 +83,7 @@ CREATE TABLE pedido (
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
-CREATE TABLE resena (
+CREATE TABLE resenas (
     id_resena BIGINT PRIMARY KEY,
     id_usuario BIGINT NOT NULL,
     id_producto BIGINT NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE resena (
     FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
 
-CREATE TABLE pago (
+CREATE TABLE pagos (
     id_pago BIGINT PRIMARY KEY,
     referencia VARCHAR(255),
     monto DECIMAL(10, 2) NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE pago (
     FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido)
 );
 
-CREATE TABLE item (
+CREATE TABLE items (
     id_item BIGINT PRIMARY KEY,
     precio_unitario DECIMAL(10, 2) NOT NULL,
     cantidad INT NOT NULL,

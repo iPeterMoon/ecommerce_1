@@ -3,7 +3,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "videojuego")
+@Table(name = "videojuegos")
 public class Videojuego {
 
     @Id

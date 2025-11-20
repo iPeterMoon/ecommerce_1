@@ -4,7 +4,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "plataforma")
+@Table(name = "plataformas")
 public class Plataforma {
 
     @Id

@@ -2,7 +2,7 @@ package entidades;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "direccion")
+@Table(name = "direcciones")
 public class Direccion {
 
     @Id
