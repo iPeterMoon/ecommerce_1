@@ -1,7 +1,6 @@
 package entidades;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -17,13 +16,16 @@ public class Producto {
     @Column(name = "nombre_producto", nullable = false)
     private String nombreProducto;
 
-    @Column(name = "imagen_url", length = 500)
-    private String imagenUrl;
+    @Lob
+    @Column(name = "imagen", columnDefinition = "LONGBLOB", nullable = false)
+    private byte[] imagen;
 
     @Column(name = "precio", nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
+    
     @Column(name = "stock")
     private Integer stock;
+    
     @Lob
     @Column(name = "descripcion")
     private String descripcion;
@@ -61,12 +63,12 @@ public class Producto {
         this.nombreProducto = nombreProducto;
     }
 
-    public String getImagenUrl() {
-        return imagenUrl;
+    public byte[] getImagen() {
+        return imagen;
     }
 
-    public void setImagenUrl(String imagenUrl) {
-        this.imagenUrl = imagenUrl;
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
 
     public BigDecimal getPrecio() {
@@ -127,7 +129,6 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", imagenUrl=" + imagenUrl + ", precio=" + precio + ", stock=" + stock + ", descripcion=" + descripcion + ", plataforma=" + plataforma + ", videojuego=" + videojuego + ", resenas=" + resenas + ", items=" + items + '}';
+        return "Producto{" + "idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", precio=" + precio + ", stock=" + stock + '}';
     }
-
 }

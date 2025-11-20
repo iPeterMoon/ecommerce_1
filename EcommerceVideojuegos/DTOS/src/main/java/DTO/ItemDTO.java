@@ -14,38 +14,14 @@ import java.math.BigDecimal;
 
 public class ItemDTO implements Serializable {
 
-    private Long idItem;
-    private Integer cantidad;
-    private BigDecimal precioUnitario;
     private Long idProducto;
     private String nombreProducto;
-    private String imagenUrl;
+    private Integer cantidad;
+    private BigDecimal precioUnitario;
+    private BigDecimal subtotal;
+    private String imagenBase64;
 
     public ItemDTO() {
-    }
-
-    public Long getIdItem() {
-        return idItem;
-    }
-
-    public void setIdItem(Long idItem) {
-        this.idItem = idItem;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public BigDecimal getPrecioUnitario() {
-        return precioUnitario;
-    }
-
-    public void setPrecioUnitario(BigDecimal precioUnitario) {
-        this.precioUnitario = precioUnitario;
     }
 
     public Long getIdProducto() {
@@ -64,23 +40,41 @@ public class ItemDTO implements Serializable {
         this.nombreProducto = nombreProducto;
     }
 
-    public String getImagenUrl() {
-        return imagenUrl;
+    public Integer getCantidad() {
+        return cantidad;
     }
 
-    public void setImagenUrl(String imagenUrl) {
-        this.imagenUrl = imagenUrl;
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public BigDecimal getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(BigDecimal precioUnitario) {
+        this.precioUnitario = precioUnitario;
+    }
+
+    public BigDecimal getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public String getImagenBase64() {
+        return imagenBase64;
+    }
+
+    public void setImagenBase64(String imagenBase64) {
+        this.imagenBase64 = imagenBase64;
     }
 
     @Override
     public String toString() {
-        return "ItemDTO{"
-                + "idItem=" + idItem
-                + ", cantidad=" + cantidad
-                + ", precioUnitario=" + precioUnitario
-                + ", idProducto=" + idProducto
-                + ", nombreProducto='" + nombreProducto + '\''
-                + ", imagenUrl='" + imagenUrl + '\''
-                + '}';
+        return "ItemDTO{" + "idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", cantidad=" + cantidad + ", precioUnitario=" + precioUnitario + ", subtotal=" + subtotal + ", imagenBase64=" + imagenBase64 + '}';
     }
+    
 }

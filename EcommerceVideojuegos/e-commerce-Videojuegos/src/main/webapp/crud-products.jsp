@@ -1,6 +1,6 @@
 <%-- 
     Document   : crud-products
-    Created on : 14 nov 2025, 1:32:33 a.m.
+    Created on : 14 nov 2025, 1:32:33 a.m.
     Author     : benja
 --%>
 
@@ -41,7 +41,8 @@
 
             <c:if test="${param.errorEliminar == '1'}">
                 <div class="error-message" style="margin-bottom: 1rem;">
-                    No se pudo eliminar el producto. Es posible que tenga pedidos o dependencias asociadas.
+                    No se pudo eliminar el producto.
+                    Es posible que tenga pedidos o dependencias asociadas.
                 </div>
             </c:if>
 
@@ -56,15 +57,10 @@
                     <c:forEach var="prod" items="${listaProductos}">
                         <div class="videogame">
                             
-                            <c:choose>
-                                <c:when test="${prod.imagenUrl.startsWith('imgs/')}">
-                                    <img class="game-photo" src="${prod.imagenUrl}" alt="<c:out value="${prod.nombreProducto}"/>">
-                                </c:when>
-                                
-                                <c:otherwise>
-                                    <img class="game-photo" src="ProductoServlet?action=verImagen&id=${prod.imagenUrl}" alt="<c:out value="${prod.nombreProducto}"/>">
-                                </c:otherwise>
-                            </c:choose>
+                            <%-- CORRECCIÓN: Uso directo de Base64 eliminado la lógica condicional antigua --%>
+                            <img class="game-photo" 
+                                 src="data:image/jpeg;base64,${prod.imagenBase64}" 
+                                 alt="<c:out value="${prod.nombreProducto}"/>">
                             
                             <div class="game-info">
                                 <div class="game-title">

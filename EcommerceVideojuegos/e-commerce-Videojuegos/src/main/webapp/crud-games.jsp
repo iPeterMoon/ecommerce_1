@@ -46,9 +46,9 @@
                     No se puede eliminar un videojuego con un producto asociado.
                 </div>
             </c:if>
-            
+
             <c:if test="${param.exito == '1'}">
-                 <div class="success-message" style="text-align:center; color: green; margin: 1rem; border: 1px solid green; padding: 10px;">
+                <div class="success-message" style="text-align:center; color: green; margin: 1rem; border: 1px solid green; padding: 10px;">
                     Producto agregado exitosamente.
                 </div>
             </c:if>
@@ -95,7 +95,7 @@
                         </div>
 
                         <div class="modal-overlay" id="game-modal-producto-${vj.idVideojuego}">
-                             <div class="modal-container">
+                            <div class="modal-container">
                                 <h2 id="modal-title">Añadir Producto para: <c:out value="${vj.nombre}"/></h2>
                                 <form class="modal-form" action="ProductoServlet" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="idVideojuego" value="${vj.idVideojuego}" />
@@ -147,16 +147,16 @@
         <div class="modal-overlay" id="game-modal" style="${not empty abrirModalAgregar ? 'display: flex;' : ''}">
             <div class="modal-container">
                 <h2>Agregar Videojuego</h2>
-                
+
                 <c:if test="${not empty abrirModalAgregar && not empty error}">
                     <div class="error-message">
                         <c:out value="${error}"/>
                     </div>
                 </c:if>
                 <c:if test="${param.errorCrear == '1'}">
-                     <div class="error-message">Ya existe un videojuego con ese nombre.</div>
+                    <div class="error-message">Ya existe un videojuego con ese nombre.</div>
                 </c:if>
-                
+
                 <form class="modal-form" action="VideojuegoServlet" method="POST">
                     <div class="form-group full-width">
                         <label for="game-name">Nombre</label>
@@ -188,7 +188,7 @@
                                            value="${cat.idCategoria}" 
                                            id="cat-new-${cat.idCategoria}" 
                                            class="input-checkbox-style">
-                                    
+
                                     <label for="cat-new-${cat.idCategoria}" style="cursor: pointer;">
                                         ${cat.nombre}
                                     </label>
@@ -199,7 +199,15 @@
 
                     <div class="form-group">
                         <label for="release-year">Año de lanzamiento</label>
-                        <input type="text" id="release-year" name="release-year" placeholder="Ej: 2025" maxlength="4" required/>
+                        <input type="text" 
+                               id="release-year" 
+                               name="release-year" 
+                               placeholder="Ej: 2025" 
+                               maxlength="4" 
+                               pattern="[0-9]*" 
+                               inputmode="numeric" 
+                               title="Ingresa un año válido de 4 números"
+                               required/>
                     </div>
 
                     <div class="form-actions">
@@ -271,7 +279,7 @@
                                                id="cat-edit-${cat.idCategoria}" 
                                                class="input-checkbox-style" 
                                                ${isSelected ? 'checked' : ''}>
-                                        
+
                                         <label for="cat-edit-${cat.idCategoria}" style="cursor: pointer;">
                                             ${cat.nombre}
                                         </label>
@@ -282,7 +290,14 @@
 
                         <div class="form-group">
                             <label for="release-year-edit">Año de lanzamiento</label>
-                            <input type="text" id="release-year-edit" name="release-year" placeholder="Ej: 2025" value="${videojuegoAEditar.anoLanzamiento}" maxlength="4" required />
+                            <input type="text" 
+                                   id="release-year-edit" 
+                                   name="release-year" 
+                                   placeholder="Ej: 2025" 
+                                   value="${videojuegoAEditar.anoLanzamiento}" 
+                                   maxlength="4" 
+                                   pattern="[0-9]*" 
+                                   required />
                         </div>
 
                         <div class="form-actions">

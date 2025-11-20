@@ -50,7 +50,6 @@
                                 <p><strong>Información del Cliente</strong></p>
                                 <p>Nombre: <c:out value="${pedidoDetalle.usuario.nombre}"/></p>
                                 <p>Correo: <c:out value="${pedidoDetalle.usuario.correo}"/></p>
-                                <!-- La dirección debe venir del DTO ----------------------------------->
                                 <p>Calle Falsa 123, Colonia Centro</p> 
                             </div>
                             <div class="payment-information">
@@ -61,13 +60,16 @@
                             </div>
                         </div>
                         <hr />
+                        
                         <div class="items-content">
-
-
                             <c:forEach var="item" items="${pedidoDetalle.items}">
                                 <div class="product-row">
-                                    <div class="product-info-left">                 
-                                        <img src="<c:out value='${item.imagenUrl}' default='imgs/placeholder.png'/>" />
+                                    <div class="product-info-left"> 
+                                    
+                                        <img src="data:image/jpeg;base64,${item.imagenBase64}" 
+                                             alt="<c:out value='${item.nombreProducto}'/>" 
+                                             style="width: 80px; height: 80px; object-fit: cover;" />
+
                                         <div class="tittle-quantity">
                                             <p><c:out value="${item.nombreProducto}"/></p>
                                             <p>Cantidad: <c:out value="${item.cantidad}"/></p>
@@ -78,8 +80,8 @@
                                     </p>
                                 </div>
                             </c:forEach>
-
                         </div>
+                        
                         <hr />
                         <div class="prices-status-order">
                             <div class="prices-subtittle">
@@ -124,5 +126,4 @@
         </main>
         <%@include file="WEB-INF/fragmentos/footer.jspf" %>
     </body>
-
 </html>

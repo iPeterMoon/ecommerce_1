@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DTO;
 
 import java.math.BigDecimal;
 
-/**
- *
- * @author benja
- */
 public class ProductoDTO {
 
     private Long idProducto;
@@ -18,7 +10,7 @@ public class ProductoDTO {
     private String nombreProducto;
     private BigDecimal precio; 
     private int stock;
-    private String imagenUrl;
+    private String imagenBase64;
     private String descripcion;
     private String nombreVideojuego;
     private String nombrePlataforma;
@@ -74,12 +66,12 @@ public class ProductoDTO {
         this.stock = stock;
     }
 
-    public String getImagenUrl() {
-        return imagenUrl;
+    public String getImagenBase64() {
+        return imagenBase64;
     }
 
-    public void setImagenUrl(String imagenUrl) {
-        this.imagenUrl = imagenUrl;
+    public void setImagenBase64(String imagenBase64) {
+        this.imagenBase64 = imagenBase64;
     }
 
     public String getDescripcion() {

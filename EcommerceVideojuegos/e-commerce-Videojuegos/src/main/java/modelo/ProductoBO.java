@@ -10,13 +10,10 @@ import DTO.ProductoDTO;
 import entidades.Plataforma;
 import entidades.Producto;
 import entidades.Videojuego;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- *
- * @author benja
- */
 public class ProductoBO {
 
     private IProductoDAO productoDAO;
@@ -33,7 +30,11 @@ public class ProductoBO {
         ProductoDTO dto = new ProductoDTO();
         dto.setIdProducto(p.getIdProducto());
         dto.setNombreProducto(p.getNombreProducto());
-        dto.setImagenUrl(p.getImagenUrl());
+        
+        if (p.getImagen() != null) {
+            dto.setImagenBase64(Base64.getEncoder().encodeToString(p.getImagen()));
+        }
+        
         dto.setPrecio(p.getPrecio());
         dto.setStock(p.getStock());
         dto.setDescripcion(p.getDescripcion());
@@ -77,7 +78,11 @@ public class ProductoBO {
         p.setNombreProducto(dto.getNombreProducto());
         p.setStock(dto.getStock());
         p.setPrecio(dto.getPrecio());
-        p.setImagenUrl(dto.getImagenUrl());
+        
+        if (dto.getImagenBase64() != null) {
+            p.setImagen(Base64.getDecoder().decode(dto.getImagenBase64()));
+        }
+        
         p.setDescripcion(dto.getDescripcion());
         p.setVideojuego(vj);
         p.setPlataforma(plat);
@@ -104,7 +109,11 @@ public class ProductoBO {
         p.setNombreProducto(dto.getNombreProducto());
         p.setStock(dto.getStock());
         p.setPrecio(dto.getPrecio());
-        p.setImagenUrl(dto.getImagenUrl());
+        
+        if (dto.getImagenBase64() != null) {
+            p.setImagen(Base64.getDecoder().decode(dto.getImagenBase64()));
+        }
+        
         p.setDescripcion(dto.getDescripcion());
         p.setPlataforma(plat);
 

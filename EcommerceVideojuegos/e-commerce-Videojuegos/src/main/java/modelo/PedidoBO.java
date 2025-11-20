@@ -9,11 +9,11 @@ import DTO.UsuarioDTO;
 import entidades.Item;
 import entidades.Pago;
 import entidades.Pedido;
-import entidades.Producto;
 import entidades.Usuario;
 import enums.EstadoPedido;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -102,7 +102,8 @@ public class PedidoBO {
 
         dto.setUsuario(convertirUsuarioADTO(pedido.getUsuario()));
         dto.setPago(convertirPagoADTO(pedido.getPago()));
-        dto.setItems(convertirItemsA_DTO(pedido.getItems()));
+        
+        dto.setItems(convertirItemsADTO(pedido.getItems()));
 
         return dto;
     }
@@ -148,28 +149,30 @@ public class PedidoBO {
         return dto;
     }
 
-    private List<ItemDTO> convertirItemsA_DTO(List<Item> items) {
-        if (items == null || items.isEmpty()) {
-            return new ArrayList<>();
-        }
-
-        List<ItemDTO> dtos = new ArrayList<>();
-        for (Item item : items) {
-            ItemDTO itemDto = new ItemDTO();
-
-            itemDto.setIdItem(item.getIdItem());
-            itemDto.setCantidad(item.getCantidad());
-            itemDto.setPrecioUnitario(item.getPrecioUnitario());
-
-            Producto producto = item.getProducto();
-            if (producto != null) {
-                itemDto.setIdProducto(producto.getIdProducto());
-                itemDto.setNombreProducto(producto.getNombreProducto());
-                itemDto.setImagenUrl(producto.getImagenUrl());
+    private List<ItemDTO> convertirItemsADTO(List<Item> items) {
+        List<ItemDTO> listaDTO = new ArrayList<>();
+        if (items != null) {
+            for (Item item : items) {
+                listaDTO.add(convertirItemADTO(item));
             }
-
-            dtos.add(itemDto);
         }
-        return dtos;
+        return listaDTO;
+    }
+
+    private ItemDTO convertirItemADTO(Item item) {
+        ItemDTO dto = new ItemDTO();
+        dto.setIdProducto(item.getProducto().getIdProducto());
+        dto.setNombreProducto(item.getProducto().getNombreProducto());
+        dto.setCantidad(item.getCantidad());
+        dto.setPrecioUnitario(item.getPrecioUnitario());
+        dto.setSubtotal(item.getPrecioUnitario().multiply(new java.math.BigDecimal(item.getCantidad())));
+        
+        // Conversión de BLOB a Base64 para la imagen
+        if (item.getProducto().getImagen() != null) {
+            String base64 = Base64.getEncoder().encodeToString(item.getProducto().getImagen());
+            dto.setImagenBase64(base64);
+        }
+        
+        return dto;
     }
 }

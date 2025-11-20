@@ -22,11 +22,10 @@
                 <div class="form-content"> 
                     
                     <c:forEach var="producto" items="${listaProductos}">
-                        <div class="product-row">
-                            
-                            <c:if test="${not empty producto.imagenUrl}">
+                        <div class="product-row">                            
+                            <c:if test="${not empty producto.imagenBase64}">
                                 <img class="product-img" 
-                                     src="${producto.imagenUrl}"
+                                     src="data:image/jpeg;base64,${producto.imagenBase64}"
                                      alt="${producto.nombreProducto}" />
                             </c:if>
 

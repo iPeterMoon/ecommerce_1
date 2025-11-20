@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controlador;
 
-import DTO.PlataformaDTO;
 import DTO.ProductoDTO;
-import DTO.VideojuegoDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,12 +10,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import java.io.File;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.util.Base64;
 import java.util.List;
 import modelo.PlataformaBO;
 import modelo.ProductoBO;
@@ -76,7 +67,6 @@ public class ProductoServlet extends HttpServlet {
         this.videojuegoBO = new VideojuegoBO();
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -157,15 +147,13 @@ public class ProductoServlet extends HttpServlet {
             dto.setPrecio(new BigDecimal(precio));
             dto.setDescripcion(request.getParameter("description"));
 
-            VideojuegoDTO vjDto = videojuegoBO.obtenerVideojuegoParaEditar(dto.getIdVideojuego());
-            String nombrePlataforma = obtenerNombrePlataforma(dto.getIdPlataforma());
-
             Part filePart = request.getPart("imagen");
             if (filePart != null && filePart.getSize() > 0) {
-                String rutaGuardada = guardarImagenInterna(filePart, request, vjDto, nombrePlataforma);
-                dto.setImagenUrl(rutaGuardada);
-            } else {
-                dto.setImagenUrl("imgs/minecraft.png");
+                try (InputStream is = filePart.getInputStream()) {
+                    byte[] imageBytes = is.readAllBytes();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                    dto.setImagenBase64(base64Image);
+                }
             }
 
             productoBO.crearProducto(dto);
@@ -194,15 +182,15 @@ public class ProductoServlet extends HttpServlet {
             dto.setPrecio(new BigDecimal(request.getParameter("precio")));
             dto.setDescripcion(request.getParameter("description"));
 
-            VideojuegoDTO vjDto = videojuegoBO.obtenerVideojuegoParaEditar(productoActual.getIdVideojuego());
-            String nombrePlataforma = obtenerNombrePlataforma(dto.getIdPlataforma());
-
             Part filePart = request.getPart("imagen");
             if (filePart != null && filePart.getSize() > 0) {
-                String rutaGuardada = guardarImagenInterna(filePart, request, vjDto, nombrePlataforma);
-                dto.setImagenUrl(rutaGuardada);
+                try (InputStream is = filePart.getInputStream()) {
+                    byte[] imageBytes = is.readAllBytes();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                    dto.setImagenBase64(base64Image);
+                }
             } else {
-                dto.setImagenUrl(productoActual.getImagenUrl());
+                dto.setImagenBase64(productoActual.getImagenBase64());
             }
 
             productoBO.actualizarProducto(dto);
@@ -250,53 +238,6 @@ public class ProductoServlet extends HttpServlet {
         }
     }
 
-    private String guardarImagenInterna(Part filePart, HttpServletRequest request, VideojuegoDTO vjDto, String nombrePlataforma) throws IOException {
-        String uploadPath = request.getServletContext().getRealPath("/imgs");
-
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdirs();
-        }
-
-        String nombreJuego = limpiarCadena(vjDto.getNombre());
-        String plataforma = limpiarCadena(nombrePlataforma);
-        String desarrolladora = limpiarCadena(vjDto.getDesarrollador());
-
-        String fileNameOriginal = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        String extension = "";
-        int i = fileNameOriginal.lastIndexOf('.');
-        if (i > 0) {
-            extension = fileNameOriginal.substring(i);
-        }
-
-        String finalName = nombreJuego + "_" + plataforma + "_" + desarrolladora + extension;
-
-        String fullPath = uploadPath + File.separator + finalName;
-
-        try (InputStream input = filePart.getInputStream()) {
-            Files.copy(input, Paths.get(fullPath), StandardCopyOption.REPLACE_EXISTING);
-        }
-
-        return "imgs/" + finalName;
-    }
-
-    private String limpiarCadena(String input) {
-        if (input == null) {
-            return "Desconocido";
-        }
-        return input.replaceAll("[^a-zA-Z0-9]", "");
-    }
-
-    private String obtenerNombrePlataforma(Long idPlataforma) {
-        List<PlataformaDTO> lista = plataformaBO.listarTodas();
-        for (PlataformaDTO p : lista) {
-            if (p.getIdPlataforma().equals(idPlataforma)) {
-                return p.getNombre();
-            }
-        }
-        return "Generica";
-    }
-
     /**
      * Returns a short description of the servlet.
      *
@@ -305,6 +246,5 @@ public class ProductoServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Servlet para CRUD de Productos";
-    }// </editor-fold>
-
+    }
 }
