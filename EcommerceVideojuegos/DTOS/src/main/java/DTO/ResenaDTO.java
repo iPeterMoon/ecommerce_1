@@ -3,6 +3,10 @@ package DTO;
 
 import java.time.LocalDate;
 
+/**
+ *
+ * @author lucianobarceloo
+ */
 public class ResenaDTO {
 
     private Long idResena;

@@ -12,6 +12,10 @@ import java.util.List;
 import modelo.ProductoBO;
 import modelo.ResenaBO;
 
+/**
+ *
+ * @author lucianobarceloo
+ */
 @WebServlet(name = "ResenaServlet", urlPatterns = {"/ResenaServlet"})
 public class ResenaServlet extends HttpServlet {
 

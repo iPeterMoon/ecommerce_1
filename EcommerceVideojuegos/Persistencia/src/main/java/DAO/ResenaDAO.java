@@ -8,6 +8,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
 
+/**
+ *
+ * @author lucianobarceloo
+ */
 public class ResenaDAO extends GenericDAO<Resena, Long> implements IResenaDAO {
 
     public ResenaDAO() {

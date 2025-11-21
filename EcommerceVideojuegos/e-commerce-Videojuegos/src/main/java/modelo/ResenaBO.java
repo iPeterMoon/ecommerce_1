@@ -7,6 +7,10 @@ import entidades.Resena;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *
+ * @author lucianobarceloo
+ */
 public class ResenaBO {
 
     private IResenaDAO resenaDAO;
