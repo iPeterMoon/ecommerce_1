@@ -52,7 +52,7 @@
                                  src="https://www.muycomputer.com/wp-content/uploads/2022/12/god-of-war-ragnarok.jpg"
                                  alt="god of war ragnarok">
                         </a>
-                    </div>
+                    </div>  
                     <div class="slide">
                         <a href="#">
                             <img id="forza"

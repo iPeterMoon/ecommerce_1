@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<header>
-
-    <div class="brand-mobile">
+<header id="main-header">
+    <div class="brand-mobile fade-target">
         <a href="${pageContext.request.contextPath}/index.jsp">
             <img class="logo" src="${pageContext.request.contextPath}/imgs/logo-mundito.svg" alt="logo">
         </a>
@@ -9,28 +8,32 @@
             <h1>MunditoGames</h1>
         </a>
     </div>
-    <div class="brand-title-desktop">
+
+    <div class="brand-title-desktop fade-target">
         <a href="${pageContext.request.contextPath}/index.jsp">
             <h1>MunditoGames</h1>
         </a>
     </div>
 
+    <div class="header-search-wrapper">
+        <input type="text" id="searchInput" placeholder="Search game..." autocomplete="off">
+        <button id="close-search">X</button>
+    </div>
 
     <nav>
         <ul>
             <li class="nav-element">
-                <a href="${pageContext.request.contextPath}/catalogo.jsp">
+                <a href="javascript:void(0);" id="search-icon-btn">
                     <img src="${pageContext.request.contextPath}/icons/search.svg" alt="search">
                 </a>
             </li>
-
             <li class="nav-element">
                 <a href="${pageContext.request.contextPath}/shopping-cart.jsp">
                     <img src="${pageContext.request.contextPath}/icons/cart.svg" alt="cart">
                 </a>
             </li>
-
-            <c:if test="${sessionScope.usuario != null and sessionScope.usuario.rol == 'ADMIN'}">
+            
+             <c:if test="${sessionScope.usuario != null and sessionScope.usuario.rol == 'ADMIN'}">
                 <li class="nav-element">
                     <a href="${pageContext.request.contextPath}/admin-options.jsp">
                         <img src="${pageContext.request.contextPath}/icons/settings.svg" alt="admin">
@@ -55,3 +58,103 @@
         </ul>
     </nav>
 </header>
+
+<div id="resultsContainer" class="results-dropdown"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const contextPath = "${pageContext.request.contextPath}";
+
+        const header = document.getElementById("main-header");
+        const searchBtn = document.getElementById("search-icon-btn");
+        const closeBtn = document.getElementById("close-search");
+        const searchInput = document.getElementById("searchInput");
+        const resultsContainer = document.getElementById("resultsContainer");
+
+        let timeout = null;
+
+        // 1. OPEN SEARCH (Fade Animation)
+        searchBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            header.classList.add("search-active");
+
+            setTimeout(() => {
+                searchInput.focus(); // Focus input after animation starts
+            }, 100);
+        });
+
+        // 2. CLOSE SEARCH
+        closeBtn.addEventListener("click", function () {
+            header.classList.remove("search-active");
+            searchInput.value = '';
+            resultsContainer.innerHTML = '';
+            resultsContainer.style.display = 'none'; // Hide dropdown
+        });
+
+        // 3. FETCH DATA
+        async function fetchProducts(query) {
+            try {
+                const url = "http://localhost:8080/API-Videojuegos" + "/api/productos?q=" + query;
+
+                const response = await fetch(url);
+
+                if (!response.ok)
+                    throw new Error("Network response not ok");
+
+                const products = await response.json();
+                renderResults(products);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        // 4. INPUT LOGIC
+        searchInput.addEventListener('input', function (event) {
+            const query = event.target.value.trim();
+            clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+                if (query.length > 0) {
+                    fetchProducts(query);
+                } else {
+                    resultsContainer.style.display = 'none';
+                    resultsContainer.innerHTML = '';
+                }
+            }, 300);
+        });
+
+        // 5. RENDER RESULTS
+        function renderResults(products) {
+            resultsContainer.innerHTML = '';
+
+            if (products.length === 0) {
+                resultsContainer.style.display = 'block';
+                resultsContainer.innerHTML = '<p style="padding:15px; text-align:center; color:#aaa">No games found.</p>';
+                return;
+            }
+
+            resultsContainer.style.display = 'block';
+
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'result-card';
+
+                const imgSource = product.imagenBase64 ? product.imagenBase64 : contextPath + '/imgs/default-placeholder.png';
+
+                card.innerHTML = `
+                <img src="` + imgSource + `" alt="` + product.nombreProducto + `" style="width:50px; height:50px; object-fit:cover; border-radius:4px;">
+                <div class="result-info">
+                    <h3 style="margin:0; font-size:14px; color:white;">` + product.nombreProducto + `</h3>
+                    <p class="price" style="margin:0; color:cyan; font-size:12px;">$` + product.precio + `</p>
+                </div>
+            `;
+
+                card.addEventListener('click', () => {
+                    window.location.href = contextPath + '/details.jsp?id=' + product.idProducto;
+                });
+
+                resultsContainer.appendChild(card);
+            });
+        }
+    });
+</script>

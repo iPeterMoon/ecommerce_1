@@ -466,3 +466,123 @@ button {
         width: 70rem;
     }
 }
+
+/* =========================================
+   HEADER SEARCH ANIMATION
+   ========================================= */
+
+
+.header-search-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.9); 
+    width: 60%; 
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    opacity: 0;
+    pointer-events: none; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 200;
+}
+
+.header-search-wrapper input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--tron-cyan);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+}
+
+.header-search-wrapper button {
+    background: none;
+    border: none;
+    color: var(--tron-cyan);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.fade-target {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   ACTIVE STATE (When search is clicked)
+   ========================================= */
+
+header.search-active .fade-target {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+}
+
+header.search-active .header-search-wrapper {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* =========================================
+   RESULTS DROPDOWN (The List)
+   ========================================= */
+.results-dropdown {
+    position: fixed; 
+    top: 64px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 95%;
+    max-width: 600px; 
+    background-color: var(--dark-blue);
+    border: 1px solid var(--tron-cyan);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    z-index: 199;
+    display: none;
+
+    max-height: 350px; 
+    overflow-y: auto; 
+}
+
+.results-dropdown::-webkit-scrollbar {
+    width: 8px;
+}
+.results-dropdown::-webkit-scrollbar-thumb {
+    background: var(--tron-cyan);
+    border-radius: 4px;
+}
+
+@media only screen and (min-width: 481px) {
+    .results-dropdown {
+        top: 84px;
+    }
+}
+@media only screen and (min-width: 769px) {
+    .results-dropdown {
+        top: 120px;
+    }
+}
+
+.result-card {
+    padding: 10px;
+    border-bottom: 1px solid rgba(0,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+.result-card:last-child {
+    border-bottom: none;
+}
+.result-card:hover {
+    background: rgba(0,255,255,0.05);
+}

@@ -21,6 +21,7 @@ import jakarta.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream; // Import Stream
 
 /**
  * REST Web Service
@@ -36,48 +37,38 @@ public class ProductosResource {
     @Context
     private UriInfo context;
 
-    /**
-     * Creates a new instance of ProductosResource
-     */
     public ProductosResource() {
-        // Recuerda: Si tu DAO no tiene el constructor vacío configurado con Persistence,
-        // esto podría fallar luego. Asegúrate de que ProductoDAO instancie su EntityManagerFactory.
         this.producto = new ProductoDAO();
     }
 
-    /**
-     * ESTE ES EL ÚNICO MÉTODO GET QUE DEBES TENER.
-     * Borra cualquier otro método @GET en esta clase.
-     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<ProductoDTO> getJson(
             @QueryParam("page") @DefaultValue("1") int page,
-            @QueryParam("size") @DefaultValue("10") int size
+            @QueryParam("size") @DefaultValue("10") int size,
+            @QueryParam("q") String query // <--- NEW PARAMETER for search
     ) {
-        // 1. Obtener todos los productos
+
+        System.out.println("API REACHED! Query value is: " + query);
+        // 1. Get all products (Raw Data)
         List<Producto> productos = producto.buscarTodos();
         List<ProductoDTO> productosDT = new ArrayList<>();
 
+        // 2. Map Entities to DTOs
         for (Producto p : productos) {
             ProductoDTO dto = new ProductoDTO();
 
-            // --- Mapeo Completo ---
             dto.setIdProducto(p.getIdProducto());
             dto.setNombreProducto(p.getNombreProducto());
             dto.setPrecio(p.getPrecio());
             dto.setDescripcion(p.getDescripcion());
-
-            // Stock seguro
             dto.setStock(p.getStock() != null ? p.getStock() : 0);
 
-            // Conversión de Imagen
             if (p.getImagen() != null) {
                 String imagenBase64 = java.util.Base64.getEncoder().encodeToString(p.getImagen());
                 dto.setImagenBase64("data:image/jpeg;base64," + imagenBase64);
             }
 
-            // Relaciones
             if (p.getPlataforma() != null) {
                 dto.setIdPlataforma(p.getPlataforma().getIdPlataforma());
                 dto.setNombrePlataforma(p.getPlataforma().getNombre());
@@ -91,13 +82,29 @@ public class ProductosResource {
             productosDT.add(dto);
         }
 
-        int skip = (page - 1) * size;
+        // 3. Create a Stream
+        Stream<ProductoDTO> stream = productosDT.stream();
 
-        if (skip >= productosDT.size()) {
-            return new ArrayList<>();
+        // 4. APPLY SEARCH FILTER (If query is not null or empty)
+        if (query != null && !query.trim().isEmpty()) {
+            String lowerQuery = query.toLowerCase(); // Case insensitive logic
+
+            stream = stream.filter(p
+                    -> // Search by Product Name
+                    (p.getNombreProducto() != null && p.getNombreProducto().toLowerCase().contains(lowerQuery))
+                    || // Search by Platform Name (Category)
+                    (p.getNombrePlataforma() != null && p.getNombrePlataforma().toLowerCase().contains(lowerQuery))
+                    || // Search by Video Game Name
+                    (p.getNombreVideojuego() != null && p.getNombreVideojuego().toLowerCase().contains(lowerQuery))
+                    || // Optional: Search by Description
+                    (p.getDescripcion() != null && p.getDescripcion().toLowerCase().contains(lowerQuery))
+            );
         }
 
-        return productosDT.stream()
+        // 5. Apply Pagination
+        int skip = (page - 1) * size;
+
+        return stream
                 .skip(skip)
                 .limit(size)
                 .collect(Collectors.toList());
