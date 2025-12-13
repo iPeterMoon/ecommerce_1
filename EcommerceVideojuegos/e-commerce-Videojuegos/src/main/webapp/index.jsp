@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="styles/slider.css">
 
         <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
-  
+        
         <title>Inicio | MunditoGames</title>
 
     </head>
@@ -137,6 +137,8 @@
         </div>
     </main>
     <%@include file="WEB-INF/fragmentos/footer.jspf" %>
+<script src="scripts/main.js"></script>
 </body>
+
 
 </html>
