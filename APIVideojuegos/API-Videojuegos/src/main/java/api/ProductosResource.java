@@ -15,6 +15,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,41 +40,44 @@ public class ProductosResource {
      * Creates a new instance of ProductosResource
      */
     public ProductosResource() {
+        // Recuerda: Si tu DAO no tiene el constructor vacío configurado con Persistence,
+        // esto podría fallar luego. Asegúrate de que ProductoDAO instancie su EntityManagerFactory.
         this.producto = new ProductoDAO();
     }
 
     /**
-     * Retrieves representation of an instance of api.ProductosResource
-     *
-     * @return an instance of DTO.ProductoDTO Obtiene y regresa todos los
-     * productos.
+     * ESTE ES EL ÚNICO MÉTODO GET QUE DEBES TENER.
+     * Borra cualquier otro método @GET en esta clase.
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ProductoDTO> getJson() {
+    public List<ProductoDTO> getJson(
+            @QueryParam("page") @DefaultValue("1") int page,
+            @QueryParam("size") @DefaultValue("10") int size
+    ) {
+        // 1. Obtener todos los productos
         List<Producto> productos = producto.buscarTodos();
-
         List<ProductoDTO> productosDT = new ArrayList<>();
 
         for (Producto p : productos) {
             ProductoDTO dto = new ProductoDTO();
 
+            // --- Mapeo Completo ---
             dto.setIdProducto(p.getIdProducto());
             dto.setNombreProducto(p.getNombreProducto());
             dto.setPrecio(p.getPrecio());
             dto.setDescripcion(p.getDescripcion());
 
-            if (p.getStock() != null) {
-                dto.setStock(p.getStock());
-            } else {
-                dto.setStock(0);
-            }
+            // Stock seguro
+            dto.setStock(p.getStock() != null ? p.getStock() : 0);
 
+            // Conversión de Imagen
             if (p.getImagen() != null) {
                 String imagenBase64 = java.util.Base64.getEncoder().encodeToString(p.getImagen());
                 dto.setImagenBase64("data:image/jpeg;base64," + imagenBase64);
             }
 
+            // Relaciones
             if (p.getPlataforma() != null) {
                 dto.setIdPlataforma(p.getPlataforma().getIdPlataforma());
                 dto.setNombrePlataforma(p.getPlataforma().getNombre());
@@ -86,20 +91,20 @@ public class ProductosResource {
             productosDT.add(dto);
         }
 
+        int skip = (page - 1) * size;
+
+        if (skip >= productosDT.size()) {
+            return new ArrayList<>();
+        }
+
         return productosDT.stream()
-                .limit(16)
+                .skip(skip)
+                .limit(size)
                 .collect(Collectors.toList());
     }
 
-    /**
-     * PUT method for updating or creating an instance of ProductosResource
-     *
-     * @param content representation for the resource
-     */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(ProductoDTO content
-    ) {
+    public void putJson(ProductoDTO content) {
     }
-
 }

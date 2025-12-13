@@ -20,7 +20,7 @@
             productos.forEach(producto => {
                 const card = document.createElement("a");
 
-                card.href = `producto.jsp?id=${producto.id}`; 
+                card.href = `producto.jsp?id=${producto.idProducto}`; 
                 card.className = "game-card";
 
                 const img = document.createElement("img");
@@ -37,4 +37,6 @@
             console.error("Hubo un problema cargando los juegos:", error);
             contenedor.innerHTML = '<p style="color: white;">No se pudieron cargar los juegos destacados.</p>';
         }
+
     }
+

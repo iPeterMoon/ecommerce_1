@@ -33,47 +33,22 @@
             </div>
 
         </aside>
-        <section class="featured-games">
-            <div class="featured-filters">
-                <h2 class="section-title">Catálogo</h2>
-                <a href="#filter-modal">
-                    <img src="icons/filter.svg" alt="filter">
-                </a>
-            </div>
+       <section class="featured-games">
+    <div class="featured-filters">
+        <h2 class="section-title">Catálogo</h2>
+        <a href="#filter-modal">
+            <img src="icons/filter.svg" alt="filter">
+        </a>
+    </div>
 
-            <div class="games-grid catalogo-grid">
-                <a href="#" class="game-card">
-                    <img src="https://juegosdigitalesmexico.mx/files/images/productos/1721500402-minecraft-ps5-0.webp"
-                        alt="minecraft">
-                </a>
-                <a href="#" class="game-card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/0/05/Call_of_Duty_Black_Ops_II_box_artwork.png"
-                        alt="Call of Duty Black Ops 2">
-                </a>
-                <a href="#" class="game-card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/c/c6/The_Legend_of_Zelda_Breath_of_the_Wild.jpg"
-                        alt="Zelda Breath of the Wild">
-                </a>
-                <a href="#" class="game-card">
-                    <img src="https://juegosdigitalesmexico.mx/files/images/productos/1746638096-grand-theft-auto-vi-xbox-series-xs-pre-orden-0.webp"
-                        alt="GTA VI">
-                </a>
-                <a href="#" class="game-card">
-                    <img src="https://m.media-amazon.com/images/I/81bwynfO98L.jpg" alt="Call of Duty Black Ops 3">
-                </a>
-                <a href="#" class="game-card">
-                    <img src="https://juegosdigitalesmexico.mx/files/images/productos/1744069588-hogwarts-legacy-digital-deluxe-edition-ps5-0.webp"
-                        alt="Hogwarts Legacy">
-                </a>
-                <a href="#" class="game-card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/b/b9/Elden_Ring_Box_art.jpg" alt="Elden Ring">
-                </a>
-                <a href="#" class="game-card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/b/bb/Dark_souls_3_cover_art.jpg"
-                        alt="Dark Souls 3">
-                </a>
-            </div>
-        </section>
+    <div id="product-container" class="games-grid catalogo-grid">
+        </div>
+
+    <div id="sentinel" style="height: 50px; text-align: center; padding: 20px;">
+        <p>Cargando más juegos...</p>
+    </div>  
+</section>
+              
         </div>
     </main>
     <div class="modal-overlay" id="filter-modal">
@@ -87,8 +62,11 @@
             </div>
         </div>
     </div>
+
       <%@include file="WEB-INF/fragmentos/footer.jspf" %>
-</body>
+    <script src="scripts/catalogo.js"></script>
+
+    </body>
 
 </html>
 

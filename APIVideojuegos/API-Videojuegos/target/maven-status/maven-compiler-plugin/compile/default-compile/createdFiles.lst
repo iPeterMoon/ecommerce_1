@@ -1,4 +1,5 @@
 com\mycompany\api\videojuegos\CorsFilter.class
 com\mycompany\api\videojuegos\resources\JakartaEE11Resource.class
+api\ProductosServlet.class
 com\mycompany\api\videojuegos\JakartaRestConfiguration.class
 api\ProductosResource.class
