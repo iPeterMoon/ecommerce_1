@@ -1,3 +1,4 @@
+api\CartResource.class
 com\mycompany\api\videojuegos\CorsFilter.class
 com\mycompany\api\videojuegos\resources\JakartaEE11Resource.class
 com\mycompany\api\videojuegos\JakartaRestConfiguration.class

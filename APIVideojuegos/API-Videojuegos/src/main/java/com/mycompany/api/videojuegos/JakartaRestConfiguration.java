@@ -1,5 +1,6 @@
 package com.mycompany.api.videojuegos;
 
+import api.CartResource;
 import api.ProductosResource;
 import jakarta.ws.rs.core.Application;
 import java.util.HashSet;
@@ -17,6 +18,7 @@ public class JakartaRestConfiguration extends Application {
     public Set<Class<?>> getClasses() {
         final Set<Class<?>> classes = new HashSet<>();
         classes.add(ProductosResource.class);
+        classes.add(CartResource.class);
         classes.add(CorsFilter.class);
         return classes;
     }
