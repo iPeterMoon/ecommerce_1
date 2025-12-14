@@ -17,6 +17,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
   </head>
   <body class="tron-grid grid-container">
+    <script src="scripts/cart.js"></script>
      <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
     <main>
       <article class="grid-item-info">
@@ -29,7 +30,7 @@
 
           <div class="button-with-price">
             <span class="price">MEX 349.00</span>
-            <a href="#item-agregado-modal" class="add-to-car"> Añadir al Carrito </a>
+            <a href="#item-agregado-modal" onclick="addToCart(502)" class="add-to-car"> Añadir al Carrito </a>
           </div>
           <div class="specifications" id="a">
             <p>Plataforma: PlayStation 5</p>
