@@ -15,117 +15,110 @@ import java.io.IOException;
 import DTO.UsuarioDTO;
 import enums.RolUsuario;
 import jakarta.servlet.annotation.WebFilter;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 /**
  * FiltroAutenticacion.java
  *
- * Filtro para delimitar el acceso a los usuarios a páginas que solo se pueden
- * acceder cuando tienen la sesión iniciada y para páginas a las que solo pueden
- * acceder administradores
+ * Filtro corregido para priorizar la sesión HTTP (Cookies) y usar JWT como respaldo.
  *
  * @author Pedro Luna
  */
 @WebFilter("/*")
 public class FiltroAutenticacion implements Filter {
 
+    private static final String API_BASE_URL = "http://localhost:8080/API-Videojuegos/api";
+    private static final String VERIFY_URL = API_BASE_URL + "/auth/verify";
+    
+    private HttpClient httpClient; 
+    
     String[] paginasUsuario = {"account.jsp", "agregar-direccion.jsp", "detalles-pedido-contraentrega.jsp", "detalles-pedido-tarjeta-pagado.jsp", "detalles-pedido-transfe.jsp", "introducir_datos_bancarios.jsp", "order.jsp", "purchase-history.jsp", "realizar_pedido.jsp", "shopping-cart.jsp", "seleccionar_metodo_pago.jsp"};
     String[] servletsAdmin = {"ActualizarEstadoUsuario", "actualizarPedido", "consultarPedidos", "ConsultaUsuarios", "consultarDetallePedido", "EliminarUsuario", "ProductoServlet", "ResenaServlet", "VideojuegoServlet"};
     String[] paginasAdmin = {"admin-options.jsp", "manage-users.jsp", "crud-products.jsp", "crud-games.jsp", "historial-pagos.jsp", "moderar-resenas.jsp", "pedidos-pendientes.jsp"};
 
-    /**
-     * Metodo para obtener el path al que se quiere acceder
-     *
-     * @param request
-     * @return El path solicitado en string
-     */
     private String getPathSolicitado(HttpServletRequest request) {
         String uriSolicitada = request.getRequestURI();
         String path = uriSolicitada.substring(request.getContextPath().length());
         return path;
     }
 
-    /**
-     * Metodo para saber si una url es de usuario (si solo se puede acceder con
-     * sesión iniciada)
-     *
-     * @param path url a la que se quiere acceder
-     * @return true si es de usuario, false si no
-     */
     private boolean isURLUsuario(String path) {
         for (String url : paginasUsuario) {
-            if (path.startsWith("/" + url)) {
-                return true;
-            }
+            if (path.startsWith("/" + url)) return true;
         }
         return false;
     }
 
-    /**
-     * Metodo para saber si una url es de usuario (si solo se puede acceder con
-     * sesión iniciada)
-     *
-     * @param path url a la que se quiere acceder
-     * @return true si es de usuario, false si no
-     */
     private boolean isServlet(String path) {
         for (String url : servletsAdmin) {
-            if (path.startsWith("/" + url)) {
-                return true;
-            }
+            if (path.startsWith("/" + url)) return true;
         }
         return false;
     }
 
-    /**
-     * Metodo para saber si una URL es una pagina a la que solo puede acceder un
-     * administrador.
-     *
-     * @param path Url a la que se quiere acceder
-     * @return true si es una url de admin, false si no
-     */
     private boolean isURLAdmin(String path) {
         for (String url : paginasAdmin) {
-            if (path.startsWith("/" + url)) {
-                return true;
-            }
+            if (path.startsWith("/" + url)) return true;
         }
         return false;
     }
 
     /**
-     * Metodo para saber si hay un usuario en la sesión de la aplicación
-     *
-     * @param request Solicitud Http donde viene la sesión
-     * @return true si hay un usuario, false si no.
+     * Verifica si existe una sesión válida de Java (JSESSIONID)
      */
     private boolean isLoggedIn(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        boolean logged = (session != null && session.getAttribute("usuario") != null);
-        return logged;
+        return (session != null && session.getAttribute("usuario") != null);
     }
 
     /**
-     * Metodo para saber si el usuario loggeado es administrador o no
-     *
-     * @param request Solicitud Http donde viene la sesión
-     * @return true si el usuario es admin, false si no
+     * Verifica si el usuario en sesión es ADMIN
      */
     private boolean isAdmin(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (isLoggedIn(request)) {
             UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
-            if (RolUsuario.valueOf(usuario.getRol()).equals(RolUsuario.ADMIN)) {
-                return true;
-            } else {
-                return false;
-            }
+            // Asegúrate que el DTO retorna el rol correctamente como String o Enum
+            return RolUsuario.valueOf(usuario.getRol()).equals(RolUsuario.ADMIN);
         }
         return false;
     }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        Filter.super.init(filterConfig); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        httpClient = HttpClient.newBuilder().build();
+    }
+
+    /**
+     * Valida JWT Server-to-Server
+     */
+    private String validarTokenYObtenerRol(String token) {
+        try {
+            String jsonBody = "{\"token\": \"" + token.replace("\"", "\\\"") + "\"}";
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(token).create(VERIFY_URL))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                String responseBody = response.body();
+                int start = responseBody.indexOf("\"role\":\"") + 8;
+                int end = responseBody.indexOf("\"", start);
+                if (start > 8 && end > start) {
+                    return responseBody.substring(start, end);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error S2S al validar token: " + e.getMessage());
+        }
+        return null;
     }
 
     @Override
@@ -135,37 +128,57 @@ public class FiltroAutenticacion implements Filter {
         String path = getPathSolicitado(peticion);
 
         boolean isUserPage = this.isURLUsuario(path);
-        boolean loggedIn = this.isLoggedIn(peticion);
         boolean isAdminPage = this.isURLAdmin(path);
-        boolean isAdmin = this.isAdmin(peticion);
         boolean isAdminServlet = this.isServlet(path);
 
-        if (isUserPage && !loggedIn) {
-            redireccionar(peticion, respuesta);
-            return;
-        } else if ((isAdminServlet || isAdminPage) && !isAdmin) {
-            redireccionar(peticion, respuesta);
-            return;
-        } else {
+        // Si la página no está en ninguna lista protegida, dejar pasar
+        if (!isUserPage && !isAdminPage && !isAdminServlet) {
             fc.doFilter(sr, sr1);
+            return;
         }
-    }
 
-    /**
-     * Metodo para redireccionar a la página de donde vienen.
-     *
-     * @param peticion
-     * @param respuesta
-     */
-    private void redireccionar(HttpServletRequest peticion, HttpServletResponse respuesta) throws IOException {
-        String referer = peticion.getHeader("Referer");
-        String redirectURL = (referer != null && !referer.isEmpty()) ? referer : peticion.getContextPath() + "/index.jsp";
-        respuesta.sendRedirect(redirectURL);
+        if (isLoggedIn(peticion)) {
+            // El usuario ya tiene sesión activa. Validamos roles si es necesario.
+            
+            // Si intenta entrar a una zona ADMIN, verificamos el rol en la sesión
+            if ((isAdminPage || isAdminServlet) && !isAdmin(peticion)) {
+                respuesta.sendRedirect(peticion.getContextPath() + "/index.jsp");
+                return;
+            }
+            
+            // Si es usuario normal en página de usuario, o admin autorizado, pase.
+            fc.doFilter(sr, sr1);
+            return; 
+        }
+
+        String token = null;
+        String authHeader = peticion.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            token = authHeader.substring(7);
+        }
+
+        String userRole = null;
+        if (token != null) {
+            userRole = validarTokenYObtenerRol(token);
+        }
+
+        if (isUserPage && userRole == null) {
+            respuesta.sendRedirect(peticion.getContextPath() + "/login.jsp");
+            return;
+        }
+
+        boolean isTokenAdmin = userRole != null && userRole.equals(RolUsuario.ADMIN.name());
+        
+        if ((isAdminServlet || isAdminPage) && !isTokenAdmin) {
+            respuesta.sendRedirect(peticion.getContextPath() + "/index.jsp");
+            return;
+        }
+        
+        fc.doFilter(sr, sr1);
     }
 
     @Override
     public void destroy() {
-        Filter.super.destroy(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        Filter.super.destroy(); 
     }
-
 }

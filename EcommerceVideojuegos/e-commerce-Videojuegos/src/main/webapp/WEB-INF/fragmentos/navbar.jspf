@@ -74,9 +74,8 @@
         const searchInput = document.getElementById("searchInput");
         const resultsContainer = document.getElementById("resultsContainer");
         let timeout = null;
-        // ============================================
+        
         // GESTIÓN DE AUTENTICACIÓN JWT
-        // ============================================
         function checkAuthAndUpdateNav() {
             // Buscamos el token en ambas ubicaciones
             const token =
@@ -88,10 +87,8 @@
             if (token && usuarioStr && userIconLink) {
                 try {
                     const usuario = JSON.parse(usuarioStr);
-                    // 1. CAMBIAR EL LINK DEL ICONO DE USUARIO A account.jsp
                     userIconLink.href = contextPath + "/account.jsp";
 
-                    // 2. MOSTRAR OPCIONES DE ADMIN si el usuario es ADMIN
                     if (usuario.rol === "ADMIN") {
                         const adminElements = document.querySelectorAll(".admin-only");
                         adminElements.forEach((el) => (el.style.display = "block"));
@@ -112,6 +109,7 @@
 
         // Ejecutar al cargar la página
         checkAuthAndUpdateNav();
+        
         // 1. OPEN SEARCH (Fade Animation)
         searchBtn.addEventListener("click", function (e) {
             e.preventDefault();
