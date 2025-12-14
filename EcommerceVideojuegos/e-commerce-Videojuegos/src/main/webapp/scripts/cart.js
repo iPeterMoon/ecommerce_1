@@ -1,83 +1,123 @@
 async function addToCart(id) {
-  try {
-    const token = localStorage.getItem('token');
+    try {
+        const token = localStorage.getItem("token");
 
-    const verify = await fetch("http://localhost:8080/API-Videojuegos/api/auth/verify", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ 
-        token: token 
-      })
-    });
+        const verify = await fetch(
+            "http://localhost:8080/API-Videojuegos/api/auth/verify",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    token: token,
+                }),
+            }
+        );
 
-    console.log(verify.status);
-    if(!verify.ok){
-      const data = await verify.json(); 
-      window.alert(data.error);
-      return;
+        console.log(verify.status);
+        if (!verify.ok) {
+            const data = await verify.json();
+            window.alert(data.error);
+            return;
+        }
+
+        const response = await fetch(
+            `http://localhost:8080/API-Videojuegos/api/cart/add?id=${id}`,
+            {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log("Total items now:", data.totalItems);
+
+            const badge = document.getElementById("cart-badge");
+            if (badge) {
+                badge.textContent = data.totalItems;
+                badge.style.display = "block";
+            }
+        } else {
+            const errorText = await response.text();
+            console.error("Server Error:", response.status, errorText);
+            alert("Error: " + errorText);
+        }
+    } catch (e) {
+        console.error(e);
     }
-
-    const response = await fetch(`http://localhost:8080/API-Videojuegos/api/cart/add?id=${id}`, {
-      method: "POST",
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Total items now:", data.totalItems);
-
-      const badge = document.getElementById("cart-badge");
-      if (badge) {
-        badge.textContent = data.totalItems;
-        badge.style.display = "block";
-      }
-
-    } else {
-      const errorText = await response.text();
-      console.error("Server Error:", response.status, errorText);
-      alert("Error: " + errorText);
-    }
-  } catch (e) {
-    console.error(e);
-  }
 }
 
 async function loadShoppingCart() {
-  try {
-    const response = await fetch("http://localhost:8080/API-Videojuegos/api/cart");
+    try {
+        const token = localStorage.getItem("token");
 
-    if (!response.ok) throw new Error("Error fetching cart");
+        const verify = await fetch(
+            "http://localhost:8080/API-Videojuegos/api/auth/verify",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    token: token,
+                }),
+            }
+        );
 
-    const items = await response.json();
-    renderCartItems(items);
-    updateSummary(items);
-  } catch (error) {
-    console.error("Error:", error);
-    document.getElementById("cart-container").innerHTML = "<p>Tu carrito está vacío o hubo un error.</p>";
-  }
+        console.log(verify.status);
+        if (!verify.ok) {
+            const data = await verify.json();
+            window.alert(data.error);
+            return;
+        }
+        const response = await fetch(
+            "http://localhost:8080/API-Videojuegos/api/cart",
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
+        if (!response.ok) throw new Error("Error fetching cart");
+
+        const items = await response.json();
+        renderCartItems(items);
+        updateSummary(items);
+    } catch (error) {
+        console.error("Error:", error);
+        document.getElementById("cart-container").innerHTML =
+            "<p>Tu carrito está vacío o hubo un error.</p>";
+    }
 }
 
 function renderCartItems(items) {
-  const container = document.getElementById("cart-container");
-  container.innerHTML = ""; 
+    const container = document.getElementById("cart-container");
+    container.innerHTML = "";
 
-  if (items.length === 0) {
-    container.innerHTML = "<p style='padding: 20px; text-align: center;'>El carrito está vacío.</p>";
-    return;
-  }
+    if (items.length === 0) {
+        container.innerHTML =
+            "<p style='padding: 20px; text-align: center;'>El carrito está vacío.</p>";
+        return;
+    }
 
-  items.forEach((item) => {
-    const row = document.createElement("div");
-    row.className = "product-row";
+    items.forEach((item) => {
+        const row = document.createElement("div");
+        row.className = "product-row";
 
-    row.innerHTML = `
+        row.innerHTML = `
             <img src="icons/x-button.svg" alt="Eliminar" class="delete-button" onclick="removeItem(${
-              item.idProducto
+                item.idProducto
             })" style="cursor:pointer;" />
             <img src="${item.imagenBase64 || "imgs/placeholder.png"}" alt="${
-      item.nombreProducto
-    }" class="product-img" />
+            item.nombreProducto
+        }" class="product-img" />
             
             <div class="tittle">
                 <p>Título</p>
@@ -100,36 +140,68 @@ function renderCartItems(items) {
             </div>
         `;
 
-    container.appendChild(row);
-  });
+        container.appendChild(row);
+    });
 }
 
 function updateSummary(items) {
-  let totalQty = 0;
-  let totalPrice = 0;
+    let totalQty = 0;
+    let totalPrice = 0;
 
-  items.forEach((item) => {
-    totalQty += item.cantidad;
-    totalPrice += parseFloat(item.subtotal);
-  });
+    items.forEach((item) => {
+        totalQty += item.cantidad;
+        totalPrice += parseFloat(item.subtotal);
+    });
 
-  document.getElementById("txt-total-items").textContent = `(${totalQty})`;
+    document.getElementById("txt-total-items").textContent = `(${totalQty})`;
 
-  const formattedPrice = totalPrice.toLocaleString("es-MX", { style: "currency", currency: "MXN" });
+    const formattedPrice = totalPrice.toLocaleString("es-MX", {
+        style: "currency",
+        currency: "MXN",
+    });
 
-  document.getElementById("txt-total-price").textContent = formattedPrice;
-  document.getElementById("txt-final-price").textContent = "MEX " + formattedPrice;
+    document.getElementById("txt-total-price").textContent = formattedPrice;
+    document.getElementById("txt-final-price").textContent =
+        "MEX " + formattedPrice;
 }
 
 async function removeItem(id) {
-  const response = await fetch(`http://localhost:8080/API-Videojuegos/api/cart/remove?id=${id}`, {
-    method: "DELETE",
-  });
+    const token = localStorage.getItem("token");
 
-  if (response.ok) {
-    loadShoppingCart();
-    const data = await response.json();
-  } else {
-    console.error("Error removing item");
-  }
+    const verify = await fetch(
+        "http://localhost:8080/API-Videojuegos/api/auth/verify",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                token: token,
+            }),
+        }
+    );
+
+    console.log(verify.status);
+    if (!verify.ok) {
+        const data = await verify.json();
+        window.alert(data.error);
+        return;
+    }
+    const response = await fetch(
+        `http://localhost:8080/API-Videojuegos/api/cart/remove?id=${id}`,
+        {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        }
+    );
+
+    if (response.ok) {
+        loadShoppingCart();
+        const data = await response.json();
+    } else {
+        console.error("Error removing item");
+    }
 }

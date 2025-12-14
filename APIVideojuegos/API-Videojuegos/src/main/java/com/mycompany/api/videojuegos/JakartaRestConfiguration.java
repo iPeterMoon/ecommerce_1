@@ -2,6 +2,8 @@ package com.mycompany.api.videojuegos;
 
 import api.LoginResource;
 import api.CartResource;
+import api.HistoryResource;
+import api.OrderDetailResource;
 import api.ProductosResource;
 import api.VerifyResource;
 import jakarta.ws.rs.core.Application;
@@ -24,6 +26,8 @@ public class JakartaRestConfiguration extends Application {
         classes.add(CorsFilter.class);
         classes.add(LoginResource.class);
         classes.add(VerifyResource.class);
+        classes.add(HistoryResource.class);
+        classes.add(OrderDetailResource.class);
         return classes;
     }
 

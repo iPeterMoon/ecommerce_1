@@ -83,7 +83,14 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* Añadido para mejor espaciado */
+  padding-bottom: 10px;
+  border-bottom: 1px solid #333;
 }
+.product-row:last-child {
+    border-bottom: none;
+}
+
 .tittle-quantity {
   display: flex;
   flex-direction: column;
@@ -103,6 +110,31 @@ hr {
   width: 5rem;
   object-fit: cover;
   height: 5rem;
+}
+
+/* NUEVO: Contenedor derecha para Precio y Botón */
+.product-info-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.review-btn {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--cyan-color, #00bcd4); /* Usa variable si tienes, o color directo */
+    border: 1px solid var(--cyan-color, #00bcd4);
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.review-btn:hover {
+    background-color: var(--cyan-color, #00bcd4);
+    color: white;
 }
 
 .prices-status-order {

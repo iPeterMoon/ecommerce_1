@@ -20,7 +20,7 @@ public class JwtUtil {
     
     private static final String ISSUER = "ecommerce-api";
     
-    private static final long EXPIRATION_TIME = 10800;
+    private static final long EXPIRATION_TIME = 10800000L;
    
     /**
      * Genera un token JWT para el usuario
