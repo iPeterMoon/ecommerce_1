@@ -1,76 +1,68 @@
-<%-- 
-    Document   : realizar_pedido
-    Created on : 14 nov 2025, 1:40:01 a.m.
-    Author     : benja
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- Document : realizar_pedido Created on : 14 nov 2025, 1:40:01 a.m. Author : benja --%> <%@page
+contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Realizar pedido</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="styles/realizar_pedido.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="styles/styles.css" />
-    <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
-</head>
+    <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png" />
+  </head>
 
-<body class="tron-grid grid-container">
-     <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
+  <body class="tron-grid grid-container">
+    <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
 
     <main class="container">
-        <h1 class="tittle">Detalles de pedido</h1>
-        <div class="header-container">
-            <p class="details-paragraph">Confirmar pedido</p>
-        </div>
-        <div class="main-container">
-            <div class="order-information">
-                <div class="personal-information">
-                    <div class="shipment-information">
-                        <p>Dirección de Envío</p>
-                        <p>Calle Falsa 123, Colonia Centro</p>
-                        <p>Ciudad Obregón, SON, CP 12345</p>
-                    </div>
-                </div>
-                <hr />
-                <div class="items-content">
-                    <div class="product-row">
-                        <div class="product-info-left">
-                            <img src="imgs/minecraft.png" />
-                            <div class="tittle-quantity">
-                                <p>Minecraft</p>
-                                <p>Cantidad: 1</p>
-                            </div>
-                        </div>
-
-                        <p class="product-price">Mex$ 349.00</p>
-                    </div>
-                </div>
-                <hr />
-                <div class="prices-status-order">
-                    <div class="prices-subtittle">
-                        <p>Subtotal</p>
-                        <p>Envío</p>
-                        <p>Total</p>
-                    </div>
-                    <div class="prices">
-                        <div class="subtotal">$349.00</div>
-                        <div class="shipment-price">$0.00</div>
-                        <div class="total-price">$349.00</div>
-                    </div>
-                </div>
-
-                <div class="buttons-container">
-                    <a href="shopping-cart.jsp"><button class="cancel-button">Cancelar</button></a>
-                    <a href="seleccionar_metodo_pago.jsp" ><button class="payment-button">Proceder al pago</button></a>
-                </div>
+      <h1 class="tittle">Detalles de pedido</h1>
+      <div class="header-container">
+        <p class="details-paragraph">Confirmar pedido</p>
+      </div>
+      <div class="main-container">
+        <div class="order-information">
+          <div class="personal-information">
+            <div class="shipment-information">
+              <p>Dirección de Envío</p>
+              <p>Calle Falsa 123, Colonia Centro</p>
+              <p>Ciudad Obregón, SON, CP 12345</p>
             </div>
-        </div>
-    </main>
-      <%@include file="WEB-INF/fragmentos/footer.jspf" %>
-</body>
+          </div>
+          <hr />
 
+          <div class="items-content" id="order-items-container">
+            <p>Cargando productos...</p>
+          </div>
+
+          <hr />
+          <div class="prices-status-order">
+            <div class="prices-subtittle">
+              <p>Subtotal</p>
+              <p>Envío</p>
+              <p>Total</p>
+            </div>
+            <div class="prices">
+              <div class="subtotal" id="order-subtotal">$0.00</div>
+              <div class="shipment-price">$0.00</div>
+              <div class="total-price" id="order-total">$0.00</div>
+            </div>
+          </div>
+
+          <div class="buttons-container">
+            <a href="shopping-cart.jsp"><button class="cancel-button">Cancelar</button></a>
+            <a href="seleccionar_metodo_pago.jsp"><button class="payment-button">Proceder al pago</button></a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="scripts/cart.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        loadOrderSummary(); 
+      });
+    </script>
+    <%@include file="WEB-INF/fragmentos/footer.jspf" %>
+  </body>
 </html>

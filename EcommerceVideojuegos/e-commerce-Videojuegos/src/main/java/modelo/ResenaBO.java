@@ -59,7 +59,7 @@ public class ResenaBO {
     private ResenaDTO convertirADTO(Resena resena) {
         ResenaDTO dto = new ResenaDTO();
         dto.setIdResena(resena.getIdResena());
-        dto.setFecha(resena.getFecha());
+        dto.setFecha(resena.getFecha().toString());
         dto.setCalificacion(resena.getCalificacion());
         dto.setComentario(resena.getComentario());
 

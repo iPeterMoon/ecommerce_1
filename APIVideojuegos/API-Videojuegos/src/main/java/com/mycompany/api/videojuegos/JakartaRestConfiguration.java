@@ -4,6 +4,7 @@ import api.LoginResource;
 import api.CartResource;
 import api.HistoryResource;
 import api.OrderDetailResource;
+import api.OrderResource;
 import api.ProductosResource;
 import api.UserResource;
 import api.VerifyResource;
@@ -24,12 +25,13 @@ public class JakartaRestConfiguration extends Application {
         final Set<Class<?>> classes = new HashSet<>();
         classes.add(ProductosResource.class);
         classes.add(CartResource.class);
-        classes.add(CorsFilter.class);
         classes.add(LoginResource.class);
         classes.add(VerifyResource.class);
         classes.add(HistoryResource.class);
         classes.add(OrderDetailResource.class);
         classes.add(UserResource.class);
+        classes.add(api.ProfileResource.class);
+        classes.add(OrderResource.class);
         return classes;
     }
 

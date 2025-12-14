@@ -6,6 +6,7 @@ package DTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -16,7 +17,7 @@ public class PagoDTO {
     String referencia;
     BigDecimal monto;
     String metodoPago;
-    LocalDateTime fechaHora;
+    Date fechaHora;
     String estadoPago;
 
     public PagoDTO() {
@@ -54,11 +55,11 @@ public class PagoDTO {
         this.metodoPago = metodoPago;
     }
 
-    public LocalDateTime getFechaHora() {
+    public Date getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(LocalDateTime fechaHora) {
+    public void setFechaHora(Date fechaHora) {
         this.fechaHora = fechaHora;
     }
 

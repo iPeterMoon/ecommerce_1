@@ -1,6 +1,7 @@
 package DTO;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class ProductoDTO {
 
@@ -8,12 +9,48 @@ public class ProductoDTO {
     private Long idVideojuego;
     private Long idPlataforma;
     private String nombreProducto;
-    private BigDecimal precio; 
+    private BigDecimal precio;
     private int stock;
     private String imagenBase64;
     private String descripcion;
     private String nombreVideojuego;
     private String nombrePlataforma;
+    private String desarrollador;
+    private String anioLanzamiento;
+    private Double promedioCalificacion;
+    private List<ResenaDTO> resenas;
+
+    public Double getPromedioCalificacion() {
+        return promedioCalificacion;
+    }
+
+    public void setPromedioCalificacion(Double promedioCalificacion) {
+        this.promedioCalificacion = promedioCalificacion;
+    }
+
+    public List<ResenaDTO> getResenas() {
+        return resenas;
+    }
+
+    public void setResenas(List<ResenaDTO> resenas) {
+        this.resenas = resenas;
+    }
+
+    public String getDesarrollador() {
+        return desarrollador;
+    }
+
+    public void setDesarrollador(String desarrollador) {
+        this.desarrollador = desarrollador;
+    }
+
+    public String getAnioLanzamiento() {
+        return anioLanzamiento;
+    }
+
+    public void setAnioLanzamiento(String anioLanzamiento) {
+        this.anioLanzamiento = anioLanzamiento;
+    }
 
     public ProductoDTO() {
     }
@@ -97,6 +134,5 @@ public class ProductoDTO {
     public void setNombrePlataforma(String nombrePlataforma) {
         this.nombrePlataforma = nombrePlataforma;
     }
-    
-    
+
 }

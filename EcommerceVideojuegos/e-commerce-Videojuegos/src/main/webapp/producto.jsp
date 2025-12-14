@@ -1,10 +1,5 @@
-<%-- 
-    Document   : producto
-    Created on : 14 nov 2025, 1:38:49 a.m.
-    Author     : benja
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- Document : producto Created on : 14 nov 2025, 1:38:49 a.m. Author : benja --%> <%@page contentType="text/html"
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,18 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="styles/producto.css" />
-    <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   </head>
   <body class="tron-grid grid-container">
     <script src="scripts/cart.js"></script>
-     <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
+    <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
     <main>
       <article class="grid-item-info">
         <div class="image-and-price">
           <img src="imgs/minecraft.png" alt="Minecraft-Logo" />
           <div class="calification" id="calificacion-general">
             <span>Calificación global:</span>
-            <img src="imgs/stars.png" alt="stars-image" class="stars" />
+            <div id="global-stars-container" style="display: inline-flex; gap: 2px"></div>
+            <span id="global-score-text" style="margin-left: 5px; font-weight: bold"></span>
           </div>
 
           <div class="button-with-price">
@@ -33,9 +32,9 @@
             <a href="#item-agregado-modal" onclick="addToCart(502)" class="add-to-car"> Añadir al Carrito </a>
           </div>
           <div class="specifications" id="a">
-            <p>Plataforma: PlayStation 5</p>
-            <p>Desarrollador: Mojang</p>
-            <p>Año de Lanzamiento: 2009</p>
+            <p>Plataforma: <span id="spec-platform">Cargando...</span></p>
+            <p>Desarrollador: <span id="spec-developer">Cargando...</span></p>
+            <p>Año de Lanzamiento: <span id="spec-year">Cargando...</span></p>
           </div>
         </div>
         <div class="item-description">
@@ -54,22 +53,11 @@
       </article>
       <section class="user-reviews">
         <h2>Reseñas de usuarios</h2>
-        <div class="review-container">
-          <p class="user">PedritoGamer777</p>
-          <div class="calification" id="user-calification">
-            <span>Calificación:</span>
-            <img src="imgs/stars.png" alt="stars-image" class="stars" />
-          </div>
-          <p class="review-date">Reseña realizada el 13/10/2025</p>
-          <p class="review-message">
-            10/10 - El mejor sandbox de la historia. Llevo más de una década jugando y todavía no he visto todo lo que
-            ofrece. Empiezas golpeando un árbol para hacer una mesa y, sin darte cuenta, ya estás diseñando un circuito
-            de redstone para una granja automática de melones. La libertad es absoluta. Es el juego más relajante del
-            mundo, hasta que escuchas un "ssssssss" y ves cómo un creeper se lleva 4 horas de tu trabajo. Volvería a
-            pasar mi primera noche en un hoyo de tierra otra vez. Recomendado.
-          </p>
+        <div class="review-container" id="reviews-list">
+          <p>Cargando reseñas...</p>
         </div>
       </section>
+      
       <div class="item-added" id="item-agregado-modal">
         <div class="modal-content">
           <h2>¡Añadido a tu carrito!</h2>
@@ -88,6 +76,7 @@
         </div>
       </div>
     </main>
-      <%@include file="WEB-INF/fragmentos/footer.jspf" %>
+    <script src="scripts/product-detail.js"></script>
+    <%@include file="WEB-INF/fragmentos/footer.jspf" %>
   </body>
 </html>

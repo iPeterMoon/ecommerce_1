@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', loadOrderDetails);
 
 async function loadOrderDetails() {
-    // 1. Obtener ID de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const orderId = urlParams.get('id');
 
@@ -17,11 +16,10 @@ async function loadOrderDetails() {
             return;
         }
 
-        // 3. Fetch Detalle del Pedido
         const response = await fetch(`http://localhost:8080/API-Videojuegos/api/pedidos/${orderId}`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Authorization': 'Bearer ' + token, 
                 'Content-Type': 'application/json'
             }
         });
@@ -72,13 +70,19 @@ function renderOrder(pedido) {
     // Info Pago (Manejo defensivo por si es null)
     if(pedido.pago) {
         document.getElementById('payment-method').textContent = pedido.pago.metodoPago || 'N/A';
-        document.getElementById('payment-ref').textContent = pedido.pago.referencia || 'N/A';
+        document.getElementById('payment-ref').textContent = pedido.pago.referencia || 'Sin referencia';
         document.getElementById('payment-status').textContent = pedido.pago.estadoPago || 'N/A';
     } else {
         document.getElementById('payment-method').textContent = "Pendiente / No registrado";
     }
 
-    // Renderizar Items
+    if (pedido.usuario.direcciones && pedido.usuario.direcciones.length > 0) {
+        const d = pedido.usuario.direcciones[0];
+        document.getElementById('client-address').textContent = `${d.calle} ${d.numeroExterior}, ${d.colonia}, ${d.ciudad}`;
+    } else {
+        document.getElementById('client-address').textContent = "Dirección no disponible";
+    }
+
     const itemsContainer = document.getElementById('items-container');
     itemsContainer.innerHTML = '';
     
@@ -94,8 +98,6 @@ function renderOrder(pedido) {
         const itemRow = document.createElement('div');
         itemRow.className = 'product-row';
         
-        // MODIFICACIÓN: Agregamos el botón de reseña en la estructura HTML
-        // Apuntamos a 'crear-resena.jsp' enviando el ID del producto
         itemRow.innerHTML = `
             <div class="product-info-left"> 
                 <img src="${img}" alt="${item.nombreProducto}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;" />
@@ -115,12 +117,12 @@ function renderOrder(pedido) {
         itemsContainer.appendChild(itemRow);
     });
 
-    // Totales y Estado
-    const totalDisplay = totalCalculado.toLocaleString("es-MX", {style:"currency", currency:"MXN"});
+    const totalFinal = (pedido.pago && pedido.pago.monto) ? pedido.pago.monto : totalCalculado;
+    const totalDisplay = totalFinal.toLocaleString("es-MX", {style:"currency", currency:"MXN"});
+    
     document.getElementById('subtotal-amount').textContent = totalDisplay;
     document.getElementById('total-amount').textContent = totalDisplay;
 
-    // Icono y texto de estado
     const statusText = document.getElementById('status-text');
     const statusIcon = document.getElementById('status-icon');
     

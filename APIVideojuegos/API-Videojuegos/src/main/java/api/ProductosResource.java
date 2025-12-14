@@ -6,6 +6,7 @@ package api;
 
 import DAO.ProductoDAO;
 import DTO.ProductoDTO;
+import DTO.ResenaDTO;
 import entidades.Producto;
 import entidades.Resena;
 import jakarta.ws.rs.core.Context;
@@ -52,11 +53,16 @@ public class ProductosResource {
             @QueryParam("platform") String platformStr,
             @QueryParam("genre") String genreStr,
             @QueryParam("year") Integer year,
-            @QueryParam("rating") Integer ratingStr
+            @QueryParam("rating") Integer ratingStr,
+            @QueryParam("id") Long id 
     ) {
 
         List<Producto> allProductos = producto.buscarTodos();
         Stream<Producto> stream = allProductos.stream();
+
+        if (id != null) {
+            stream = stream.filter(p -> p.getIdProducto().equals(id));
+        }
 
         if (query != null && !query.trim().isEmpty()) {
             String lowerQuery = query.toLowerCase();
@@ -88,19 +94,17 @@ public class ProductosResource {
                 if (p.getVideojuego() == null || p.getVideojuego().getCategorias() == null) {
                     return false;
                 }
-
                 return p.getVideojuego().getCategorias().stream()
                         .anyMatch(cat -> selectedGenres.contains(cat.getNombre().toLowerCase()));
             });
         }
 
         if (year != null) {
-            String yearString = String.valueOf(year); 
+            String yearString = String.valueOf(year);
             stream = stream.filter(p
                     -> p.getVideojuego() != null
                     && p.getVideojuego().getAnoLanzamiento() != null
-                    && 
-                    p.getVideojuego().getAnoLanzamiento().equals(yearString)
+                    && p.getVideojuego().getAnoLanzamiento().equals(yearString)
             );
         }
 
@@ -110,12 +114,10 @@ public class ProductosResource {
                 if (reviews == null || reviews.isEmpty()) {
                     return false;
                 }
-
                 double average = reviews.stream()
-                        .mapToInt(Resena::getCalificacion) 
+                        .mapToInt(Resena::getCalificacion)
                         .average()
                         .orElse(0.0);
-
                 return average >= ratingStr;
             });
         }
@@ -144,6 +146,29 @@ public class ProductosResource {
                 String imgBase64 = java.util.Base64.getEncoder().encodeToString(p.getImagen());
                 dto.setImagenBase64("data:image/jpeg;base64," + imgBase64);
             }
+            if (p.getResenas() != null && !p.getResenas().isEmpty()) {
+                double avg = p.getResenas().stream()
+                        .mapToInt(entidades.Resena::getCalificacion)
+                        .average()
+                        .orElse(0.0);
+                dto.setPromedioCalificacion(avg);
+
+                List<ResenaDTO> reviewDTOs = new ArrayList<>();
+                for (entidades.Resena r : p.getResenas()) {
+                    String userName = (r.getUsuario() != null) ? r.getUsuario().getNombre() : "Anónimo";
+
+                    reviewDTOs.add(new ResenaDTO(
+                            userName,
+                            r.getFecha().toString(), 
+                            r.getCalificacion(),
+                            r.getComentario()
+                    ));
+                }
+                dto.setResenas(reviewDTOs);
+            } else {
+                dto.setPromedioCalificacion(0.0);
+                dto.setResenas(new ArrayList<>());
+            }
             if (p.getPlataforma() != null) {
                 dto.setIdPlataforma(p.getPlataforma().getIdPlataforma());
                 dto.setNombrePlataforma(p.getPlataforma().getNombre());
@@ -151,6 +176,8 @@ public class ProductosResource {
             if (p.getVideojuego() != null) {
                 dto.setIdVideojuego(p.getVideojuego().getIdVideojuego());
                 dto.setNombreVideojuego(p.getVideojuego().getNombre());
+                dto.setDesarrollador(p.getVideojuego().getDesarrollador());
+                dto.setAnioLanzamiento(p.getVideojuego().getAnoLanzamiento());
             }
             dtos.add(dto);
         }

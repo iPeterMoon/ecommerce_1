@@ -8,7 +8,6 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.annotation.WebFilter;
 import util.JwtUtil;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import java.io.IOException;
@@ -19,7 +18,7 @@ import java.io.IOException;
  * 
  * @author peter
  */
-@WebFilter("/api/*")
+//@WebFilter("/api/*")
 public class FiltroJWT implements Filter {
 
     // Endpoints públicos que no requieren autenticación
@@ -64,6 +63,7 @@ public class FiltroJWT implements Filter {
         // Obtener el token del header Authorization
         String authHeader = httpRequest.getHeader("Authorization");
         
+        System.out.println("ASDASADSSADDSA: " + authHeader);
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             sendUnauthorizedResponse(httpResponse, "Token no proporcionado");
             return;

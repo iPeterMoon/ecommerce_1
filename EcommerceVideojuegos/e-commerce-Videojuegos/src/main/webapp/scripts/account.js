@@ -1,4 +1,6 @@
-document.addEventListener('DOMContentLoaded', loadUserProfile);
+document.addEventListener('DOMContentLoaded', () => {
+    loadUserProfile();
+});
 
 // Variable global para almacenar los datos del usuario temporalmente
 let currentUserData = null;
@@ -22,6 +24,7 @@ async function loadUserProfile() {
             }
         });
 
+
         if (!response.ok) {
             if (response.status === 401) {
                 alert("Sesión expirada.");
@@ -33,7 +36,8 @@ async function loadUserProfile() {
         }
 
         const user = await response.json();
-        currentUserData = user; // Guardar referencia
+        
+        currentUserData = user; 
 
         renderUserData(user);
         renderAddresses(user.direcciones);
@@ -42,7 +46,6 @@ async function loadUserProfile() {
         if(content) content.style.display = 'block';
 
     } catch (error) {
-        console.error(error);
         if(loader) loader.style.display = 'none';
         alert("Error cargando perfil: " + error.message);
     }
@@ -184,7 +187,10 @@ function openEditAddress(event, id) {
 
     // Buscar la dirección en los datos locales
     const direccion = currentUserData.direcciones.find(d => d.idDireccion === id);
-    if (!direccion) return;
+    if (!direccion) {
+        return;
+    }
+
 
     // Llenar formulario
     document.getElementById('address-id').value = direccion.idDireccion;
@@ -264,7 +270,6 @@ async function handleAddressSubmit(event) {
             } else {
                 // Aquí capturamos el error "Unrecognized field..."
                 const textError = await response.text();
-                console.error("Error del servidor (Texto):", textError);
                 
                 // Extraer mensaje útil si es posible, o mostrar genérico
                 if (textError.includes("Unrecognized field")) {
@@ -279,7 +284,6 @@ async function handleAddressSubmit(event) {
         await loadUserProfile(); 
 
     } catch (error) {
-        console.error(error);
         errorDiv.textContent = error.message;
         errorDiv.style.display = 'block';
     }

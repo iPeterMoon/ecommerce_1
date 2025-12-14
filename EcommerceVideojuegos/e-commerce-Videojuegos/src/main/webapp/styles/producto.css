@@ -17,6 +17,10 @@
   align-items: center;
 }
 
+  .review-item{
+    display: flex;
+  }
+
 .image-and-price img {
   width: 100%;
   object-fit: cover;
@@ -35,8 +39,10 @@
 }
 
 .calification span {
+  justify-self: center;
+  align-self: center;
   color: var(--text-white);
-  font-size: 0.6rem;
+  font-size: clamp(.65rem,.65rem,.7rem);
 }
 
 .button-with-price {
