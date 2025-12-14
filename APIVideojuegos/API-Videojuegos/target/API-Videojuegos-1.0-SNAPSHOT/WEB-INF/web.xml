@@ -24,5 +24,14 @@
             30
         </session-timeout>
     </session-config>
+    
+    <filter>
+        <filter-name>autenticacion</filter-name>
+        <filter-class>filtros.FiltroJWT</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>autenticacion</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
 </web-app>
 

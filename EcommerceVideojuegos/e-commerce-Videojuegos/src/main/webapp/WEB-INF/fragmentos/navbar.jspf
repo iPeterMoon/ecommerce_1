@@ -32,28 +32,32 @@
                     <img src="${pageContext.request.contextPath}/icons/cart.svg" alt="cart">
                 </a>
             </li>
-            
-             <c:if test="${sessionScope.usuario != null and sessionScope.usuario.rol == 'ADMIN'}">
+
+            <%-- Solo renderizar si el usuario existe Y su rol es ADMIN --%>
+            <c:if test="${not empty sessionScope.usuario and sessionScope.usuario.rol eq 'ADMIN'}">
                 <li class="nav-element">
                     <a href="${pageContext.request.contextPath}/admin-options.jsp">
                         <img src="${pageContext.request.contextPath}/icons/settings.svg" alt="admin">
                     </a>
-                </li>                
-            </c:if>
+                </li>
+            </c:if>             
 
             <li class="nav-element">
-            <c:choose>
-                <c:when test="${sessionScope.usuario != null}">
-                    <a href="${pageContext.request.contextPath}/account.jsp">
-                        <img src="${pageContext.request.contextPath}/icons/user.svg" alt="account">
-                    </a>
-                </c:when>
-                <c:otherwise>
-                    <a href="${pageContext.request.contextPath}/login.jsp">
-                        <img src="${pageContext.request.contextPath}/icons/user.svg" alt="login">
-                    </a>
-                </c:otherwise>
-            </c:choose>
+                <%-- Verificamos si existe el objeto 'usuario' en la sesión --%>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.usuario}">
+                        <%-- Si ESTÁ logueado, mandamos a account.jsp --%>
+                        <a href="${pageContext.request.contextPath}/account.jsp" id="user-icon-link">
+                            <img src="${pageContext.request.contextPath}/icons/user.svg" alt="account">
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <%-- Si NO está logueado, mandamos a login.jsp --%>
+                        <a href="${pageContext.request.contextPath}/login.jsp" id="user-icon-link">
+                            <img src="${pageContext.request.contextPath}/icons/user.svg" alt="account">
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </li>
         </ul>
     </nav>
@@ -64,43 +68,75 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const contextPath = "${pageContext.request.contextPath}";
-
         const header = document.getElementById("main-header");
         const searchBtn = document.getElementById("search-icon-btn");
         const closeBtn = document.getElementById("close-search");
         const searchInput = document.getElementById("searchInput");
         const resultsContainer = document.getElementById("resultsContainer");
-
         let timeout = null;
+        // ============================================
+        // GESTIÓN DE AUTENTICACIÓN JWT
+        // ============================================
+        function checkAuthAndUpdateNav() {
+            // Buscamos el token en ambas ubicaciones
+            const token =
+                    localStorage.getItem("token") || sessionStorage.getItem("token");
+            const usuarioStr =
+                    localStorage.getItem("usuario") ||
+                    sessionStorage.getItem("usuario");
+            const userIconLink = document.getElementById("user-icon-link");
+            if (token && usuarioStr && userIconLink) {
+                try {
+                    const usuario = JSON.parse(usuarioStr);
+                    // 1. CAMBIAR EL LINK DEL ICONO DE USUARIO A account.jsp
+                    userIconLink.href = contextPath + "/account.jsp";
 
+                    // 2. MOSTRAR OPCIONES DE ADMIN si el usuario es ADMIN
+                    if (usuario.rol === "ADMIN") {
+                        const adminElements = document.querySelectorAll(".admin-only");
+                        adminElements.forEach((el) => (el.style.display = "block"));
+                    }
+                } catch (e) {
+                    // Si el JSON es inválido, limpiamos para forzar un nuevo login
+                    console.error("Error parsing user data, forcing re - login logic.");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("usuario");
+                    sessionStorage.removeItem("token");
+                    sessionStorage.removeItem("usuario");
+                    // El link se queda apuntando a login.jsp por defecto.
+                }
+
+            }
+            // Si no hay token, el link se mantiene en login.jsp por defecto.
+        }
+
+        // Ejecutar al cargar la página
+        checkAuthAndUpdateNav();
         // 1. OPEN SEARCH (Fade Animation)
         searchBtn.addEventListener("click", function (e) {
             e.preventDefault();
             header.classList.add("search-active");
-
             setTimeout(() => {
                 searchInput.focus(); // Focus input after animation starts
             }, 100);
         });
-
         // 2. CLOSE SEARCH
         closeBtn.addEventListener("click", function () {
             header.classList.remove("search-active");
-            searchInput.value = '';
-            resultsContainer.innerHTML = '';
-            resultsContainer.style.display = 'none'; // Hide dropdown
+            searchInput.value = "";
+            resultsContainer.innerHTML = "";
+            resultsContainer.style.display = "none"; // Hide dropdown
         });
-
         // 3. FETCH DATA
         async function fetchProducts(query) {
             try {
-                const url = "http://localhost:8080/API-Videojuegos" + "/api/productos?q=" + query;
-
+                const url =
+                        "http://localhost:8080/API-Videojuegos" +
+                        "/api/productos?q=" +
+                        query;
                 const response = await fetch(url);
-
                 if (!response.ok)
                     throw new Error("Network response not ok");
-
                 const products = await response.json();
                 renderResults(products);
             } catch (error) {
@@ -109,52 +145,58 @@
         }
 
         // 4. INPUT LOGIC
-        searchInput.addEventListener('input', function (event) {
+        searchInput.addEventListener("input", function (event) {
             const query = event.target.value.trim();
             clearTimeout(timeout);
-
             timeout = setTimeout(() => {
                 if (query.length > 0) {
                     fetchProducts(query);
                 } else {
-                    resultsContainer.style.display = 'none';
-                    resultsContainer.innerHTML = '';
+                    resultsContainer.style.display = "none";
+                    resultsContainer.innerHTML = "";
                 }
             }, 300);
         });
-
         // 5. RENDER RESULTS
         function renderResults(products) {
-            resultsContainer.innerHTML = '';
-
+            resultsContainer.innerHTML = "";
             if (products.length === 0) {
-                resultsContainer.style.display = 'block';
-                resultsContainer.innerHTML = '<p style="padding:15px; text-align:center; color:#aaa">No games found.</p>';
+                resultsContainer.style.display = "block";
+                resultsContainer.innerHTML =
+                        '<p style="padding:15px; text-align:center; color:#aaa">No games found.</p>';
                 return;
             }
 
-            resultsContainer.style.display = 'block';
-
-            products.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'result-card';
-
-                const imgSource = product.imagenBase64 ? product.imagenBase64 : contextPath + '/imgs/default-placeholder.png';
-
-                card.innerHTML = `
-                <img src="` + imgSource + `" alt="` + product.nombreProducto + `" style="width:50px; height:50px; object-fit:cover; border-radius:4px;">
+            resultsContainer.style.display = "block";
+            products.forEach((product) => {
+                const card = document.createElement("div");
+                card.className = "result-card";
+                const imgSource = product.imagenBase64
+                        ? product.imagenBase64
+                        : contextPath + "/imgs/default-placeholder.png";
+                card.innerHTML =
+                        `
+                <img src="` +
+                        imgSource +
+                        `" alt="` +
+                        product.nombreProducto +
+                        `" style="width:50px; height:50px; object-fit:cover; border-radius:4px;">
                 <div class="result-info">
-                    <h3 style="margin:0; font-size:14px; color:white;">` + product.nombreProducto + `</h3>
-                    <p class="price" style="margin:0; color:cyan; font-size:12px;">$` + product.precio + `</p>
+                    <h3 style="margin:0; font-size:14px; color:white;">` +
+                        product.nombreProducto +
+                        `</h3>
+                    <p class="price" style="margin:0; color:cyan; font-size:12px;">$` +
+                        product.precio +
+                        `</p>
                 </div>
             `;
-
-                card.addEventListener('click', () => {
-                    window.location.href = contextPath + '/details.jsp?id=' + product.idProducto;
+                card.addEventListener("click", () => {
+                    window.location.href =
+                            contextPath + "/details.jsp?id=" + product.idProducto;
                 });
-
                 resultsContainer.appendChild(card);
             });
         }
     });
+
 </script>

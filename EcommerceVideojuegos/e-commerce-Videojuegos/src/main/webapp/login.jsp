@@ -8,42 +8,34 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="styles/form_login_register.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
-    <title>Inicio de Sesión</title>
-</head>
+        <link rel="stylesheet" href="styles/styles.css">
+        <link rel="stylesheet" href="styles/form_login_register.css">
+        <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
+        <title>Inicio de Sesión</title>
+    </head>
 
-<body class="tron-grid grid-container">
-     <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
-    <main>
-        <form action="InicioSesion" method="get">
-            <h2 class="form-title">Inicio de sesión</h2>  
-            
-            <%
-                String error = request.getParameter("error");
-                if(error != null && error.equals("1")) {
-            %>
-                <div class="error-message">
-                    Correo o contraseña incorrectos. Intenta de nuevo.
-                </div>
-            <%
-                }
-            %>
+    <body class="tron-grid grid-container">
+        <%@include file="WEB-INF/fragmentos/navbar.jspf" %>
+        <main>
+            <form id="loginForm" onSubmit="handleLogin(event)">
+                <h2 class="form-title">Inicio de sesión</h2>  
 
-            <label for="mail">Correo electrónico</label>
-            <input id="mail" name="mail" type="email" required>
-            <label for="pswd">Contraseña</label>
-            <input id="pswd" name="pswd" type="password" required>
-            <span>¿No tienes una cuenta? <a href="register.jsp">Crear cuenta</a></span>
-            <button type="submit">Iniciar sesión</button>
-        </form>
-    </main>
-      <%@include file="WEB-INF/fragmentos/footer.jspf" %>
-</body>
+                <div class="error-message" id="errorMessage" style="display: none;"></div>
+
+                <label for="mail">Correo electrónico</label>
+                <input id="mail" name="mail" type="email" required>
+                <label for="pswd">Contraseña</label>
+                <input id="pswd" name="pswd" type="password" required>
+                <span>¿No tienes una cuenta? <a href="register.jsp">Crear cuenta</a></span>
+                <button type="submit" id="submitBtn">Iniciar sesión</button>
+            </form>
+        </main>
+        <%@include file="WEB-INF/fragmentos/footer.jspf" %>
+        <script src="scripts/login.js"></script>
+    </body>
 
 </html>

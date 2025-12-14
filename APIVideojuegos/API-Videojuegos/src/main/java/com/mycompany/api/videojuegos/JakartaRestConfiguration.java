@@ -1,6 +1,8 @@
 package com.mycompany.api.videojuegos;
 
+import api.LoginResource;
 import api.ProductosResource;
+import api.VerifyResource;
 import jakarta.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +20,8 @@ public class JakartaRestConfiguration extends Application {
         final Set<Class<?>> classes = new HashSet<>();
         classes.add(ProductosResource.class);
         classes.add(CorsFilter.class);
+        classes.add(LoginResource.class);
+        classes.add(VerifyResource.class);
         return classes;
     }
 
