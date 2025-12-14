@@ -5,6 +5,7 @@ import api.CartResource;
 import api.HistoryResource;
 import api.OrderDetailResource;
 import api.ProductosResource;
+import api.UserResource;
 import api.VerifyResource;
 import jakarta.ws.rs.core.Application;
 import java.util.HashSet;
@@ -28,6 +29,7 @@ public class JakartaRestConfiguration extends Application {
         classes.add(VerifyResource.class);
         classes.add(HistoryResource.class);
         classes.add(OrderDetailResource.class);
+        classes.add(UserResource.class);
         return classes;
     }
 

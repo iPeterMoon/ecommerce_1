@@ -8,8 +8,7 @@ import java.util.stream.Collectors;
 
 /**
  * Mapper para convertir entre Direccion (Entidad) y DireccionDTO
- * 
- * @author petermoon
+ * * @author petermoon
  */
 public class DireccionMapper {
     
@@ -25,6 +24,7 @@ public class DireccionMapper {
         
         DireccionDTO dto = new DireccionDTO();
         dto.setIdDireccion(direccion.getIdDireccion());
+        dto.setNombre(direccion.getNombre()); // Mapeo del nombre
         dto.setCalle(direccion.getCalle());
         dto.setNumeroExterior(direccion.getNumeroExterior());
         dto.setColonia(direccion.getColonia());
@@ -47,6 +47,7 @@ public class DireccionMapper {
         
         Direccion direccion = new Direccion();
         direccion.setIdDireccion(dto.getIdDireccion());
+        direccion.setNombre(dto.getNombre()); // Mapeo del nombre
         direccion.setCalle(dto.getCalle());
         direccion.setNumeroExterior(dto.getNumeroExterior());
         direccion.setColonia(dto.getColonia());
@@ -67,6 +68,11 @@ public class DireccionMapper {
     public static void updateEntityFromDTO(Direccion direccion, DireccionDTO dto) {
         if (direccion == null || dto == null) {
             return;
+        }
+        
+        // Actualizar nombre si está presente
+        if (dto.getNombre() != null) {
+            direccion.setNombre(dto.getNombre());
         }
         
         if (dto.getCalle() != null) {

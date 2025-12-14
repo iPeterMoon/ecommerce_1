@@ -9,9 +9,11 @@ package DTO;
  * @author petermoon
  */
 public class DireccionDTO {
-
+    
     private Long idDireccion;
 
+    private String nombre;
+    
     private String calle;
 
     private String numeroExterior;
@@ -27,6 +29,14 @@ public class DireccionDTO {
     public DireccionDTO() {
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public Long getIdDireccion() {
         return idDireccion;
     }

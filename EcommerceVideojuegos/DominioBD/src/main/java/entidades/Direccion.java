@@ -10,6 +10,9 @@ public class Direccion {
     @Column(name = "id_direccion")
     private Long idDireccion;
 
+    @Column(name = "nombre", length = 50)
+    private String nombre;
+
     @Column(name = "calle", nullable = false)
     private String calle;
 
@@ -35,13 +38,20 @@ public class Direccion {
     public Direccion() {
     }
 
-    
     public Long getIdDireccion() {
         return idDireccion;
     }
 
     public void setIdDireccion(Long idDireccion) {
         this.idDireccion = idDireccion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getCalle() {
@@ -99,6 +109,4 @@ public class Direccion {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    
 }
