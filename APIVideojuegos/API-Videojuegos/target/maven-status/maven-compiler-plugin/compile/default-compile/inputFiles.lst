@@ -1,5 +1,11 @@
-C:\Users\moren\Documents\GitHub\ecommerce_1\APIVideojuegos\API-Videojuegos\src\main\java\api\CartResource.java
-C:\Users\moren\Documents\GitHub\ecommerce_1\APIVideojuegos\API-Videojuegos\src\main\java\api\ProductosResource.java
-C:\Users\moren\Documents\GitHub\ecommerce_1\APIVideojuegos\API-Videojuegos\src\main\java\com\mycompany\api\videojuegos\CorsFilter.java
-C:\Users\moren\Documents\GitHub\ecommerce_1\APIVideojuegos\API-Videojuegos\src\main\java\com\mycompany\api\videojuegos\JakartaRestConfiguration.java
-C:\Users\moren\Documents\GitHub\ecommerce_1\APIVideojuegos\API-Videojuegos\src\main\java\com\mycompany\api\videojuegos\resources\JakartaEE11Resource.java
+/home/petermoon/Documentos/GitHub/ecommerce_1/APIVideojuegos/API-Videojuegos/src/main/java/api/CartResource.java
+/home/petermoon/Documentos/GitHub/ecommerce_1/APIVideojuegos/API-Videojuegos/src/main/java/api/LoginResource.java
+/home/petermoon/Documentos/GitHub/ecommerce_1/APIVideojuegos/API-Videojuegos/src/main/java/api/ProductosResource.java
+/home/petermoon/Documentos/GitHub/ecommerce_1/APIVideojuegos/API-Videojuegos/src/main/java/api/VerifyResource.java
+/home/petermoon/Documentos/GitHub/ecommerce_1/APIVideojuegos/API-Videojuegos/src/main/java/com/mycompany/api/videojuegos/CorsFilter.java
+/home/petermoon/Documentos/GitHub/ecommerce_1/APIVideojuegos/API-Videojuegos/src/main/java/com/mycompany/api/videojuegos/JakartaRestConfiguration.java
+/home/petermoon/Documentos/GitHub/ecommerce_1/APIVideojuegos/API-Videojuegos/src/main/java/com/mycompany/api/videojuegos/resources/JakartaEE11Resource.java
+/home/petermoon/Documentos/GitHub/ecommerce_1/APIVideojuegos/API-Videojuegos/src/main/java/filtros/FiltroJWT.java
+/home/petermoon/Documentos/GitHub/ecommerce_1/APIVideojuegos/API-Videojuegos/src/main/java/mappers/DireccionMapper.java
+/home/petermoon/Documentos/GitHub/ecommerce_1/APIVideojuegos/API-Videojuegos/src/main/java/mappers/UsuarioMapper.java
+/home/petermoon/Documentos/GitHub/ecommerce_1/APIVideojuegos/API-Videojuegos/src/main/java/util/JwtUtil.java

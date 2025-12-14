@@ -1,8 +1,6 @@
 package controlador;
 
-import DTO.UsuarioDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,12 +26,13 @@ public class CerrarSesionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
-        if(usuario != null) {
-            session.setAttribute("usuario", null);
-            response.sendRedirect("index.jsp");
+        HttpSession session = request.getSession(false);
+        
+        if (session != null) {
+            session.invalidate();
         }
+        
+        response.sendRedirect("index.jsp");
     }
 
     /**

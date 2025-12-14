@@ -130,7 +130,7 @@
                             <button type="submit">Guardar cambios</button>
                         </form>
                         <hr>
-                        <form action="CerrarSesion" method="post">
+                        <form action="CerrarSesion" method="post" onsubmit="handleLogout(event)">
                             <button type="submit" style="color: var(--red-error-text)">Cerrar sesión</button>
                         </form>
                     </div>
@@ -241,6 +241,7 @@
 
         <%@include file="WEB-INF/fragmentos/footer.jspf" %>
 
+        <script src="scripts/account.js"></script>
     </body>
 
 </html>

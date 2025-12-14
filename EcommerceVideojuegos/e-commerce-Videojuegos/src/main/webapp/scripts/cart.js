@@ -1,5 +1,24 @@
 async function addToCart(id) {
   try {
+    const token = localStorage.getItem('token');
+
+    const verify = await fetch("http://localhost:8080/API-Videojuegos/api/auth/verify", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        token: token 
+      })
+    });
+
+    console.log(verify.status);
+    if(!verify.ok){
+      const data = await verify.json(); 
+      window.alert(data.error);
+      return;
+    }
+
     const response = await fetch(`http://localhost:8080/API-Videojuegos/api/cart/add?id=${id}`, {
       method: "POST",
     });

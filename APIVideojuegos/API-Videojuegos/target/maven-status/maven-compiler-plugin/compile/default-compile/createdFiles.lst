@@ -1,5 +1,12 @@
-api\CartResource.class
-com\mycompany\api\videojuegos\CorsFilter.class
-com\mycompany\api\videojuegos\resources\JakartaEE11Resource.class
-com\mycompany\api\videojuegos\JakartaRestConfiguration.class
-api\ProductosResource.class
+com/mycompany/api/videojuegos/CorsFilter.class
+com/mycompany/api/videojuegos/resources/JakartaEE11Resource.class
+api/ProductosResource.class
+api/VerifyResource.class
+api/LoginResource.class
+api/CartResource.class
+util/JwtUtil.class
+com/mycompany/api/videojuegos/JakartaRestConfiguration.class
+mappers/DireccionMapper.class
+mappers/UsuarioMapper.class
+api/TokenRequest.class
+filtros/FiltroJWT.class
