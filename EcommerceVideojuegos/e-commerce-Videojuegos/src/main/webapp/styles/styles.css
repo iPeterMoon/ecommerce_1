@@ -240,9 +240,7 @@ button {
 
 /* LANDING PAGE */
 
-.featured-games {
-    margin-top: 40px;
-}
+
 
 .featured-header {
     display: flex;
@@ -304,7 +302,7 @@ button {
 
 .sidebar {
     display: none;
-    width: 70rem;
+    width: 20rem;
     background-color: #171D25;
     padding: 2rem;
     font-family: 'Montserrat', sans-serif;
@@ -463,7 +461,8 @@ button {
 
     .sidebar {
         display: flex;
-        width: 70rem;
+        width: 20rem;
+        height: 40rem;
     }
 }
 

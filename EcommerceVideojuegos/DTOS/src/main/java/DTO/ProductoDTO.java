@@ -97,4 +97,6 @@ public class ProductoDTO {
     public void setNombrePlataforma(String nombrePlataforma) {
         this.nombrePlataforma = nombrePlataforma;
     }
+    
+    
 }

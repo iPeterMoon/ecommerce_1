@@ -19,7 +19,12 @@ public class ProductoDAO extends GenericDAO<Producto, Long> implements IProducto
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Producto> query = em.createQuery(
-                    "SELECT p FROM Producto p LEFT JOIN FETCH p.plataforma LEFT JOIN FETCH p.videojuego", Producto.class);
+                    "SELECT DISTINCT p FROM Producto p " +
+                    "LEFT JOIN FETCH p.plataforma " +
+                    "LEFT JOIN FETCH p.videojuego v " +
+                    "LEFT JOIN FETCH v.categorias " +
+                    "LEFT JOIN FETCH p.resenas",     
+                    Producto.class);
             return query.getResultList();
         } finally {
             em.close();
