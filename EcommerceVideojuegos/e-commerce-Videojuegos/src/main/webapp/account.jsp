@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="phone-info">
                                         <label for="phone">Teléfono:</label>
-                                        <input id="phone" name="phone" type="tel" placeholder="Cargando...">
+                                        <input id="phone" name="phone" type="tel" placeholder="Telefono no Asignado. Ingresar uno">
                                     </div>
                                 </div>
 

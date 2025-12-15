@@ -161,6 +161,11 @@ hr {
   border: none;
   font-weight: bold;
   width: 100%;
+  transition: all 0.3s ease;
+}
+
+.buttons-container button:active {
+    transform: scale(0.98);
 }
 
 .cancel-button {
@@ -168,9 +173,21 @@ hr {
   color: white;
 }
 
+.cancel-button:hover {
+    background-color: #4b658a;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
+}
+
 .payment-button {
   background-color: #008000;
   color: white;
+}
+
+.payment-button:hover {
+    background-color: #00a800;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+    transform: translateY(-2px);
 }
 
 

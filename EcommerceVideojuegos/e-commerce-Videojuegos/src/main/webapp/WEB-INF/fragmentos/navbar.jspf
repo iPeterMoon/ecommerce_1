@@ -16,7 +16,7 @@
     </div>
 
     <div class="header-search-wrapper">
-        <input type="text" id="searchInput" placeholder="Search game..." autocomplete="off">
+        <input type="text" id="searchInput" placeholder="Buscar videojuegos ..." autocomplete="off">
         <button id="close-search">X</button>
     </div>
 

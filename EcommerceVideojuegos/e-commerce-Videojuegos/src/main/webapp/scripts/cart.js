@@ -1,6 +1,5 @@
 
 async function addToCart(id) {
-
     try {
         const token = localStorage.getItem("token");
 
@@ -16,7 +15,7 @@ async function addToCart(id) {
         });
 
         if (verify.status === 401) {
-            alert("Your session has expired. Please log in again.");
+            alert("Tu sesión expiró, por favor inicia sesión de nuevo.");
             localStorage.removeItem("token");
             window.location.href = "login.jsp";
             return;
@@ -39,19 +38,45 @@ async function addToCart(id) {
         if (response.ok) {
             const data = await response.json();
 
+            // 1. Actualizar el globito del carrito (Badge)
             const badge = document.getElementById("cart-badge");
             if (badge) {
                 badge.textContent = data.totalItems;
                 badge.style.display = "block";
             }
+
+            // =======================================================
+            // 2. NUEVO: Actualizar la información visual del Modal
+            // =======================================================
+
+            // A. Obtener datos de la página principal (DOM)
+            const mainImgSrc = document.querySelector(".image-and-price img").src;
+            const mainTitle = document.querySelector(".item-description .game-tittle").textContent;
+            let mainPrice = document.querySelector(".button-with-price .price").textContent.trim(); // Ej: "MEX 349.00"
+
+            // B. Formatear el precio para que se vea bonito (Agregar signo $ si falta)
+            // Si dice "MEX 349.00", lo convertimos a "MEX $349.00"
+            if (!mainPrice.includes("$")) {
+                mainPrice = mainPrice.replace("MEX", "MEX $");
+            }
+
+            const modal = document.getElementById("item-agregado-modal");
+            
+            // Imagen
+            modal.querySelector(".item-img").src = mainImgSrc;
+            // Título
+            modal.querySelector(".game-tittle").textContent = mainTitle;
+            // Precio (Concatenamos "Precio: " con el formato arreglado)
+            modal.querySelector(".price-item").textContent = "Precio: " + mainPrice;
+
         } else {
             const errorText = await response.text();
             alert("Error: " + errorText);
         }
     } catch (e) {
+        console.error(e);
     }
 }
-
 
 async function loadShoppingCart() {
 
@@ -70,7 +95,7 @@ async function loadShoppingCart() {
         });
 
         if (verify.status === 401) {
-            alert("Your session has expired.");
+            alert("Tu sesion expiro.");
             localStorage.removeItem("token");
             window.location.href = "login.jsp";
             return;
@@ -97,7 +122,7 @@ async function loadShoppingCart() {
 
     } catch (error) {
         console.error("Fatal error in loadShoppingCart:", error);
-        document.getElementById("cart-container").innerHTML = "<p>Your cart is empty or an error occurred.</p>";
+        document.getElementById("cart-container").innerHTML = "<p>Tu carrito esta vacío.</p>";
     }
 }
 
@@ -107,7 +132,7 @@ function renderCartItems(items) {
     container.innerHTML = "";
 
     if (items.length === 0) {
-        container.innerHTML = "<p style='padding: 20px; text-align: center;'>The cart is empty.</p>";
+        container.innerHTML = "<p style='padding: 20px; text-align: center;'>¡Ups! Parece que no hay nada por aquí... solo grillos 🦗.</p>";
         return;
     }
 
@@ -120,17 +145,17 @@ function renderCartItems(items) {
             <img src="${item.imagenBase64 || "imgs/placeholder.png"}" alt="${item.nombreProducto}" class="product-img" />
             
             <div class="tittle">
-                <p>Title</p>
+                <p>Título</p>
                 <p class="game-name">${item.nombreProducto}</p>
             </div>
             
             <div class="quantity">
-                <p>Quantity</p>
+                <p>Cantidad</p>
                 <p class="product-quantity">${item.cantidad}</p>
             </div>
             
             <div class="price">
-                <p>Price</p>
+                <p>Precio</p>
                 <p class="product-price">$${item.precioUnitario}</p>
             </div>
             
@@ -206,7 +231,7 @@ async function loadOrderSummary() {
             const user = await userResponse.json();
 
             if (!user.direccion || user.direccion.trim() === "") {
-                alert("You do not have a registered address. Please add one to continue.");
+                alert("No tienes direccion registrada, Porfavor agrega una para continuar.");
                 window.location.href = "agregar_direccion.jsp"; // Or your edit profile page
                 return; 
             }
@@ -214,13 +239,13 @@ async function loadOrderSummary() {
             const addressContainer = document.querySelector(".shipment-information");
             if (addressContainer) {
                 addressContainer.innerHTML = `
-                    <p style="font-weight:bold;">Shipping Address</p>
+                    <p style="font-weight:bold;">Dirección de envío</p>
                     <p>${user.direccion}</p>
                     <p>${user.ciudad || ''}, CP ${user.cp || ''}</p>
                 `;
             }
         } else if (userResponse.status === 401) {
-             alert("Session expired.");
+             alert("Sesion expirada.");
              window.location.href = "login.jsp";
              return;
         }

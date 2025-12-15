@@ -465,81 +465,121 @@ button {
         height: 40rem;
     }
 }
-
 /* =========================================
-   HEADER SEARCH ANIMATION
+   HEADER SEARCH ANIMATION & LOGIC
    ========================================= */
 
+/* 1. Ocultar la Lupa cuando el buscador está activo */
+header.search-active #search-icon-btn {
+    display: none; /* Desaparece el icono de la lupa */
+}
 
+/* 2. Contenedor del Buscador (Móvil) */
 .header-search-wrapper {
+
     position: absolute;
-    left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%) scale(0.9); 
-    width: 60%; 
-    max-width: 600px;
+    left: 10px; /* Pegado a la izquierda */
+
+    /* CÁLCULO CRÍTICO: 
+       100vw es el ancho total de la pantalla.
+       Le restamos 140px para dejar espacio a los iconos de la derecha (Carrito, Admin, User).
+       Si sigue tapando, aumenta el 140px a 160px.
+    */
+    width: calc(100vw - 170px);
+
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 
     opacity: 0;
-    pointer-events: none; 
+    pointer-events: none;
+    transform: translateY(-50%) scale(0.9);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 200;
 }
 
+/* Estilo del Input (La barra negra) */
 .header-search-wrapper input {
-    width: 100%;
-    padding: 10px 15px;
+    width: 80%;
+    padding: 8px 12px;
     border-radius: 20px;
     border: 1px solid var(--tron-cyan);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.95); /* Fondo casi sólido para que no se trasluzca nada */
     color: white;
     font-family: 'Poppins', sans-serif;
     outline: none;
+    font-size: 16px; /* 16px evita que el iPhone haga zoom al escribir */
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
 }
 
+/* Botón X de cerrar */
 .header-search-wrapper button {
     background: none;
     border: none;
     color: var(--tron-cyan);
     font-size: 1.2rem;
+    font-weight: bold;
     cursor: pointer;
+    padding: 0 5px;
+    flex-shrink: 0;
 }
-
-.fade-target {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    opacity: 1;
-    transform: translateY(0);
-}
+  header.search-active .header-search-wrapper {
+        transform: translate(-50%, -50%) scale(1);
+    }
 
 /* =========================================
-   ACTIVE STATE (When search is clicked)
+   ACTIVE STATE (Cuando se activa el buscador)
    ========================================= */
 
+/* Ocultar el logo y título en móvil al buscar para limpiar espacio */
 header.search-active .fade-target {
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-10px);
 }
 
 header.search-active .header-search-wrapper {
     opacity: 1;
     pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translateY(-50%) scale(1);
 }
 
+/* =========================================
+   DESKTOP (Pantallas grandes)
+   ========================================= */
+@media only screen and (min-width: 769px) {
+    /* En PC restauramos el icono de la lupa si quieres, 
+       o lo dejas oculto. Normalmente en PC hay espacio para todo. 
+       Si quieres que en PC NO desaparezca la lupa, borra la línea de abajo: */
+    header.search-active #search-icon-btn {
+        display: inline-block;
+        opacity: 0; /* Opcional: solo lo hacemos semi-transparente */
+        pointer-events: none;
+    }
+
+
+    .header-search-wrapper {
+        left: 50%;
+        width: 50%;
+        max-width: 600px;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    header.search-active .header-search-wrapper {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
 /* =========================================
    RESULTS DROPDOWN (The List)
    ========================================= */
 .results-dropdown {
-    position: fixed; 
+    position: fixed;
     top: 64px;
     left: 0;
     right: 0;
     margin: 0 auto;
     width: 95%;
-    max-width: 600px; 
+    max-width: 600px;
     background-color: var(--dark-blue);
     border: 1px solid var(--tron-cyan);
     border-top: none;
@@ -548,8 +588,8 @@ header.search-active .header-search-wrapper {
     z-index: 199;
     display: none;
 
-    max-height: 350px; 
-    overflow-y: auto; 
+    max-height: 350px;
+    overflow-y: auto;
 }
 
 .results-dropdown::-webkit-scrollbar {

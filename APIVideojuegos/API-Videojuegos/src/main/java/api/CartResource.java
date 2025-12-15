@@ -83,7 +83,7 @@ public class CartResource {
 
                 cart.add(newItem);
             } else {
-                return Response.status(Response.Status.NOT_FOUND).entity("Product not found").build();
+                return Response.status(Response.Status.NOT_FOUND).entity("Producto no encontrado.").build();
             }
         }
 
