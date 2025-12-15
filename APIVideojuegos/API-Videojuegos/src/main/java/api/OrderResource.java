@@ -29,6 +29,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import util.JwtUtil;
 
 @Path("orders")
@@ -105,6 +106,7 @@ public class OrderResource {
             pago.setFechaHora(LocalDateTime.now());
             pago.setPedido(pedido);
             
+            pago.setReferencia(generarReferenciaAleatoria());
             String methodStr = orderRequest.getMetodoPago();
 
             try {
@@ -128,6 +130,15 @@ public class OrderResource {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("{\"error\": \"Error al procesar el pedido: " + e.getMessage() + "\"}").build();
         }
+    }
+
+    private String generarReferenciaAleatoria() {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 12; i++) {
+            sb.append(random.nextInt(10));
+        }
+        return sb.toString();
     }
 }
 
