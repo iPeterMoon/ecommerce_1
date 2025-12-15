@@ -1,4 +1,4 @@
-<%--
+<%-- 
     Document   : order
     Created on : 14 nov 2025, 1:37:57 a.m.
     Author     : moren
@@ -36,7 +36,6 @@
                 </ol>
             </nav>
 
-            <!-- Loader / Mensajes de Error -->
             <div id="loading-message" style="text-align: center; padding: 40px;">
                 <h2>Cargando detalles del pedido...</h2>
             </div>
@@ -47,7 +46,6 @@
                 <a href="purchase-history.jsp" style="color: cyan; text-decoration: underline;">Volver al historial</a>
             </div>
 
-            <!-- Contenedor Principal (Oculto hasta cargar datos) -->
             <div id="order-content" style="display: none;">
                 <h1 class="tittle">Cuenta de <span id="user-name-title">Cargando...</span></h1>
 
@@ -66,12 +64,10 @@
                                 <p><strong>Información del Cliente</strong></p>
                                 <p>Nombre: <span id="client-name"></span></p>
                                 <p>Correo: <span id="client-email"></span></p>
-                                <!-- Nota: La dirección podría venir del usuario o del pedido si se guardó snapshot -->
                                 <p id="client-address">Dirección registrada</p> 
                             </div>
                             <div class="payment-information">
                                 <p><strong>Resumen de Pago</strong></p>
-
                                 <p>Método de Pago: <span id="payment-method"></span></p>
                                 <p>Referencia: <span id="payment-ref"></span></p>
                                 <p>Estado: <span id="payment-status"></span></p>
@@ -80,7 +76,7 @@
                         <hr />
 
                         <div class="items-content" id="items-container">
-                        </div>
+                            </div>
 
                         <hr />
                         <div class="prices-status-order">
@@ -107,7 +103,38 @@
                 </div>
             </div>
         </main>
+        
         <%@include file="WEB-INF/fragmentos/footer.jspf" %>
+
+        <div id="modalResena" class="modal-overlay">
+            <div class="modal-container">
+                <h3 class="modal-title">¿Con cuantas estrellas calificarías este juego?</h3>
+
+                <input type="hidden" id="modalVideojuegoId" value="">
+
+                <div class="star-rating">
+                    <span class="star" onclick="setRating(1)">★</span>
+                    <span class="star" onclick="setRating(2)">★</span>
+                    <span class="star" onclick="setRating(3)">★</span>
+                    <span class="star" onclick="setRating(4)">★</span>
+                    <span class="star" onclick="setRating(5)">★</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="resenaTexto" class="modal-label">Reseña del videojuego:</label>
+                    <textarea id="resenaTexto" class="modal-textarea" placeholder="Escribe aquí tu opinión..."></textarea>
+                </div>
+
+                <p class="modal-note">El contenido que estas apunto de escribir será publico para todos</p>
+
+                <div class="modal-actions">
+                    <button class="btn-modal btn-cancel" onclick="cerrarModalResena()">Cancelar</button>
+                    <button class="btn-modal btn-publish" onclick="enviarResena()">Publicar reseña</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="scripts/review.js"></script>
 
         <script src="scripts/order-details.js"></script>
 

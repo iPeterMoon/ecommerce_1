@@ -49,25 +49,20 @@ async function loadOrderDetails() {
 }
 
 function renderOrder(pedido) {
-    // Ocultar loader, mostrar contenido
     document.getElementById('loading-message').style.display = 'none';
     document.getElementById('order-content').style.display = 'block';
 
-    // Rellenar datos básicos
     document.getElementById('user-name-title').textContent = pedido.usuario.nombre;
     document.getElementById('order-id').textContent = pedido.idPedido;
     
-    // Formatear Fecha
     const date = new Date(pedido.fechaHora);
     document.getElementById('order-date').textContent = date.toLocaleDateString('es-MX', { 
         day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute:'2-digit' 
     });
 
-    // Info Cliente
     document.getElementById('client-name').textContent = pedido.usuario.nombre;
     document.getElementById('client-email').textContent = pedido.usuario.correo;
 
-    // Info Pago (Manejo defensivo por si es null)
     if(pedido.pago) {
         document.getElementById('payment-method').textContent = pedido.pago.metodoPago || 'N/A';
         document.getElementById('payment-ref').textContent = pedido.pago.referencia || 'Sin referencia';
@@ -88,16 +83,28 @@ function renderOrder(pedido) {
     
     let totalCalculado = 0;
 
+    const puedeResenar = pedido.estadoPedido === 'ENTREGADO';
+
     pedido.items.forEach(item => {
         const subtotal = item.subtotal || (item.precioUnitario * item.cantidad);
         totalCalculado += subtotal;
-        
+
         const img = item.imagenBase64 || 'imgs/placeholder.png';
-        const precioFormatted = item.precioUnitario.toLocaleString("es-MX", {style:"currency", currency:"MXN"});
+        const precioFormatted = item.precioUnitario.toLocaleString("es-MX", {style: "currency", currency: "MXN"});
+
+        let botonResenaHTML = '';
+
+        if (puedeResenar) {
+            botonResenaHTML = `
+                <button type="button" class="review-btn" onclick="abrirModalResena(${item.idProducto})">
+                    ★ Escribir Reseña
+                </button>
+            `;
+        }
 
         const itemRow = document.createElement('div');
         itemRow.className = 'product-row';
-        
+
         itemRow.innerHTML = `
             <div class="product-info-left"> 
                 <img src="${img}" alt="${item.nombreProducto}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;" />
@@ -109,11 +116,9 @@ function renderOrder(pedido) {
             
             <div class="product-info-right">
                 <p class="product-price">${precioFormatted}</p>
-                <a href="crear-resena.jsp?idProducto=${item.idProducto}" class="review-btn">
-                    ★ Escribir Reseña
-                </a>
-            </div>
+                ${botonResenaHTML} </div>
         `;
+
         itemsContainer.appendChild(itemRow);
     });
 

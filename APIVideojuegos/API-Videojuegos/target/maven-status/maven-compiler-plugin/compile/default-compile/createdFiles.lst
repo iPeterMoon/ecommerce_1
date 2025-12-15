@@ -1,3 +1,4 @@
+api\ResenasResource.class
 api\OrderResource.class
 mappers\VideojuegoMapper.class
 util\JwtUtil.class
